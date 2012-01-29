@@ -29,3 +29,6 @@
 	top:0;
 	right:0;
 }
+#toolbar a{
+	text-decoration:none;
+}
