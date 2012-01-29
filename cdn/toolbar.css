@@ -34,11 +34,12 @@
 	font-size:10px;
 }
 #toolbar a{text-decoration:none;color:#ccc;}
-#toolbar a:hover{color:red}
+#toolbar a:hover, #toolbar a:visited:hover{color:red}
 #toolbar a:visited{color:#ccc}
 #toolbar a:active{color:red}
 #toolbar .icon{
 	height: 18px;
+	margin:0;padding:0;
 }
 @media print {
 #toolbar{display:none}
