@@ -1,0 +1,39 @@
+@charset "UTF-8";
+@import "reset.css";
+body{
+	background: #999 url(blackpearl.png) center center fixed no-repeat;
+	color: black;
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+p{
+	margin:1em auto;
+}
+#sitehead .logo {
+	float:right;
+	width: 200px;
+	height: 200px;
+}
+#sitehead h1{
+	font-family:"Book Antiqua", Georgia, serif;
+	font-size:6.5em;
+	font-weight:bold;
+}
+#dacolumn{
+	width: 600px;
+	margin: auto;
+}
+.rettangolo{
+	background: url(whpx.png);
+}
+article{
+	font-size:1em;
+	line-height:1.2;
+	margin:0.5em 0.5ex;
+}
+article h1{
+	font-size:2em;
+}
+article footer{
+	font-size:small;
+	font-style:italic;
+}
