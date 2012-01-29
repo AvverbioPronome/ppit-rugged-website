@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import "reset.css";
 body{
-	background: #999 url(blackpearl.png) center center fixed no-repeat;
+	background: #ccc url(blackpearl.png) center center fixed no-repeat;
 	color: black;
 	font-family:Georgia, "Times New Roman", Times, serif;
 }
