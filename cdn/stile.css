@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "reset.css";
+ @import "reset.css"; 
 body{
 	background: #ccc url(blackpearl.png) center center fixed no-repeat;
 	color: black;
@@ -20,20 +20,31 @@ p{
 }
 #dacolumn{
 	width: 600px;
-	margin: auto;
+	margin: 2em auto;
 }
 .rettangolo{
 	background: url(whpx.png);
+	padding:1em 1ex;
 }
-article{
+article, section{
 	font-size:1em;
 	line-height:1.2;
 	margin:0.5em 0.5ex;
 }
-article h1{
+article h1, section h1{
 	font-size:2em;
 }
 article footer{
 	font-size:small;
 	font-style:italic;
 }
+nav#sitenav ul li{list-style-type:none; display:inline;}
+.map{margin: auto;width:auto;}
+a{
+	color:#007;
+	text-decoration:underline;
+}
+a:hover{
+	color:red;text-decoration:none;
+}
+hr{display:none;}
