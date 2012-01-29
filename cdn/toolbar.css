@@ -40,3 +40,6 @@
 #toolbar .icon{
 	height: 18px;
 }
+@media print {
+#toolbar{display:none}
+}

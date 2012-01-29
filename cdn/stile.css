@@ -39,7 +39,9 @@ article footer{
 	font-style:italic;
 }
 nav#sitenav ul li{list-style-type:none; display:inline;}
-.map{margin: auto;width:auto;}
+.map{margin: 1ex auto; width:100%;}
+.map img{width:100%;}
+figcaption{font-size:smaller; text-align:center;}
 a{
 	color:#007;
 	text-decoration:underline;
