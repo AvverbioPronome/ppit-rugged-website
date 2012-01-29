@@ -23,8 +23,8 @@ p{
 	margin: 2em auto;
 }
 .rettangolo{
-	/* background: url(whpx.png); */
-	background: rgba(100%, 100%, 100%, 0.53)
+	/* background: url(whpx.png); */ 
+	background: rgba(255, 255, 255, 0.53)
 	padding:1em 1ex;
 }
 article, section{
