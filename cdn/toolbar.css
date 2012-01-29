@@ -3,7 +3,7 @@
 	background: black;
 	color: white;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size:.9em;
+	font-size: 20px;
 	position:absolute;
 	top:0;
 	left:0;
@@ -19,6 +19,9 @@
 	list-style-type:none;
 	margin:auto 1ex;
 }
+#toolbar ul li{
+	vertical-align: top;
+}
 .sites{
 	position: absolute;
 	top:0;
@@ -28,7 +31,12 @@
 	position:absolute;
 	top:0;
 	right:0;
+	font-size:10px;
 }
-#toolbar a{
-	text-decoration:none;
+#toolbar a{text-decoration:none;color:white;}
+#toolbar a:hover{color:red}
+#toolbar a:visited{color:white}
+#toolbar a:active{color:red}
+#toolbar .icon{
+	height: 20px;
 }
