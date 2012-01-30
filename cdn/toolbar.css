@@ -3,12 +3,12 @@
 	background: black;
 	color: white;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 18px;
+	font-size: 15px;
 	position:absolute;
 	top:0;
 	left:0;
 	width:100%;
-	height:20px; /* dimensionamento assoluto invece che relativo per mantenere consistenza cross-site */
+	height:18px; /* dimensionamento assoluto invece che relativo per mantenere consistenza cross-site */
 	}
 #toolbar *{
 	margin:0;
@@ -32,6 +32,9 @@
 	top:0;
 	right:0;
 	font-size:10px;
+}
+.sso input{
+	height:12px;margin:0; padding:0;
 }
 #toolbar a{text-decoration:none;color:#ccc;}
 #toolbar a:hover, #toolbar a:visited:hover{color:red}

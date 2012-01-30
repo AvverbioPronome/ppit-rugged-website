@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import "reset.css"; 
+@import "toolbar.css";
 body{
 	background: #ccc url(blackpearl-big.png) center center fixed no-repeat;
 	color: black;
@@ -8,16 +9,25 @@ body{
 p{
 	margin:1em auto;
 }
-#sitehead .logo {
+#sitehead{
+	height: 6em;
+	position:relative;
+}
+#sitehead .logo, .logo {
 	float:right;
-	width: 200px;
-	height: 200px;
+	width: 12em;
+	height: 12em;
 }
 #sitehead h1{
 	font-family:"Book Antiqua", Georgia, serif;
-	font-size:6.5em;
 	font-weight:bold;
+	position:absolute; bottom:0; left:0;
 }
+/* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
+#sitehead h1.partito {font-size:6em;} 
+#sitehead h1.assemblea {font-size:4.6em}
+#sitehead h1.home {font-size:3.6em; padding-top:2.4;}
+
 #dacolumn{
 	width: 600px;
 	margin: 2em auto;
