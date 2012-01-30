@@ -3,7 +3,7 @@
 	background: black;
 	color: white;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 15px;
+	font-size: 13px;
 	position:absolute;
 	top:0;
 	left:0;
@@ -19,13 +19,21 @@
 	list-style-type:none;
 	margin:auto 1ex;
 }
-#toolbar ul li, #toolbar ul{
+#toolbar ul li, #toolbar ul, #toolbar a{
 	vertical-align: top;
+}
+
+#toolbar ul li img{
+	margin-bottom:-3px;
 }
 .sites{
 	position: absolute;
-	top:0;
+	top:1px;
 	left:0;
+}
+.sites img{
+	position:relative;
+	top:-1px;
 }
 .sso{
 	position:absolute;
