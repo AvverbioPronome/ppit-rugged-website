@@ -2,7 +2,7 @@
 @import "reset.css"; 
 @import "toolbar.css";
 body{
-	background: #ccc url(blackpearl-big.png) center center fixed no-repeat;
+	background: #eee url(blackpearl.png) center center fixed no-repeat;
 	color: black;
 	font-family:Georgia, "Times New Roman", Times, serif;
 }
