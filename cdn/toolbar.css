@@ -31,10 +31,6 @@
 	top:1px;
 	left:0;
 }
-.sites img{
-	position:relative;
-	top:-1px;
-}
 .sso{
 	position:absolute;
 	top:0;
@@ -48,9 +44,14 @@
 #toolbar a:hover, #toolbar a:visited:hover{color:red}
 #toolbar a:visited{color:#ccc}
 #toolbar a:active{color:red}
-#toolbar .icon{
+#toolbar .icon, #toolbar a img{
 	height: 18px;
 	margin:0;padding:0;
+	position:relative;
+	top:-1px;
+}
+hr{
+	display:none;
 }
 @media print {
 #toolbar{display:none}
