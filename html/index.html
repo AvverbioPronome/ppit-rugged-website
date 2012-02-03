@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset=UTF-8 />
+<link rel="stylesheet" href="./cdn/toolbar.css" />
+<link rel="stylesheet" href="./cdn/stile.css" />
+<title>Partito Pirata - Benvenuti a bordo</title>
+</head>
+<body>
+<!--upbar-->
+<div id="toolbar">
+<ul class="sites"></li>
+<li><a href="http://www.partitopirata.org/"><img src="./cdn/partitopirata.png" alt="PP logo"
+width="18" height="18"></a></li>
+<li><a href="http://www.partitopirata.org/partito.html">Il Partito</a></li>
+<li><a href="http://www.partitopirata.org/assemblea.html">Assemblea Permanente</a></li>
+<li><a href="http://blog.partitopirata.org/">Social</a></li>
+</ul>
+<form id="sso" class="sso" method="post" action="https://accounts.partitopirata.org/sso">
+<label for="user">Username<input name="user" type="text" maxlength="50"></label>
+<label for="pwd">Password<input name="pwd" type="password" maxlength="50"></label>
+<input name="redirect_to" type="hidden" value=""><!-- da popolare in qualche modo, anche js al limite. -->
+</form>
+</div>
+<!--/toolbar-->
+<div id="dacolumn">
+<hgroup id="sitehead">
+	<h1 class="sitename"><img class="logo" alt=""  src="./cdn/signet.png"/>Partito Pirata</h1>
+</hgroup>
+<hr />
+<nav id="sitenav">
+<ul>
+	<li></li>
+    <li></li>
+    <!--oppure un while che scorre le pagine di primo livello. che struttura dati implementare, si vedrà.-->
+</ul>
+</nav>
+<hr />
+<div id="sitecont" class="rettangolo">
+<article id="article01">
+	<h1>Lorem ipsum dolor sit amet, consectetur...</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a nunc in quam pulvinar lacinia. Donec vel elit et quam blandit gravida. Nam elementum, neque vel lobortis consequat, mauris nisi faucibus nibh, eget sollicitudin risus nisl quis diam. Sed vitae dolor a quam volutpat blandit. Vestibulum egestas congue arcu eu hendrerit. Etiam in blandit risus. Quisque et nisi tellus, ut lobortis velit. Suspendisse dignissim varius eros, at placerat leo elementum vitae. Duis gravida tellus in ipsum scelerisque vel dictum ipsum blandt.</p>
+
+<p>Pellentesque nec eros eros, sed tempor nibh. Etiam sit amet quam ante. Praesent ac neque id neque egestas fringilla. Maecenas sollicitudin pharetra leo, vel ultricies nibh ultricies ut. Sed eros metus, malesuada id tempus at, iaculis at diam. Duis aliquet bibendum libero in viverra. Sed non leo ut erat posuere adipiscing sit amet eget dolor. Suspendisse scelerisque condimentum augue, nec mattis risus gravida quis. Aenean commodo euismod orci, a gravida lacus imperdiet a. Suspendisse potenti. Nulla facilisi. Phasellus euismod ultrices leo, quis interdum eros suscipit in. Sed rhoncus, tellus et vestibulum vehicula, mi eros bibendum ipsum, ac vulputate nisl nunc et nibh. Nullam tempus metus id arcu vehicula et luctus ante scelerisque. In pharetra dolor non risus lacinia sit amet adipiscing elit commodo.</p>
+
+    <footer>Pubblicato <time datetime="">tre giorni fa</time> da <author>Spugna, portavoce del pp-it</author> in <a href="#alcool" rel="tag">alcool</a>, <a href="#alcool" rel="tag">pornografia</a>, <a href="#alcool" rel="tag">varie</a></footer>
+</article>
+
+<!-- and so on -->
+
+
+</div>
+<div id="sidebar" class="rettangolo">
+</div>
+</div><!--dacolumn-->
+</body>
+</html>

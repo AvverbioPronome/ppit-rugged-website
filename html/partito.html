@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset=UTF-8 />
+<link rel="stylesheet" href="./cdn/toolbar.css" />
+<link rel="stylesheet" href="./cdn/stile.css" />
+<title>Partito Pirata - La barca</title>
+</head>
+<body>
+<!--toolbar-->
+<div id="toolbar">
+<ul class="sites"></li>
+<li><a href="http://www.partitopirata.org/"><img src="./cdn/partitopirata.png" alt="PP logo"
+width="18" height="18"></a></li>
+<li><a href="http://www.partitopirata.org/partito.html">Il Partito</a></li>
+<li><a href="http://www.partitopirata.org/assemblea.html">Assemblea Permanente</a></li>
+<li><a href="http://blog.partitopirata.org/">Social</a></li>
+</ul>
+<form id="sso" class="sso" method="post" action="https://accounts.partitopirata.org/sso">
+<label for="user">Username<input name="user" type="text" maxlength="50"></label>
+<label for="pwd">Password<input name="pwd" type="password" maxlength="50"></label>
+<input name="redirect_to" type="hidden" value=""><!-- da popolare in qualche modo, anche js al limite.-->
+</form>
+</div>
+<!--/toolbar-->
+<div id="dacolumn">
+<div id="sitehead">
+	<img class="logo" alt=""  src="./cdn/signet.png"/>
+	<h2 class="sitename">La barca</h1>
+</div>
+<!--
+<hr />
+<nav id="sitenav">
+<ul>
+    <li>Partito</li>
+    <li>Contatti</li>
+    <li>insomma, menu locale</li>
+    oppure un while che scorre le pagine di primo livello. che struttura dati implementare, si vedrà
+</ul>
+</nav>
+<hr />
+-->
+<nav>    
+    <div class="nav">
+<ul>
+<li><a href="#s0" class="nav">0. Introduzione</a></li>
+<li><a href="#s1" class="nav">1. Come Partecipare</a></li>
+<li><a href="#s2" class="nav">2. Manifesto, Statuto, Regolamenti</a></li>
+<li><a href="#s3" class="nav">3. Elementi costituenti</a></li>
+<li><a href="#s4" class="nav">4. Movimento Globale</a></li>
+</ul>
+    </div>
+</nav>
+
+<div id="sitecont" class="rettangolo">
+<section id="s0"><h1>0. Introduzione</h1>
+<p>Il Partito Pirata Italiano nasce nel 2006 a seguito dell'incapacita'
+delle strutture organizzative esistenti di garantire alla popolazione un
+sistema informativo rispettoso della privacy, della naturale tendenza degli
+uomini a condividere tra amici e, spesso, anche con perfetti sconosciuti. E
+da allora e' caratterizzato da una costante evoluzione, cosi' come e' la
+vita per ogni singolo individuo che lo compone.</p>
+</section>
+<section id="s1"><h1>1. Come Partecipare</h1>
+<ul>
+<li><a href="mailto:info@partitopirata.org">Invia una mail a
+info@partitopirata.org</a>: l'indirizzo generico a cui rivolgere ogni tipo
+di richiesta.</li>
+<li><a href="#">Iscriviti</a> alla Lista Discussioni Aperte: lista aperta non moderata ("Lasciate ogne speranza, voi ch'entrate...", Dante Alighieri).</li>
+<li>Calendario Eventi (<a href="#">html</a>, <a href="#">iCal</a>): per incontrare rappresentanti del partito alle
+assemblee ed eventi pubblici.</li>
+<li>Contatta il socio piu' vicino a te, inserisci la provincia 
+<form id="provincia" class="form" method="post" action="https://accounts.partitopirata.org/pso"><input name="user" type="text" maxlength="50"><input name="redirect_to" type="button" value=""></form>
+</li></ul>
+</section>
+<section id="s2"><h1>2. Manifesto, Statuto, Regolamenti</h1>
+<ul>
+<li>Manifesto (<a href="#">versione corrente</a>): il manifesto e' la
+dichiarazione pubblica che definisce ed espone i principi e gli obiettivi
+del movimento e di coloro che decidono di aderirvi. Richiedendo le
+credenziali di accesso all'Assemblea Permanente sottoscrivi il manifesto.</li>
+<li>Statuto (<a href="#">versione corrente</a>): lo statuto e' l'atto normativo
+fondamentale che disciplina l'organizzazione e il funzionamento del Partito
+Pirata Italiano e di coloro che vi sono iscritti. L'iscrizione comporta la
+sottoscrizione dello Statuto.</li>
+<li>Procedura d'Iscrizione/Esclusione Soci (<a href="#">versione corrente</a>):
+e' la procedura che definisce le modalita' di associazione dall'Iscrizione
+all'Esclusione.</li>
+<li>Lettera Assunzione Responsabilita' Tecnici (<a href="#">versione corrente</a>):
+e' la dichiarazione giurata da sottoscrivere e recitare in presenza di altri
+2+ soci per poter assumere incarichi clericali di natura informatica.</li>
+<li>Lettera Assunzione Responsabilita' Artisti (<a href="#">versione corrente</a>):
+e' la dichiarazione giurata da sottoscrivere e recitare in presenza di altri
+2+ soci per poter assumere incarichi clericali nel campo delle arti
+(es: giurisprudenza, economia, comunicazione, filosofia).</li>
+</ul></section>
+<section id="s3"><h1>3. Elementi Costituenti</h1>
+<ul>
+<li id="assemblea">Assemblea Permanente: Organo decisionale sovrano regolato secondo il <a href="https://dev.partitopirata.org/attachments/download/2/schulze1.pdf">Metodo Schulze</a>, implementato in
+forma digitale (<a href="http://liquidfeedback.org/">Liquid Feedback</a>) o tradizionale (assemblee in presenza e videoconferenza).</li>
+<li>Soci: Implementano una rete distribuita di identificazione degli individui per dare accesso a chiunque all'Assemblea Permanente in forma pseudo-anonima.</li>
+<li>Burocrate: esegue la burocrazia strettamente indispensabile a non produrre una associazione segreta.</li>
+<li>Tesoriere: rende lo statuto conforme.</li>
+</ul></section>
+<section id="s4"><h1>4. Il Movimento Globale</h1>
+<div><a href="http://en.wikipedia.org/wiki/Category:Pirate_parties" target="_blank"><img src="./cdn/200px-PiratePartiesMap17.svg.png" width="200" height="112"></a></div>
+
+</div>
+</div>
+</div><!--dacolumn-->
+</body>
+</html>
