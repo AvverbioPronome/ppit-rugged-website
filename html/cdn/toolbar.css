@@ -3,39 +3,22 @@
 	background: black;
 	color: white;
 	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-<<<<<<< HEAD
 	font-size: 13px;
-=======
-	font-size:.9em;
->>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 	position:absolute;
 	top:0;
 	left:0;
 	width:100%;
-<<<<<<< HEAD
 	height:18px; /* dimensionamento assoluto invece che relativo per mantenere consistenza cross-site */
-=======
-	height:25px; /* dimensionamento assoluto invece che relativo per mantenere consistenza cross-site */
->>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 	}
 #toolbar *{
 	margin:0;
 	padding:0;
 }
-<<<<<<< HEAD
-=======
-#toolbar a{
-	color: white;
-	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size:.9em;
-}
->>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 #toolbar ul li{
 	display:inline;
 	list-style-type:none;
 	margin:auto 1ex;
 }
-<<<<<<< HEAD
 #toolbar ul li, #toolbar ul, #toolbar a{
 	vertical-align: top;
 }
@@ -46,18 +29,12 @@
 .sites{
 	position: absolute;
 	top:1px;
-=======
-.sites{
-	position: absolute;
-	top:0;
->>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 	left:0;
 }
 .sso{
 	position:absolute;
 	top:0;
 	right:0;
-<<<<<<< HEAD
 	font-size:10px;
 }
 .sso input{
@@ -79,6 +56,3 @@ hr{
 @media print {
 #toolbar{display:none}
 }
-=======
-}
->>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
