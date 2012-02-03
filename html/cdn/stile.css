@@ -1,14 +1,21 @@
 @charset "UTF-8";
+<<<<<<< HEAD
 @import "reset.css"; 
 @import "toolbar.css";
 body{
 	background: #eee url(blackpearl.png) center center fixed no-repeat;
+=======
+ @import "reset.css"; 
+body{
+	background: #ccc url(blackpearl.png) center center fixed no-repeat;
+>>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 	color: black;
 	font-family:Georgia, "Times New Roman", Times, serif;
 }
 p{
 	margin:1em auto;
 }
+<<<<<<< HEAD
 p.desc{
 	font-size:1.2em;
 }
@@ -31,12 +38,33 @@ p.desc{
 #sitehead h1.assemblea {font-size:4.5em}
 #sitehead h1.home {font-size:3.6em;}
 
+=======
+#sitehead .logo {
+	float:right;
+	width: 200px;
+	height: 200px;
+}
+#sitehead h1{
+	font-family:"Book Antiqua", Georgia, serif;
+	font-size:6.5em;
+	font-weight:bold;
+}
+#sitehead h2{
+        font-family:"Book Antiqua", Georgia, serif;
+        font-size:4.5em; 
+        font-weight:bold;
+}
+>>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 #dacolumn{
 	width: 600px;
 	margin: 2em auto;
 }
 .rettangolo{
+<<<<<<< HEAD
 	background: url(whpx.png); 
+=======
+	background: url(whpx.png);
+>>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 	padding:1em 1ex;
 }
 article, section{
@@ -51,10 +79,25 @@ article footer{
 	font-size:small;
 	font-style:italic;
 }
+<<<<<<< HEAD
 nav#sitenav ul li{list-style-type:none; display:inline;}
 .map{margin: 1ex auto; width:100%;}
 .map img{width:100%;}
 figcaption{font-size:smaller; text-align:center;}
+=======
+nav#sitenav div{color:white;}
+nav#sitenav ul li{list-style-type:none; display:inline; color:white;}
+nav#sitenav a{color:white; text-decoration:underline;}
+div.nav{
+	position:relative;
+	left:70px;
+	width: 50%;
+        background: url(whpx.png) repeat;
+}
+p.nav{color:black; font-size:1.5em;}
+a.nav{color:black; text-decoration:underline;}
+.map{margin: auto;width:auto;}
+>>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
 a{
 	color:#007;
 	text-decoration:underline;
@@ -62,4 +105,8 @@ a{
 a:hover{
 	color:red;text-decoration:none;
 }
+<<<<<<< HEAD
 hr{display:none;}
+=======
+hr{display:none;}
+>>>>>>> 0ea9be3c9c7140a69ea744c1f03fe7b9406c56a4
