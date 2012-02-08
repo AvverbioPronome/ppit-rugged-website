@@ -31,7 +31,7 @@ p.desc{
 }
 nav#sitenav ul li{list-style-type:none; display:inline;}
 nav#sitenav ul {margin:0; padding:1ex 1em;}
-nav#sitenav{ font-size:1.1em;}
+nav#sitenav{font-size:1.1em;}
 @media print{nav#sitenav{display:none;}}
 /* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
 #sitehead h1.partito {font-size:5em;} 
