@@ -19,7 +19,7 @@ set bmargin at screen 0
 set tmargin at screen 1
 
 #Plot the background image
-plot "equirectangular_italy_477x599_physical.png" binary filetype=png w rgbimage
+plot "equirectangular_italy_477x599.png" binary filetype=png w rgbimage
 
 
 #The x and y range of the population data file
