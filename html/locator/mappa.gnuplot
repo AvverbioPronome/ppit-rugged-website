@@ -2,7 +2,7 @@
 # http://gnuplot-surprising.blogspot.com/2011/09/gnuplot-background-image.html
 
 reset
-set term png nocrop enhanced size 477,599
+set term png nocrop enhanced size 477,599 truecolor
 set output "piratemap_italy.png"
 set multiplot
 set xrange [0:476]	
@@ -38,6 +38,8 @@ unset tics
 unset border
 unset key
 
-plot "italian_top1000_cities_coordinates.tsv" using 3:2;
+set style fill transparent solid 0.5 noborder
+
+plot "italian_top1000_cities_coordinates_census2001.tsv" using 3:2:(sqrt($4)/5000) with circles;
 
 unset multiplot
