@@ -19,7 +19,7 @@ set bmargin at screen 0
 set tmargin at screen 1
 
 #Plot the background image
-plot "equirectangular_italy_477x599.png" binary filetype=png w rgbimage
+plot "equirectangular_italy_477x599_physical.png" binary filetype=png w rgbimage
 
 
 #The x and y range of the population data file
@@ -38,8 +38,8 @@ unset tics
 unset border
 unset key
 
-set style fill transparent solid 0.5 noborder
+set style fill transparent solid 0.35 noborder
 
-plot "italian_top1000_cities_coordinates_census2001.tsv" using 3:2:(sqrt($4)/5000) with circles;
+plot "italian_top1000_cities_coordinates_census2001.tsv" using 3:2:(sqrt($4)/3000) with circles;
 
 unset multiplot
