@@ -28,14 +28,12 @@ p{
 #sitehead h1.assemblea {font-size:4.5em}
 #sitehead h1.home {font-size:3.6em;}
 
-#sitehead nav#sitenav{
-	position:absolute; bottom:0; left:0;
-}
-nav#sitenav ul li a{text-decoration:none}
-nav#sitenav ul li{list-style-type:none; display:inline;}
-nav#sitenav ul {margin:0; padding:0.5ex 1em;}
-nav#sitenav{font-size:1.1em;}
-@media print{nav#sitenav{display:none;}}
+nav#sitenav{position:absolute; bottom:0; left:0;}
+	nav#sitenav ul li a{text-decoration:none}
+	nav#sitenav ul li{list-style-type:none; display:inline;}
+	nav#sitenav ul {margin:0; padding:0.5ex 1em;}
+	nav#sitenav{font-size:1.1em;}
+	@media print{nav#sitenav{display:none;}}
 
 #dacolumn{
 	width: 600px;
