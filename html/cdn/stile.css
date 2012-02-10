@@ -9,9 +9,6 @@ body{
 p{
 	margin:1em auto;
 }
-p.desc{
-	font-size:1.2em;
-}
 #sitehead{
 	height: 6em;
 	position:relative;
