@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import "reset.css"; 
-@import "toolbar.css";
+@import "ppbar.css";
 body{
 	background: #eee url(blackpearl.png) center center fixed no-repeat;
 	color: black;
@@ -16,7 +16,7 @@ p.desc{
 	height: 6em;
 	position:relative;
 }
-#sitehead .logo, .logo {
+.logo {
 	float:right;
 	width: 12em;
 	height: 12em;
@@ -26,6 +26,11 @@ p.desc{
 	font-weight:bold;
 	position:absolute; bottom:1 em; left:0;
 }
+/* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
+#sitehead h1.partito {font-size:5em;} 
+#sitehead h1.assemblea {font-size:4.5em}
+#sitehead h1.home {font-size:3.6em;}
+
 #sitehead nav#sitenav{
 	position:absolute; bottom:0; left:0;
 }
@@ -33,10 +38,6 @@ nav#sitenav ul li{list-style-type:none; display:inline;}
 nav#sitenav ul {margin:0; padding:1ex 1em;}
 nav#sitenav{font-size:1.1em;}
 @media print{nav#sitenav{display:none;}}
-/* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
-#sitehead h1.partito {font-size:5em;} 
-#sitehead h1.assemblea {font-size:4.5em}
-#sitehead h1.home {font-size:3.6em;}
 
 #dacolumn{
 	width: 600px;
