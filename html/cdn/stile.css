@@ -56,7 +56,8 @@ article footer{
 	font-style:italic;
 }
 .map{margin: 1ex auto; width:100%;}
-.map img{width:100%;}
+.map.world img{width:100%;}
+.map.italy img {width:60%;}
 figcaption{font-size:smaller; text-align:center;}
 a{
 	color:#005;
