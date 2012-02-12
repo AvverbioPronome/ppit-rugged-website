@@ -67,3 +67,5 @@ a:hover{
 	color:red;text-decoration:none;
 }
 hr{display:none;}
+dt{font-weight:bold; margin-top:0.5em;}
+
