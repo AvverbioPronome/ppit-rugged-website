@@ -30,6 +30,8 @@ $tag[] = '<!--#include virtual="ppbar.html"-->';
 $tag[] = '<!--#include virtual="sitenav.html"-->';
  $re[] = file_get_contents('./html/inc/sitenav.html');
 
+// qui una volta c'era un coso che aggiustava i path dei css e simili
+// in forma di brutale sostituzione.
 
 $scandir=array_diff(
 	scandir($settings['sourcf']),
