@@ -52,7 +52,7 @@ $scandir=array_diff(scandir($settings['sourcf']), array('.', '..'));
 
 foreach($scandir as $file){	
 	$pathin=pathinfo($file);
-	if($pathin['extension'] = 'html'){
+	if($pathin['extension'] == 'html'){
 		$page[$pathin['filename']] = file_get_contents($settings['sourcf'].$file);
 	}
 }
