@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+$inizio = microtime(true);
 // dove stanno i nostri simpatici sorgenti?
 $settings['sourcf']='./html/editme/'; 
 
@@ -46,4 +47,8 @@ foreach($scandir as $name){
 		str_replace($tag, $re, file_get_contents($settings['sourcf'].$name))
 	);
 };
+$fine = microtime(true);
+$tempo_impiegato = $fine - $inizio;
+$tempo = number_format($tempo_impiegato,5,',','.');
+echo "Tempo impiegato dallo script: $tempo secondi\n";
 ?>
