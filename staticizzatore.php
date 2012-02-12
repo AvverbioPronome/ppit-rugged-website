@@ -38,7 +38,7 @@ $scandir=array_diff(
 	scandir($settings['sourcf']),
 	array('.', '..'));
 
-foreach($scandir as $name){
+foreach($scandir as $name){ // e questo foreach stampa le pagine "statiche"
 	$pathin=pathinfo($name);
 	if($pathin['extension'] != 'html') continue;
 	
@@ -47,6 +47,12 @@ foreach($scandir as $name){
 		str_replace($tag, $re, file_get_contents($settings['sourcf'].$name))
 	);
 };
+
+// qui è finito il foreach. se si devono stampare delle pagine
+// pseudodinamiche, eg: le proposte approvate da lqfb, si può aggiungere
+// un altro ciclo che query l'api e generi tutto quello che gli pare.
+
+
 $fine = microtime(true);
 $tempo_impiegato = $fine - $inizio;
 $tempo = number_format($tempo_impiegato,5,',','.');
