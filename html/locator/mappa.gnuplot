@@ -1,3 +1,4 @@
+#!/opt/local/bin/gnuplot
 # -- 
 # http://gnuplot-surprising.blogspot.com/2011/09/gnuplot-background-image.html
 
