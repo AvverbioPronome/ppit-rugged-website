@@ -60,11 +60,15 @@ $tag[] = '<!--include:sitenav-->';
 $scandir=array_diff(scandir($settings['sourcf']), array('.', '..'));
 
 foreach($scandir as $file){	
-	$pathin=pathinfo($file);
-	if($pathin['extension'] == 'html'){
-		$page[$pathin['filename']] = file_get_contents($settings['sourcf'].$file);
-	}
-}
+	if(is_file($settings['sourcf'].$file)){//non dovrebbero esserci cartelle, ma non si sa mai
+		$pathin=pathinfo($file);
+		if($pathin['extension'] == 'html'){
+			$page[$pathin['filename']] = file_get_contents($settings['sourcf'].$file);
+		}
+	}else{
+		echo "Non devono esserci cartelle in `".$settings['sourcf']."`.\n Ed in ogni caso, le sto ignorando: si, parlo di `".$file."`.\n";
+	};
+};
 
 /*
  *   Applicazione delle sostituzioni e stampa.
