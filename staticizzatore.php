@@ -25,6 +25,13 @@ $settings['desf']='./html/';
  *
  */
 
+
+/*
+ *   Definizione sostituzioni.
+ *   =========================
+ *
+ */
+
 $tag[] = '<!--include:ppbar-->';
  $re[] = file_get_contents('./html/inc/ppbar.html');
 
@@ -34,25 +41,44 @@ $tag[] = '<!--include:sitenav-->';
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
 
-$scandir=array_diff(
-	scandir($settings['sourcf']),
-	array('.', '..'));
 
-foreach($scandir as $name){ // e questo foreach stampa le pagine "statiche"
-	$pathin=pathinfo($name);
-	if($pathin['extension'] != 'html') continue;
-	
+/*
+ *   Caricamento pagine statiche dal filesystem.
+ *   ===========================================
+ *
+ */
+
+$scandir=array_diff(scandir($settings['sourcf']), array('.', '..'));
+
+foreach($scandir as $file){	
+	$pathin=pathinfo($file);
+	if($pathin['extension'] = 'html'){
+		$page[$pathin['filename']] = file_get_contents($settings['sourcf'].$file);
+	}
+}
+
+/*
+ *   Caricamento pagine pseudodinamiche.
+ *   ===================================
+ *
+ */
+
+// bla bla bla.
+//$page['indirizzo']=testo della pagina, che può includere tag definiti sopra
+
+/*
+ *   Applicazione delle sostituzioni e stampa.
+ *   =========================================
+ *
+ */
+foreach($page as $name => $text){ 
 	file_put_contents(
-		$settings['desf'].$name,
-		str_replace($tag, $re, file_get_contents($settings['sourcf'].$name))
+		$settings['desf'].$name.".html",
+		str_replace($tag, $re, $text)
 	);
 };
 
-// qui è finito il foreach. se si devono stampare delle pagine
-// pseudodinamiche, eg: le proposte approvate da lqfb, si può aggiungere
-// un altro ciclo che query l'api e generi tutto quello che gli pare.
-
-
+//cronometro, ignorare.
 $fine = microtime(true);
 $tempo_impiegato = $fine - $inizio;
 $tempo = number_format($tempo_impiegato,5,',','.');
