@@ -41,6 +41,15 @@ $tag[] = '<!--include:sitenav-->';
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
 
+/*
+ *   Caricamento pagine pseudodinamiche.
+ *   ===================================
+ *
+ */
+
+// bla bla bla.
+//$page['indirizzo']=testo della pagina, che può includere tag definiti sopra
+
 
 /*
  *   Caricamento pagine statiche dal filesystem.
@@ -56,15 +65,6 @@ foreach($scandir as $file){
 		$page[$pathin['filename']] = file_get_contents($settings['sourcf'].$file);
 	}
 }
-
-/*
- *   Caricamento pagine pseudodinamiche.
- *   ===================================
- *
- */
-
-// bla bla bla.
-//$page['indirizzo']=testo della pagina, che può includere tag definiti sopra
 
 /*
  *   Applicazione delle sostituzioni e stampa.
