@@ -25,10 +25,10 @@ $settings['desf']='./html/';
  *
  */
 
-$tag[] = '<!--#include virtual="ppbar.html"-->';
+$tag[] = '<!--include:ppbar-->';
  $re[] = file_get_contents('./html/inc/ppbar.html');
 
-$tag[] = '<!--#include virtual="sitenav.html"-->';
+$tag[] = '<!--include:sitenav-->';
  $re[] = file_get_contents('./html/inc/sitenav.html');
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
