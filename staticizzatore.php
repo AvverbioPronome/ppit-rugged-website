@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+error_reporting(E_ALL && E_NOTICE);
 $inizio = microtime(true);
 // dove stanno i nostri simpatici sorgenti?
 $settings['sourcf']='./html/editme/'; 
@@ -42,6 +43,41 @@ $tag[] = '<!--include:sitenav-->';
 // in forma di brutale sostituzione.
 
 /*
+ *   Caricamento pagine dalla redmine wiki.
+ *   ===================================
+ *
+ */
+ 
+/*
+allora, funziona così: esiste un modello, esiste */
+
+ 
+$wikipages = array("LiquidFeedback", "LiquidFeedback_FAQ");
+ 
+function pagefromwiki($pagename){
+	
+	$baseurl = "https://dev.partitopirata.org/projects/ppit/wiki/";
+	$html=file_get_contents($baseurl.$pagename.'.html');
+	// http://stackoverflow.com/a/4911037
+	if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches)) {
+			$body = $matches[1];
+		}
+	 
+	return str_replace(
+		array('<!--include:text_from_wiki_goes_here-->',
+			'<!--templating:title-->'),
+		array($body,$pagename),
+		file_get_contents('./html/inc/text_from_wiki_goes_here.html')
+	 );
+ };
+  
+ 
+ foreach($wikipages as $bla){
+ 	$page[$bla]=pagefromwiki($bla);
+ };
+ 
+ 
+ /*
  *   Caricamento pagine pseudodinamiche.
  *   ===================================
  *
