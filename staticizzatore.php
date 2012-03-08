@@ -52,7 +52,7 @@ $tag[] = '<!--include:sitenav-->';
 allora, funziona così: esiste un modello, esiste */
 
  
-$wikipages = array("LiquidFeedback", "LiquidFeedback_FAQ");
+$wikipages = array("LiquidFeedback", "LiquidFeedback_FAQ", "LiquidFeedback_Glossario");
  
 function pagefromwiki($pagename){
 	
@@ -65,8 +65,9 @@ function pagefromwiki($pagename){
 	 
 	return str_replace(
 		array('<!--include:text_from_wiki_goes_here-->',
-			'<!--templating:title-->'),
-		array($body,$pagename),
+			'<!--templating:title-->',
+			'<!--templating:fancytitle-->'),
+		array($body,$pagename,str_replace('_', ' ', $pagename)),
 		file_get_contents('./html/inc/text_from_wiki_goes_here.html')
 	 );
  };
