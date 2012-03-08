@@ -50,14 +50,29 @@ $tag[] = '<!--include:sitenav-->';
  
 /*
 allora, funziona così: esiste un modello, esiste */
-
  
-$wikipages = array("LiquidFeedback", "LiquidFeedback_FAQ", "LiquidFeedback_Glossario");
+$wikipages = array(
+"Il_Partito_Pirata", 
+"Manifesto", 
+"Statuto", 
+"Garanzia_di_Iscrizione_ed_Esclusione", 
+"Lettera_di_Intento_Pirata", 
+"Lettera_di_Assunzione_Responsabilità_Artistiche",
+"Lettera_di_Assunzione_Responsabilità_Tecniche",
+"Lettera_di_Assunzione_Responsabilità_Uomini_Pubblicamente_Armai",
+"Modulo_Iscrizione_e_Certificazione",
+"Modulo_Personale_del_Certificatore",
+"Modulo_Contabile_del_Certificatore"
+);
  
 function pagefromwiki($pagename){
 	
 	$baseurl = "https://dev.partitopirata.org/projects/ppit/wiki/";
-	$html=file_get_contents($baseurl.$pagename.'.html');
+	$htmlurl = $baseurl.$pagename.'.html';
+	if ( $pagename == "Statuto" ){
+	        $htmlurl = $htmlurl.'?version=41';
+	}
+	$html = file_get_contents($htmlurl);
 	// http://stackoverflow.com/a/4911037
 	if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches)) {
 			$body = $matches[1];
@@ -113,10 +128,13 @@ foreach($scandir as $file){
  *
  */
 foreach($page as $name => $text){ 
-	file_put_contents(
-		$settings['desf'].$name.".html",
-		str_replace($tag, $re, $text)
-	);
+        if ( $name == "Il_Partito_Pirata" ){
+                $name = index;
+        };
+        file_put_contents(
+                $settings['desf'].$name.".html",
+                str_replace($tag, $re, $text)
+        );
 };
 
 //cronometro, ignorare.
