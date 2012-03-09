@@ -24,12 +24,17 @@ p{
 	position:absolute; bottom:1 em; left:0;
 }
 /* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
-#sitehead h1.partito {font-size:5em;} 
-#sitehead h1.assemblea {font-size:4.5em}
-#sitehead h1.home {font-size:3.6em;}
+#sitehead h1.gazzetta {font-size:4em;} 
+#sitehead h1.verbale {font-size:4em}
+#sitehead h1.tribuna {font-size:4em;}
 
+nav#sitenav{
+        background: url(whpx.png);
+        padding:0.5em 1ex;
+}
 nav#sitenav{position:absolute; bottom:0; left:0;z-index:100;}
 	nav#sitenav ul li a{text-decoration:none}
+	nav#sitenav ul li a:hover{text-decoration:underline}
 	nav#sitenav ul li{list-style-type:none; display:inline;}
 	nav#sitenav ul {margin:0; padding:0.5ex 1em;}
 	nav#sitenav{font-size:1.1em;}
@@ -49,6 +54,9 @@ article, section{
 	margin:0.5em 0.5ex;
 }
 article h1, section h1{
+	font-size:3em;
+}
+article h2, section h2{
 	font-size:2em;
 }
 article footer{
@@ -61,11 +69,11 @@ article footer{
 figcaption{font-size:smaller; text-align:center;}
 a{
 	color:#005;
-	text-decoration:underline;
+	text-decoration:none;
 }
 a:hover{
-	color:red;text-decoration:none;
+	color:red;text-decoration:underline;
 }
 hr{display:none;}
 dt{font-weight:bold; margin-top:0.5em;}
-
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
