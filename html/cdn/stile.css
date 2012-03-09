@@ -2,7 +2,7 @@
 @import "reset.css"; 
 @import "ppbar.css";
 body{
-	background: #fffff0 url(blackpearl.png) center center fixed no-repeat;
+	background: #fffff0 url(blackpearl-big.png) center center fixed no-repeat;
 	color: black;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
