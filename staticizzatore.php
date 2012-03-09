@@ -70,7 +70,7 @@ function pagefromwiki($pagename){
 	$baseurl = "https://dev.partitopirata.org/projects/ppit/wiki/";
 	$htmlurl = $baseurl.$pagename.'.html';
 	if ( $pagename == "Statuto" ){
-	        $htmlurl = $htmlurl.'?version=41';
+	        $htmlurl = $htmlurl.'?version=44';
 	}
 	$html = file_get_contents($htmlurl);
 	// http://stackoverflow.com/a/4911037
