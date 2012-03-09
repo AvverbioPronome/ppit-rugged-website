@@ -72,4 +72,4 @@ a:hover{
 }
 hr{display:none;}
 dt{font-weight:bold; margin-top:0.5em;}
-
+a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }

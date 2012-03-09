@@ -59,7 +59,7 @@ $wikipages = array(
 "Lettera_di_Intento_Pirata", 
 "Lettera_di_Assunzione_Responsabilità_Artistiche",
 "Lettera_di_Assunzione_Responsabilità_Tecniche",
-"Lettera_di_Assunzione_Responsabilità_Uomini_Pubblicamente_Armai",
+"Lettera_di_Assunzione_Responsabilità_Uomini_Pubblicamente_Armati",
 "Modulo_Iscrizione_e_Certificazione",
 "Modulo_Personale_del_Certificatore",
 "Modulo_Contabile_del_Certificatore"
