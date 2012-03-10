@@ -4,7 +4,7 @@
 body{
 	background: #fffff0;
 	color: black;
-	font-family: Georgia, "Times New Roman", Times, serif;
+	font-family:"Book Antiqua", Georgia, serif;
 }
 p{
 	margin:1em auto;
@@ -19,7 +19,6 @@ p{
 	height: 12em;
 }
 #sitehead h1{
-	font-family:"Book Antiqua", Georgia, serif;
 	font-weight:bold;
 	position:absolute; bottom:1 em; left:0;
 }
