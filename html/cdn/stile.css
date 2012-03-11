@@ -46,6 +46,7 @@ code, kbd, samp, pre, tt, var {
 
 #dacolumn{
 	width: 66%;
+	max-width: 800px;
 	margin: 2em auto;
 }
 
