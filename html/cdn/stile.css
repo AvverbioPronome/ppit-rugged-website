@@ -111,15 +111,21 @@ article footer{
 	align: center;
 	text-align: center;
 }
-nav#fcentro{
+nav#ppint{
         padding:0.5em 1ex;
-	position:absolute;
+	position:relative;
 	bottom:0;
 	z-index:100;
 }
-nav#fcentro ul li{list-style-type:none; display:inline;}
-nav#fcentro ul {margin:0; padding:0.5ex 1em;}
-nav#fcentro{font-size:1.1em;}
+nav#ppint ul li{list-style-type:none; display:inline;}
+nav#ppint ul {margin:0; padding:0.5ex 1em;}
+nav#ppint{font-size:1.1em;}
 @media print{
-	nav#fcentro{display:none;}
+	nav#ppint{display:none;}
+}
+#copyright{
+	padding:0.5em 1ex;
+        position:relative;
+        bottom:0;
+        z-index:100;
 }
