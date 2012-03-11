@@ -1,9 +1,8 @@
 @charset "UTF-8";
 #toolbar{
 	background: black;
-	color: white;
-	font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 13px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
 	position:absolute;
 	top:0;
 	left:0;
@@ -40,10 +39,8 @@
 .sso input{
 	height:12px;margin:0; padding:0;
 }
-#toolbar a{text-decoration:none;color:#ccc;}
-#toolbar a:hover, #toolbar a:visited:hover{color:red}
-#toolbar a:visited{color:#ccc}
-#toolbar a:active{color:red}
+#toolbar a{text-decoration:none;color:darkorange;}
+#toolbar a:hover{color:black;background-color:darkorange;}
 #toolbar .icon, #toolbar a img{
 	height: 18px;
 	margin:0;padding:0;

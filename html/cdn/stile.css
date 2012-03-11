@@ -2,21 +2,55 @@
 @import "reset.css"; 
 @import "ppbar.css";
 body{
-	background: #fffff0;
+	background: Darkorange url(tagcloud.png);
 	color: black;
-	font-family:"Book Antiqua", Georgia, serif;
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-style: normal;
 }
 p{
 	margin:1em auto;
 }
-#sitehead{
-	height: 6em;
-	position:relative;
+a{
+	color:darkorange;
+	background:black;
+	text-decoration:none;
 }
+a:hover{
+	color:black;
+	background:none;
+	text-decoration:underline;
+}
+hr{display:none;}
+dt{font-weight:bold; margin-top:0.5em;}
+figcaption{font-size:smaller; text-align:center;}
+code, kbd, samp, pre, tt, var {
+  font-family: consolas, "courier new", courier, monospace; 
+}
+
 .logo {
 	float:right;
 	width: 12em;
 	height: 12em;
+}
+
+.rettangolo{
+	background: url(whpx.png); 
+	padding:1em 1ex;
+}
+
+.map{margin: 1ex auto; width:100%;text-align:center;}
+.map.italy img {width:68%;}
+.map.world img{width:100%;}
+
+#dacolumn{
+	width: 66%;
+	margin: 2em auto;
+}
+
+#sitehead{
+	height: 6em;
+	position:relative;
 }
 #sitehead h1{
 	font-weight:bold;
@@ -26,27 +60,33 @@ p{
 #sitehead h1.gazzetta {font-size:4em;} 
 #sitehead h1.verbale {font-size:4em}
 #sitehead h1.tribuna {font-size:4em;}
-
 nav#sitenav{
-       /* background: url(whpx.png); */ 
         padding:0.5em 1ex;
+	position:absolute; 
+	bottom:0; 
+	left:0;
+	z-index:100;
 }
-nav#sitenav{position:absolute; bottom:0; left:0;z-index:100;}
-	nav#sitenav ul li a{text-decoration:none}
-	nav#sitenav ul li a:hover{text-decoration:underline}
-	nav#sitenav ul li{list-style-type:none; display:inline;}
-	nav#sitenav ul {margin:0; padding:0.5ex 1em;}
-	nav#sitenav{font-size:1.1em;}
-	@media print{nav#sitenav{display:none;}}
+nav#sitenav ul li{list-style-type:none; display:inline;}
+nav#sitenav ul {margin:0; padding:0.5ex 1em;}
+nav#sitenav{font-size:1.1em;}
+@media print{
+	nav#sitenav{display:none;}
+}
 
-#dacolumn{
-	width: 600px;
-	margin: 2em auto;
+#sitecont{
 }
-.rettangolo{
-	background: url(whpx.png); 
-	padding:1em 1ex;
+#sitecont a{
+	color:black;
+	background:none;
+	text-decoration:underline;
 }
+#sitecont a:hover{
+	color:darkorange;
+	background:black;
+	text-decoration:none;
+}
+#sitecont a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
 article, section{
 	font-size:1em;
 	line-height:1.2;
@@ -62,17 +102,24 @@ article footer{
 	font-size:small;
 	font-style:italic;
 }
-.map{margin: 1ex auto; width:100%;text-align:center;}
-.map.world img{width:100%;}
-.map.italy img {width:68%;}
-figcaption{font-size:smaller; text-align:center;}
-a{
-	color:#005;
-	text-decoration:none;
+
+#ppfooter{
+	width:75%;
+	height:4em;
+        position:relative;
+	margin: 2em auto;
+	align: center;
+	text-align: center;
 }
-a:hover{
-	color:red;text-decoration:underline;
+nav#fcentro{
+        padding:0.5em 1ex;
+	position:absolute;
+	bottom:0;
+	z-index:100;
 }
-hr{display:none;}
-dt{font-weight:bold; margin-top:0.5em;}
-a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+nav#fcentro ul li{list-style-type:none; display:inline;}
+nav#fcentro ul {margin:0; padding:0.5ex 1em;}
+nav#fcentro{font-size:1.1em;}
+@media print{
+	nav#fcentro{display:none;}
+}

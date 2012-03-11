@@ -33,11 +33,14 @@ $settings['desf']='./html/';
  *
  */
 
-$tag[] = '<!--include:ppbar-->';
- $re[] = file_get_contents('./html/inc/ppbar.html');
+$tag[] = '<!--include:ppheader-->';
+ $re[] = file_get_contents('./html/inc/ppheader.html');
 
 $tag[] = '<!--include:sitenav-->';
  $re[] = file_get_contents('./html/inc/sitenav.html');
+
+$tag[] = '<!--include:ppfooter-->';
+ $re[] = file_get_contents('./html/inc/ppfooter.html');
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
@@ -70,7 +73,7 @@ function pagefromwiki($pagename){
 	$baseurl = "https://dev.partitopirata.org/projects/ppit/wiki/";
 	$htmlurl = $baseurl.$pagename.'.html';
 	if ( $pagename == "Statuto" ){
-	        $htmlurl = $htmlurl.'?version=44';
+	        $htmlurl = $htmlurl.'?version=45';
 	}
 	$html = file_get_contents($htmlurl);
 	// http://stackoverflow.com/a/4911037
@@ -83,7 +86,7 @@ function pagefromwiki($pagename){
 			'<!--templating:title-->',
 			'<!--templating:fancytitle-->'),
 		array($body,$pagename,str_replace('_', ' ', $pagename)),
-		file_get_contents('./html/inc/text_from_wiki_goes_here.html')
+		file_get_contents('./html/editme/wikipages.html')
 	 );
  };
   
