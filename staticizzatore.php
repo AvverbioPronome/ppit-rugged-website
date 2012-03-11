@@ -34,8 +34,7 @@ $settings['desf']='./html/';
  */
  
  function ftbi($filename){
- 	return file_get_contents('./html/inc/'.$filename.'.html') 
- 		or die('./html/inc/'.$filename.".html not found\n");
+ 	return file_get_contents('./html/inc/'.$filename.'.html');
  }
 
 $tag[] = '<!--include:ppheader-->';
@@ -46,6 +45,12 @@ $tag[] = '<!--include:sitenav-->';
  
 $tag[] = '<!--include:ppfooter-->';
  $re[] = ftbi('ppfooter');
+ 
+ 
+//qui cominciano le sostituzioni per validare l'html di redmine.
+ 
+$tag[] = '<a name=';
+ $re[] = '<a id='; 
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
@@ -75,12 +80,13 @@ $wikipages = array(
  
 function pagefromwiki($pagename){
 	
-	$baseurl = "https://dev.partitopirata.org/projects/ppit/wiki/";
+	$baseurl = 'https://dev.partitopirata.org/projects/ppit/wiki/';
 	$htmlurl = $baseurl.$pagename.'.html';
 	if ( $pagename == "Statuto" ){
 	        $htmlurl = $htmlurl.'?version=45';
 	}
-	$html = file_get_contents($htmlurl);
+	//non controlla se ci sono 404, ma dovrebbe andare bene comunque
+	$html = file_get_contents($htmlurl); 
 	// http://stackoverflow.com/a/4911037
 	if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches)) {
 			$body = $matches[1];
@@ -94,8 +100,6 @@ function pagefromwiki($pagename){
 		file_get_contents('./html/editme/wikipages.html')
 	 );
 	 
-	  /* usando la pagina in questa posizione verrà creato
-	     un file senza senso in html/wikipages.html! */
 	  
  };
   
@@ -140,11 +144,14 @@ foreach($scandir as $file){
  *
  */
 foreach($page as $name => $text){ 
-        if ( $name == "Il_Partito_Pirata" ){
+        if ( $name == 'Il_Partito_Pirata' ){
                 $name = index;
+        }elseif($name=='wikipages'){
+        	continue;
         };
+        
         file_put_contents(
-                $settings['desf'].$name.".html",
+                $settings['desf'].$name.'.html',
                 str_replace($tag, $re, $text)
         );
 };
