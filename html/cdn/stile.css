@@ -10,7 +10,7 @@ body{
 }
 p{
 	margin:1em auto;
-	line-height: 1.1;
+	line-height: 1.3;
 }
 a{
 	color:darkorange;
@@ -46,7 +46,7 @@ code, kbd, samp, pre, tt, var {
 
 #dacolumn{
 	width: 66%;
-	max-width: 800px;
+	max-width: 700px;
 	margin: 2em auto;
 }
 
@@ -108,20 +108,27 @@ article footer{
 #ppfooter{
 	width:75%;
 	height:4em;
-        position:relative;
+    position:relative;
 	margin: 2em auto;
 	align: center;
 	text-align: center;
 }
-nav#fcentro{
+
+nav#ppint{
     padding:0.5em 1ex;
-	position:absolute;
+	position:relative;
 	bottom:0;
 	z-index:100;
 }
-nav#fcentro ul li{list-style-type:none; display:inline;}
-nav#fcentro ul {margin:0; padding:0.5ex 1em;}
-nav#fcentro{font-size:1.1em;}
+nav#ppint ul li{list-style-type:none; display:inline;}
+nav#ppint ul {margin:0; padding:0.5ex 1em;}
+nav#ppint{font-size:1.1em;}
 @media print{
-	nav#fcentro{display:none;}
+	nav#ppint{display:none;}
+}
+#copyright{
+	padding:0.5em 1ex;
+    position:relative;
+	bottom:0;
+	z-index:100;
 }
