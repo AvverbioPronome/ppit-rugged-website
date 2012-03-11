@@ -32,15 +32,20 @@ $settings['desf']='./html/';
  *   =========================
  *
  */
+ 
+ function ftbi($filename){
+ 	return file_get_contents('./html/inc/'.$filename.'.html') 
+ 		or die('./html/inc/'.$filename.".html not found\n");
+ }
 
 $tag[] = '<!--include:ppheader-->';
- $re[] = file_get_contents('./html/inc/ppheader.html');
+ $re[] = ftbi('ppheader');
 
 $tag[] = '<!--include:sitenav-->';
- $re[] = file_get_contents('./html/inc/sitenav.html');
-
+ $re[] = ftbi('sitenav');
+ 
 $tag[] = '<!--include:ppfooter-->';
- $re[] = file_get_contents('./html/inc/ppfooter.html');
+ $re[] = ftbi('ppfooter');
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
@@ -88,6 +93,10 @@ function pagefromwiki($pagename){
 		array($body,$pagename,str_replace('_', ' ', $pagename)),
 		file_get_contents('./html/editme/wikipages.html')
 	 );
+	 
+	  /* usando la pagina in questa posizione verrà creato
+	     un file senza senso in html/wikipages.html! */
+	  
  };
   
  
