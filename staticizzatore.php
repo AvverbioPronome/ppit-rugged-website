@@ -138,6 +138,17 @@ foreach($scandir as $file){
 	};
 };
 
+ /*
+ *   Caricamento issue/iniziative LQFB.
+ *   ===================================
+ *
+ */
+
+$areasurl = "http://apitest.liquidfeedback.org:25520/area";
+$areas = file_get_contents($jsonurl,0,null,null);
+$json_output = json_decode($json);
+var_dump($json_output, true);
+
 /*
  *   Applicazione delle sostituzioni e stampa.
  *   =========================================
