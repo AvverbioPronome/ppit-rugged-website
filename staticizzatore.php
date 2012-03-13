@@ -154,22 +154,34 @@ function pagefromlqfb($pagename) {
 */
 };
 
+require_once 'liquidquery.php';
 
-$apiurl = "http://apitest.liquidfeedback.org:25520/";
-$bla = array();
-do{
-	$draftsurl= $apiurl."draft?current_draft=true&render_content='html'";
-	$draftsjson = file_get_contents($draftsurl,0,null,null);
-	$drafts = json_decode($draftsjson, true);
-	//print_r($drafts);
-}while($drafts['status']!='ok'); //questo ci farà bannare dal mondo.
+$liq = new liquidquery('http://apitest.liquidfeedback.org:25520/');
 
-foreach($drafts['result'] as $draft){
-	$sep='';
-	$page['proposta'.$sep.$draft['initiative_id']]
-		= pagefrombody($draft['content'], $title);
+$approvate = $liq->getApproved(10,0,2); //solo le prime dieci.
+//$approvate = $liq->getDrafts('current_draft=true');
+
+$indexbody='';
+foreach($approvate as $initiative){
+	$sep='_';
+	$initurl='tribuna'.$sep.$initiative['initiative_id'];
+	$page[$initurl] = pagefrombody($initiative['content'], $title);
+	
+	$page[$initurl] = "<article id=init".$initiative['initiative_id'].">";
+	$page[$initurl] .= "<h1><a href='".$initurl.".html'>".$initiative['name']."</a></h1>";
+	$page[$initurl] .= $initiative['content'];
+	$page[$initurl] .= "</article>\n";
+	
+	$page[$initurl]=pagefrombody($page[$initurl], $initiative['name'], 'tribuna');
+	
+	$indexbody .= "<article id=init".$initiative['initiative_id'].">";
+	$indexbody .= "<h1><a href='".$initurl.".html'>".$initiative['name']."</a></h1>";
+	$indexbody .= substr($initiative['content'],0,1000);
+	$indexbody .= "</article>\n";
 
 };
+
+$page['tribuna']=pagefrombody($indexbody, 'Tribuna', 'tribuna'); unset($indexbody);
 
 /*
 $initiativesurl= $apiurl."initiative";
