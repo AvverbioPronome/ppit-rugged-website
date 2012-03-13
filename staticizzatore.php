@@ -51,8 +51,11 @@ $tag[] = '<!--include:ppfooter-->';
 $tag[] = '<a name=';
  $re[] = '<a id='; 
  
-$tag[] = '<br />';
+$tag[] = '<br /><br />';
  $re[] = '</p><p>'; //si, lo so che sono due cose diverse. ma non lo sapete usare.
+ 
+$tag[] = '<br />';
+ $re[] = ' '; //si che le fa in ordine... :D
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
@@ -77,7 +80,8 @@ $wikipages = array(
 "Lettera_di_Assunzione_Responsabilità_Uomini_Pubblicamente_Armati",
 "Modulo_Iscrizione_e_Certificazione",
 "Modulo_Personale_del_Certificatore",
-"Modulo_Contabile_del_Certificatore"
+"Modulo_Contabile_del_Certificatore",
+"Storia", "Assemblea_Occasionale_2012"
 );
 
 function pagefrombody($body, $pagename, $template='wikipages'){
