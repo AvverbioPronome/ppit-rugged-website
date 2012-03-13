@@ -139,15 +139,62 @@ foreach($scandir as $file){
 };
 
  /*
- *   Caricamento issue/iniziative LQFB.
+ *   Caricamento verbale (LQFB).
  *   ===================================
  *
  */
 
-$areasurl = "http://apitest.liquidfeedback.org:25520/area";
-$areas = file_get_contents($jsonurl,0,null,null);
-$json_output = json_decode($json);
-var_dump($json_output, true);
+function pagefromlqfb($pagename) {
+/*
+        TODO: crea albero directory := ./area/issue/initiative/draft/
+        TODO: per ogni draft crea file html (senza html-body; file da includere in una funzione successiva che compone verbale.html)
+*/
+};
+
+/*
+$apiurl = "http://apitest.liquidfeedback.org:25520/";
+$bla = array();
+
+$draftsurl= $apiurl."draft";
+$draftsjson = file_get_contents($draftsurl,0,null,null);
+$drafts = json_decode($draftsjson);
+var_dump($drafts, true);
+$initiativesurl= $apiurl."initiative";
+$initiativesjson = file_get_contents($initiativesurl,0,null,null);
+$initiatives = json_decode($initiativesjson);
+var_dump($initiatives, true);
+$issuesurl= $apiurl."issue";
+$issuesjson = file_get_contents($issuesurl,0,null,null);
+$issues = json_decode($issuesjson);
+var_dump($issues, true);
+$areasurl = $apiurl."area";
+$areasjson = file_get_contents($areasurl,0,null,null);
+$areas = json_decode($areasjson);
+var_dump($areas, true);
+
+foreach($drafts as $draft){
+        TODO: draft id => $bla,
+        TODO: datetime => $bla,
+        TODO: draft text => $bla,
+        foreach($initiatives as $initiative){
+                TODO: initiative id => $bla,
+                TODO: initiative name => $bla,
+                foreach($issues as $issue){
+                        TODO: issue id => $bla,
+                        TODO: alternatives => $bla,
+                        TODO: area id => $bla,
+                        foreach($areas as $area){
+                                if ( $area == $bla[area id]){
+                                        TODO: area name => $bla
+                                } 
+                        };
+                };
+        };
+        $page[$bla] = pagefromlqfb($bla);
+};
+
+
+*/
 
 /*
  *   Applicazione delle sostituzioni e stampa.
