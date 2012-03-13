@@ -86,14 +86,14 @@ function pagefrombody($body, $pagename, $template='wikipages'){
 		array($body,$pagename,str_replace('_', ' ', $pagename)),
 		file_get_contents('./html/editme/'.$template.'.html')
 	 );
-};
+}; // questa funzione serve anche più avanti per lqfb. attenzione.
  
 function pagefromwiki($pagename){
 	
 	$baseurl = 'https://dev.partitopirata.org/projects/ppit/wiki/';
 	$htmlurl = $baseurl.$pagename.'.html';
 	if ( $pagename == "Statuto" ){
-	        $htmlurl = $htmlurl.'?version=45';
+	    $htmlurl = $htmlurl.'?version=45';
 	}
 	//non controlla se ci sono 404, ma dovrebbe andare bene comunque
 	$html = file_get_contents($htmlurl); 
@@ -158,16 +158,16 @@ function pagefromlqfb($pagename) {
 $apiurl = "http://apitest.liquidfeedback.org:25520/";
 $bla = array();
 do{
-	$draftsurl= $apiurl."draft?current_draft=true";
+	$draftsurl= $apiurl."draft?current_draft=true&render_content='html'";
 	$draftsjson = file_get_contents($draftsurl,0,null,null);
 	$drafts = json_decode($draftsjson, true);
 	//print_r($drafts);
-}while($drafts['status']!='ok');
+}while($drafts['status']!='ok'); //questo ci farà bannare dal mondo.
 
 foreach($drafts['result'] as $draft){
 	$sep='';
 	$page['proposta'.$sep.$draft['initiative_id']]
-		=pagefrombody($draft['content']);
+		= pagefrombody($draft['content'], $title);
 
 };
 
@@ -216,7 +216,7 @@ foreach($drafts as $draft){
  */
 foreach($page as $name => $text){ 
         if ( $name == 'Il_Partito_Pirata' ){
-                $name = index;
+            $name = index;
         }elseif($name=='wikipages'){
         	continue;
         };
