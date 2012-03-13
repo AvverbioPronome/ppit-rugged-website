@@ -2,7 +2,7 @@
 @import "reset.css"; 
 @import "ppbar.css";
 body{
-	background: Darkorange url(tagcloud.png) center center;
+	background: Darkorange url(tagcloud.png) top left;
 	color: black;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: normal;
