@@ -79,7 +79,7 @@ $wikipages = array(
 );
 
 function pagefrombody($body, $pagename, $template='wikipages'){
-		return str_replace(
+	return str_replace(
 		array('<!--include:text_from_wiki_goes_here-->',
 			'<!--templating:title-->',
 			'<!--templating:fancytitle-->'),
