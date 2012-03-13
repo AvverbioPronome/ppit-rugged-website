@@ -36,7 +36,7 @@ class liquidquery{
 		
 		foreach($txts as $txt){
 			$res=$this->getInitInfo($txt['initiative_id']);
-			print_r($res);
+			//print_r($res);
 			$txt['name']=$res['name'];
 			$txn[]=$txt;
 		};
