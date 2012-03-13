@@ -46,11 +46,13 @@ $tag[] = '<!--include:sitenav-->';
 $tag[] = '<!--include:ppfooter-->';
  $re[] = ftbi('ppfooter');
  
- 
 //qui cominciano le sostituzioni per validare l'html di redmine.
  
 $tag[] = '<a name=';
  $re[] = '<a id='; 
+ 
+$tag[] = '<br />';
+ $re[] = '</p><p>'; //si, lo so che sono due cose diverse. ma non lo sapete usare.
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
