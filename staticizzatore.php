@@ -152,6 +152,7 @@ function pagefromlqfb($pagename) {
         	non supporta la creazione di cartelle. scegliere altro simbolo.
         TODO: per ogni draft crea file html (senza html-body; file da includere in una funzione successiva che compone verbale.html)
 */
+	
 };
 
 require_once 'liquidquery.php';
