@@ -77,6 +77,16 @@ $wikipages = array(
 "Modulo_Personale_del_Certificatore",
 "Modulo_Contabile_del_Certificatore"
 );
+
+function pagefrombody($body, $pagename, $template='wikipages'){
+		return str_replace(
+		array('<!--include:text_from_wiki_goes_here-->',
+			'<!--templating:title-->',
+			'<!--templating:fancytitle-->'),
+		array($body,$pagename,str_replace('_', ' ', $pagename)),
+		file_get_contents('./html/editme/'.$template.'.html')
+	 );
+};
  
 function pagefromwiki($pagename){
 	
@@ -92,15 +102,7 @@ function pagefromwiki($pagename){
 			$body = $matches[1];
 		}
 	 
-	return str_replace(
-		array('<!--include:text_from_wiki_goes_here-->',
-			'<!--templating:title-->',
-			'<!--templating:fancytitle-->'),
-		array($body,$pagename,str_replace('_', ' ', $pagename)),
-		file_get_contents('./html/editme/wikipages.html')
-	 );
-	 
-	  
+	return pagefrombody($body, $pagename, 'wikipages');  
  };
   
  
@@ -138,7 +140,7 @@ foreach($scandir as $file){
 	};
 };
 
- /*
+/*
  *   Caricamento verbale (LQFB).
  *   ===================================
  *
@@ -147,18 +149,29 @@ foreach($scandir as $file){
 function pagefromlqfb($pagename) {
 /*
         TODO: crea albero directory := ./area/issue/initiative/draft/
+        	non supporta la creazione di cartelle. scegliere altro simbolo.
         TODO: per ogni draft crea file html (senza html-body; file da includere in una funzione successiva che compone verbale.html)
 */
 };
 
-/*
+
 $apiurl = "http://apitest.liquidfeedback.org:25520/";
 $bla = array();
+do{
+	$draftsurl= $apiurl."draft?current_draft=true";
+	$draftsjson = file_get_contents($draftsurl,0,null,null);
+	$drafts = json_decode($draftsjson, true);
+	//print_r($drafts);
+}while($drafts['status']!='ok');
 
-$draftsurl= $apiurl."draft";
-$draftsjson = file_get_contents($draftsurl,0,null,null);
-$drafts = json_decode($draftsjson);
-var_dump($drafts, true);
+foreach($drafts['result'] as $draft){
+	$sep='';
+	$page['proposta'.$sep.$draft['initiative_id']]
+		=pagefrombody($draft['content']);
+
+};
+
+/*
 $initiativesurl= $apiurl."initiative";
 $initiativesjson = file_get_contents($initiativesurl,0,null,null);
 $initiatives = json_decode($initiativesjson);
