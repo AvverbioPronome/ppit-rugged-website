@@ -1,5 +1,6 @@
 <?php
-require_once('liblf.php');
+require_once('liblqfb.class.php');
+require_once('libpagina.class.php');
 
 class piratewww {
 	private $lfapi;
