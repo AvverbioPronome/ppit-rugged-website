@@ -50,7 +50,7 @@ class liquidquery{
 			return false;
 	}
 	
-	function getApproved($limit, $offset)
+	function getApproved($offset, $limit)
 	{ //
 		
 		$qs .= 'include_initiatives=true&'.'include_issues=true&';

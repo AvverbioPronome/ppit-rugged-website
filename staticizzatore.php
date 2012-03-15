@@ -161,7 +161,7 @@ foreach($tutte as $initiative){
 $page['verbale']=pagefrombody($indexbody, 'Verbale', 'verbale');
 unset($indexbody);
 
-$approvate = $liq->getApproved(10,0,2); // solo le prime dieci.
+$approvate = $liq->getApproved(0,10); // solo le prime dieci.
 $indexbody='<p>La Tribuna Politica del Partito Pirata elenca le iniziative assembleari
 che hanno raggiunto l\'approvazione, accompagnate da eventuali commenti "a bocce
 ferme" da parte di chi desideri inviare degli approfondimenti sul
