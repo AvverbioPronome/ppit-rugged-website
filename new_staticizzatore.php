@@ -3,10 +3,13 @@
 error_reporting(E_ALL && E_NOTICE);
 $perfstart = microtime(true);
 
-require_once('new_staticizzatore.conf');
-require_once('libpiratewww.php');
-
 echo "Init: ";
+
+require_once('new_staticizzatore.conf');
+require_once('libpiratewww.class.php');
+
+// new www
+//$www = new Piratewww('IT',$settings['lfapi']);
 
 // create needed dirs
 function createdirs($dir=NULL) {
@@ -61,10 +64,27 @@ $settings['cleanprevious'] = false;
 echo "OK\n";
 echo "Commands: ";
 
-// command parsing
+// command parsing and exec
 if (isset($argc)) {
   for ($i = 1; $i < $argc; $i++) {
     switch($argv[$i]) {
+      case "-?":
+      case "-h":
+      case "--help":
+        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['basedir'].".\n";
+        echo "\n";
+        echo "Usage: ".$argv[0]." <option>\n";
+        echo "\n";
+        echo "--help, -help, -h, or -?	to get this help.\n";
+        echo "--version, -v		to return the version of this file.\n";
+        echo "--debug, -d		to turn on output debugging.\n";
+        echo "--test, -t		to fake any write operation (filesystem, api).\n";
+        echo "--basedir [directory]	to change base directory from ".$settings['basedir']." .\n";
+        echo "--createdirs, -c	to create needed dirs starting from basedir.";
+        echo "\n";
+        echo "Command line options override config files options.\n";
+      exit;
+      break;
       case "-v":
       case "--version":
         echo $argv[0]." v0.1\n";
@@ -83,42 +103,23 @@ if (isset($argc)) {
       case "--dir":
         $settings['basedir'] = $argv[++$i];
         break;
+      case "-p":
+      case "--cleanprevious":
+        $settings['cleanprevious'] = true;
+        break;
       case "-c":
       case "--createdirs":
         createdirs($settings['basedir']);
         exit;
         break;
-      case "-p":
-      case "--cleanprevious":
-        $settings['cleanprevious'] = true;
-        break;
-      case "-?":
-      case "-h":
-      case "--help":
-        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['basedir'].".\n";
-        echo "\n";
-        echo "Usage: ".$argv[0]." <option>\n";
-        echo "\n";
-        echo "--help, -help, -h, or -?	to get this help.\n";
-        echo "--version, -v		to return the version of this file.\n";
-        echo "--debug, -d		to turn on output debugging.\n";
-        echo "--test, -t		to fake any write operation (filesystem, api).\n";
-        echo "--basedir [directory]	to change base directory from ".$settings['basedir']." .\n";
-        echo "--createdirs, -c		to create needed dirs starting from basedir.";
-        echo "\n";
-        echo "Command line options override config files options.\n";
-      exit;
-      break;
     }; // switch options
   }; // for each option
 }; // if is option
 
 echo "OK\n";
-echo "Exec: ";
+echo "Post: ";
 
-// istanzia gli oggetti e lavora
-$www = new piratewww('IT',$settings['lfapi']);
-
+// operazioni finali
 echo "OK\n";
 
 // cronometro.
