@@ -2,7 +2,7 @@
 @import "reset.css"; 
 @import "ppbar.css";
 body{
-	background: Darkorange url(tagcloud.png) top left;
+	background: #ff8c00 url(tagcloud.png) top left;
 	color: black;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: normal;
@@ -15,7 +15,7 @@ p{
 em{font-style:italic;}
 strong{font-weight:bold;}
 a{
-	color:darkorange;
+	color:#ff8c00;
 	background:black;
 	text-decoration:none;
 }
@@ -58,7 +58,7 @@ code, kbd, samp, pre, tt, var {
 }
 #sitehead h1{
 	font-weight:bold;
-	position:absolute; bottom:1 em; left:0;
+	position:absolute; bottom:1em; left:0;
 }
 /* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
 #sitehead h1.gazzetta {font-size:4em;} 
@@ -86,7 +86,7 @@ nav#sitenav{font-size:1.1em;}
 	text-decoration:underline;
 }
 #sitecont a:hover{
-	color:darkorange;
+	color:#ff8c00;
 	background:black;
 	text-decoration:none;
 }
@@ -113,7 +113,6 @@ article footer{
 	height:4em;
     position:relative;
 	margin: 2em auto;
-	align: center;
 	text-align: center;
 }
 
