@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-require_once 'liquidquery.php';
+require_once 'liblf.php';
 $lqfb = new liquidquery('http://apitest.liquidfeedback.org:25520/', 2);
 
 switch($argv[1]){
