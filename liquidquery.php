@@ -1,7 +1,4 @@
 <?php
-
-define(MAXATTEMPT, 2);
-
 class liquidquery{
 	
 	private $apiserver='http://apitest.liquidfeedback.org:25520/';
@@ -40,7 +37,7 @@ class liquidquery{
 		$txts = $this->getSomething('draft', $querystring);
 		
 		foreach($txts as $txt){
-			$res=$this->getInitInfo($txt['initiative_id']);
+			$res=$this->getInitiativeInfo($txt['initiative_id']);
 			//print_r($res);
 			$txt['name']=$res['name'];
 			$txn[]=$txt;
@@ -62,11 +59,10 @@ class liquidquery{
 		$qs .= 'current_draft=true&'.'render_content=html&';
 		$qs .= 'limit='.$limit.'&'.'offset='.$offset.'&';
 		
-		return $this->getDrafts($qs);
-		
+		return $this->getDrafts($qs);		
 	}
 	
-	function getInitInfo($id)
+	function getInitiativeInfo($id)
 	{ // mah, apiserver: dimmi un po' di questa proposta...
 		
 		$res = $this->getSomething('initiative', 'initiative_id='.$id);
