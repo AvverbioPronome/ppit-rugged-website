@@ -168,7 +168,7 @@ foreach($scandir as $file){
  *
  */
 
-require_once 'liquidquery.php';
+require_once 'liquidquery.class.php';
 
 $liq = new liquidquery('http://apitest.liquidfeedback.org:25520/');
 
