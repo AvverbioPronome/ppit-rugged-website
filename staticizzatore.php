@@ -48,30 +48,8 @@ if (isset($argv)){
  *   =========================
  *
  */
- 
- function ftbi($filename){
- 	return file_get_contents('./html/inc/'.$filename.'.html');
- }
 
-$tag[] = '<!--include:ppheader-->';
- $re[] = ftbi('ppheader');
-
-$tag[] = '<!--include:sitenav-->';
- $re[] = ftbi('sitenav');
- 
-$tag[] = '<!--include:ppfooter-->';
- $re[] = ftbi('ppfooter');
- 
-//qui cominciano le sostituzioni per validare l'html di redmine.
- 
-$tag[] = '<a name=';
- $re[] = '<a id='; 
- 
-$tag[] = '<br /><br />';
- $re[] = '</p><p>'; //si, lo so che sono due cose diverse. ma non lo sapete usare.
- 
-$tag[] = '<br />';
- $re[] = ' '; //si che le fa in ordine... :D
+require 'sostituzioni.list.php';
 
 // qui una volta c'era un coso che aggiustava i path dei css e simili,
 // in forma di brutale sostituzione.
@@ -85,20 +63,7 @@ $tag[] = '<br />';
 /*
 allora, funziona così: esiste un modello, esiste */
  
-$wikipages = array(
-"Il_Partito_Pirata", 
-"Manifesto", 
-"Statuto", 
-"Garanzia_di_Iscrizione_ed_Esclusione", 
-"Lettera_di_Intento_Pirata", 
-"Lettera_di_Assunzione_Responsabilità_Artistiche",
-"Lettera_di_Assunzione_Responsabilità_Tecniche",
-"Lettera_di_Assunzione_Responsabilità_Uomini_Pubblicamente_Armati",
-"Modulo_Iscrizione_e_Certificazione",
-"Modulo_Personale_del_Certificatore",
-"Modulo_Contabile_del_Certificatore",
-"Storia", "Assemblea_Occasionale_2012"
-);
+$wikipages = file('wikipages.list');
 
 function pagefrombody($body, $pagename, $template='wikipages'){
 	return str_replace(
@@ -129,7 +94,7 @@ function pagefromwiki($pagename){
   
  
  foreach($wikipages as $bla){
- 	$page[$bla]=pagefromwiki($bla);
+ 	$page[trim($bla)]=pagefromwiki(trim($bla));
  };
  
  
