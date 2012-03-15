@@ -19,7 +19,7 @@ echo "initiatives:\t";
 foreach($liq->getApproved(0,10) as $init){
 	
 	$page = new Pagina($init['initiative_id'], $subs, './html/templates/tribuna.html');
-	$page->appendToBody('<article id=init'.$init['initiative_id'].'><h1><a href='.$page->pagename.$page->extension.'">'.$init['name']."</a></h1>");
+	$page->appendToBody('<article id=init'.$init['initiative_id'].'><h1>'.$init['name'].'</h1>');
 	$page->appendToBody($init['content']);
 	$page->appendToBody('</article>');
 	
@@ -27,7 +27,7 @@ foreach($liq->getApproved(0,10) as $init){
 	
 	$indice->appendToBody("\n");
 	$indice->appendToBody("<section id=init".$init['initiative_id'].">");
-	$indice->appendToBody('<h1><a href="'.$page->saved_as.'">'.$init['name']."</a></h1>");
+	$indice->appendToBody('<h1><a href="'.$page->saved_as.'">Proposta n° '.$init['initiative_id'].': '.$init['name']."</a></h1>");
 	$indice->appendToBody(strlen($init['content']) < 3000 ? $init['content'] : substr($init['content'], 0, 3000).'[continua...]');
 	$indice->appendToBody('<p><small>Pubblicato <time datetime='.$initiative['created'].'>'.$initiative['created'].'</time> da Spugna, portavoce dell\'Assemblea Permanente, nel Contesto '."TODO".' con tags '."TODO".'</small></p>');
 	$indice->appendToBody('</section>');
