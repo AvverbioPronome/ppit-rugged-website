@@ -8,6 +8,22 @@ $settings['sourcf']='./html/editme/';
 // dove vomito il risultato?
 $settings['desf']='./html/'; 
 
+// cancella output pre-esistente (ie: tutti i .html in ./html/)
+if (isset($argv)){
+    if ( $argv[1]  == "-d"){
+        if ( file_exists($settings['desf']) ){
+            $comando="rm ".$settings['desf']."*.html";
+            $uscita[0]="Ok";
+            $ritorno=1;
+            exec($comando,$uscita,$ritorno);
+            if ( $ritorno != 0 ){
+                echo "ATTENZIONE: non ho potuto cancellare i file .html pre-esistenti\n";
+            };
+        };
+    }
+};
+
+
 /*
  *
  * Si, sono stronzo. E questo non è mediawiki, che controlla che l'html
@@ -147,7 +163,7 @@ foreach($scandir as $file){
 };
 
 /*
- *   Caricamento verbale / tribuna (LQFB).
+ *   Caricamento tribuna / verbale (LQFB).
  *   ===================================
  *
  */
@@ -156,12 +172,37 @@ require_once 'liquidquery.php';
 
 $liq = new liquidquery('http://apitest.liquidfeedback.org:25520/');
 
-$approvate = $liq->getApproved(10,0,2); //solo le prime dieci.
+$tutte = $liq->getDrafts(""); // tutte le bozze.
+$indexbody='<p>Il Verbale del Partito Pirata riporta fedelmente tutta l\'attivita\' dell\'Assemblea Permanente
+elencando tutte le iniziative e rielencandole quando vengono modificate dai relatori.</p>';
+foreach($tutte as $initiative){
+	$sep='_';
+	$initurl='verbale'.$sep.$initiative['initiative_id'];
+	$page[$initurl] = pagefrombody($initiative['content'], $title);
+	
+	$page[$initurl] = "<article id=init".$initiative['initiative_id'].">";
+	$page[$initurl] .= "<h4>Tema n. "."null"."->Iniziativa n.".$initiative['initiative_id']."->Bozza n.".$initiative['id'].":</h4>";
+	$page[$initurl] .= "<h1>'".$initiative['name']."'</h1>";
+	$page[$initurl] .= $initiative['content'];
+	$page[$initurl] .= "<footer>Pubblicato <time datetime=".$initiative['created'].">".$initiative['created']."</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</footer>";
+	$page[$initurl] .= "</article>\n";
+	
+	$page[$initurl]=pagefrombody($page[$initurl], $initiative['name'], 'verbale');
+	
+	$indexbody .= "<article id=init".$initiative['id'].">";
+	$indexbody .= $initiative['created']." - <a href='".$initurl.".html'>'".$initiative['name']."'</a>"." (<a href=\"#\">T"."null"."I".str_pad($initiative['initiative_id'], 5, '0', STR_PAD_LEFT)."D".str_pad($initiative['id'], 5, '0', STR_PAD_LEFT)."</a>)";
+	$indexbody .= "</article>\n";
+}
+$page['verbale']=pagefrombody($indexbody, 'Verbale', 'verbale');
+unset($indexbody);
 
+$approvate = $liq->getApproved(10,0,2); // solo le prime dieci.
 $indexbody='<p>La Tribuna Politica del Partito Pirata elenca le iniziative assembleari
 che hanno raggiunto l\'approvazione, accompagnate da eventuali commenti "a bocce
 ferme" da parte di chi desideri inviare degli approfondimenti sul
-significato delle scelte assembleari qui elencate.</p>';
+significato delle scelte assembleari qui elencate, aggiungere una prospettiva storica, 
+commentare le alternative bocciate dall\'assemblea, contestualizzare o 
+descrivere i potenziali scenari aperti dal cambiamento approvato.</p>';
 foreach($approvate as $initiative){
 	$sep='_';
 	$initurl='tribuna'.$sep.$initiative['initiative_id'];
@@ -175,14 +216,12 @@ foreach($approvate as $initiative){
 	
 	$page[$initurl]=pagefrombody($page[$initurl], $initiative['name'], 'tribuna');
 	
-	$indexbody .= "<article id=init".$initiative['initiative_id'].">";
-	$indexbody .= "<h1><a href='".$initurl.".html'>Iniziativa n.".$initiative['initiative_id'].": '".$initiative['name']."'</a></h1>";
-	$indexbody .= substr($initiative['content'],0,1000);
-        $indexbody .= "<footer>Pubblicato <time datetime=".$initiative['created'].">".$initiative['created']."</time> da Spugna, portavoce dell'Assemblea Permanente, nel Contesto "."TODO"." con tags "."TODO"."</footer>";
-	$indexbody .= "</article>\n";
+	$indexbody .= "<article id=init".$initiative['initiative_id']."><ul>";
+	$indexbody .= "<li>".$initiative['created']."<a href='".$initurl.".html'>Iniziativa n.".$initiative['initiative_id'].": '".$initiative['name']."'</a></li>";
+	$indexbody .= "</ul></article>\n";
 };
-
-$page['tribuna']=pagefrombody($indexbody, 'Tribuna', 'tribuna'); unset($indexbody);
+$page['tribuna']=pagefrombody($indexbody, 'Tribuna', 'tribuna');
+unset($indexbody);
 
 
 /*
@@ -197,10 +236,12 @@ foreach($page as $name => $text){
         	continue;
         };
         
-        file_put_contents(
-                $settings['desf'].$name.'.html',
-                str_replace($tag, $re, $text)
-        );
+        if (!file_exists($settings['desf'].$name.'.html')) {
+            file_put_contents(
+                    $settings['desf'].$name.'.html',
+                    str_replace($tag, $re, $text)
+                    );
+        };
 };
 
 //cronometro, ignorare.
