@@ -1,28 +1,29 @@
 <?php
-
-define(MAXATTEMPT, 2);
-
 class liquidquery{
 	
-	private $apiurl='http://apitest.liquidfeedback.org:25520/';
+	private $apiserver='http://apitest.liquidfeedback.org:25520/';
+	private $tnt=2; //solo il valore di default...
 	
-	function __construct($apiserver)
-	{
-		$this->apiurl=$apiserver;
+	function __construct($apiserver=NULL, $tnt=NULL)
+	{ // parametri del server e regolazione dell'insistenza.
+		
+		$this->apiserver = $apiserver ? $apiserver : $this->apiserver;
+		$this->tnt = $tnt ? $tnt : $this->tnt;
 	}
 	
-	function getSomething($what, $querystring, $tnt=MAXATTEMPT)
-	{
+	function getSomething($what, $querystring)
+	{ // la funzione brutale. fa una query.
+		
 		$i=0;
 		do{
-			$draftsurl= $this->apiurl.$what.'?'.$querystring;			
+			$draftsurl= $this->apiserver.$what.'?'.$querystring;			
 			$draftsjson = file_get_contents($draftsurl,0,null,null);
 			$drafts = json_decode($draftsjson, true);
 			//print_r($drafts);
 			$i++;
-		}while($drafts['status']!='ok' && $i <= $tnt);
+		}while($drafts['status']!='ok' && $i <= $this->tnt);
 		
-		if($i < $tnt)
+		if($i < $this->tnt)
 			return $drafts['result'];
 		elseif( $drafts['status'] )
 			return $drafts['status'];
@@ -30,18 +31,18 @@ class liquidquery{
 			return false;
 	}
 	
-	function getDrafts($querystring='', $tnt=MAXATTEMPT)
-	{
-		$txts = $this->getSomething('draft', $querystring, $tnt);
+	function getDrafts($querystring='')
+	{ //
+		
+		$txts = $this->getSomething('draft', $querystring);
 		
 		foreach($txts as $txt){
-			$res=$this->getInitInfo($txt['initiative_id']);
+			$res=$this->getInitiativeInfo($txt['initiative_id']);
 			//print_r($res);
 			$txt['name']=$res['name'];
 			$txn[]=$txt;
 		};
 		
-		unset($txt, $res, $txts);
 		
 		if (is_array($txn))
 			return $txn;
@@ -49,7 +50,8 @@ class liquidquery{
 			return false;
 	}
 	
-	function getApproved($limit, $offset, $tnt=MAXATTEMPT){
+	function getApproved($limit, $offset)
+	{ //
 		
 		$qs .= 'include_initiatives=true&'.'include_issues=true&';
 		$qs .= 'issue_state=finished_with_winner&';
@@ -57,14 +59,18 @@ class liquidquery{
 		$qs .= 'current_draft=true&'.'render_content=html&';
 		$qs .= 'limit='.$limit.'&'.'offset='.$offset.'&';
 		
-		return $this->getDrafts($qs, $tnt);
-		
+		return $this->getDrafts($qs);		
 	}
 	
-	function getInitInfo($id)
-	{
+	function getInitiativeInfo($id)
+	{ // mah, apiserver: dimmi un po' di questa proposta...
+		
 		$res = $this->getSomething('initiative', 'initiative_id='.$id);
-		return $res[0];
+		
+		if ($res)
+			return $res[0];
+		else
+			return false;
 	}
 
 };
