@@ -133,11 +133,7 @@ foreach($scandir as $file){
  *
  */
 
-<<<<<<< HEAD
 require_once 'liquidquery.class.php';
-=======
-require_once 'liblf.php';
->>>>>>> 3e98c26da0ee9a94ab7ff2863c145c61aa7aef26
 
 $liq = new liquidquery('http://apitest.liquidfeedback.org:25520/');
 
