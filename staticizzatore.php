@@ -147,86 +147,43 @@ foreach($scandir as $file){
 };
 
 /*
- *   Caricamento verbale (LQFB).
+ *   Caricamento verbale / tribuna (LQFB).
  *   ===================================
  *
  */
-
-function pagefromlqfb($pagename) {
-/*
-        TODO: crea albero directory := ./area/issue/initiative/draft/
-        	non supporta la creazione di cartelle. scegliere altro simbolo.
-        TODO: per ogni draft crea file html (senza html-body; file da includere in una funzione successiva che compone verbale.html)
-*/
-	
-};
 
 require_once 'liquidquery.php';
 
 $liq = new liquidquery('http://apitest.liquidfeedback.org:25520/');
 
 $approvate = $liq->getApproved(10,0,2); //solo le prime dieci.
-//$approvate = $liq->getDrafts('current_draft=true');
 
-$indexbody='';
+$indexbody='<p>La Tribuna Politica del Partito Pirata elenca le iniziative assembleari
+che hanno raggiunto l\'approvazione, accompagnate da eventuali commenti "a bocce
+ferme" da parte di chi desideri inviare degli approfondimenti sul
+significato delle scelte assembleari qui elencate.</p>';
 foreach($approvate as $initiative){
 	$sep='_';
 	$initurl='tribuna'.$sep.$initiative['initiative_id'];
 	$page[$initurl] = pagefrombody($initiative['content'], $title);
 	
 	$page[$initurl] = "<article id=init".$initiative['initiative_id'].">";
-	$page[$initurl] .= "<h1><a href='".$initurl.".html'>".$initiative['name']."</a></h1>";
+	$page[$initurl] .= "<h1><a href='".$initurl.".html'>Iniziativa n.".$initiative['initiative_id'].": '".$initiative['name']."'</a></h1>";
 	$page[$initurl] .= $initiative['content'];
+	$page[$initurl] .= "<footer>Pubblicato <time datetime=".$initiative['created'].">".$initiative['created']."</time> da Spugna, portavoce dell'Assemblea Permanente, nel Contesto "."TODO"." con tags "."TODO"."</footer>";
 	$page[$initurl] .= "</article>\n";
 	
 	$page[$initurl]=pagefrombody($page[$initurl], $initiative['name'], 'tribuna');
 	
 	$indexbody .= "<article id=init".$initiative['initiative_id'].">";
-	$indexbody .= "<h1><a href='".$initurl.".html'>".$initiative['name']."</a></h1>";
+	$indexbody .= "<h1><a href='".$initurl.".html'>Iniziativa n.".$initiative['initiative_id'].": '".$initiative['name']."'</a></h1>";
 	$indexbody .= substr($initiative['content'],0,1000);
+        $indexbody .= "<footer>Pubblicato <time datetime=".$initiative['created'].">".$initiative['created']."</time> da Spugna, portavoce dell'Assemblea Permanente, nel Contesto "."TODO"." con tags "."TODO"."</footer>";
 	$indexbody .= "</article>\n";
-
 };
 
 $page['tribuna']=pagefrombody($indexbody, 'Tribuna', 'tribuna'); unset($indexbody);
 
-/*
-$initiativesurl= $apiurl."initiative";
-$initiativesjson = file_get_contents($initiativesurl,0,null,null);
-$initiatives = json_decode($initiativesjson);
-var_dump($initiatives, true);
-$issuesurl= $apiurl."issue";
-$issuesjson = file_get_contents($issuesurl,0,null,null);
-$issues = json_decode($issuesjson);
-var_dump($issues, true);
-$areasurl = $apiurl."area";
-$areasjson = file_get_contents($areasurl,0,null,null);
-$areas = json_decode($areasjson);
-var_dump($areas, true);
-
-foreach($drafts as $draft){
-        TODO: draft id => $bla,
-        TODO: datetime => $bla,
-        TODO: draft text => $bla,
-        foreach($initiatives as $initiative){
-                TODO: initiative id => $bla,
-                TODO: initiative name => $bla,
-                foreach($issues as $issue){
-                        TODO: issue id => $bla,
-                        TODO: alternatives => $bla,
-                        TODO: area id => $bla,
-                        foreach($areas as $area){
-                                if ( $area == $bla[area id]){
-                                        TODO: area name => $bla
-                                } 
-                        };
-                };
-        };
-        $page[$bla] = pagefromlqfb($bla);
-};
-
-
-*/
 
 /*
  *   Applicazione delle sostituzioni e stampa.
