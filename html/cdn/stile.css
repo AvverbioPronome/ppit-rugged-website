@@ -58,7 +58,7 @@ code, kbd, samp, pre, tt, var {
 }
 #sitehead h1{
 	font-weight:bold;
-	position:absolute; bottom:1em; left:0;
+	position:absolute; bottom: 1 em; left:0;
 }
 /* Vogliamo che il titolo stia su una riga sola. le classi che seguono servono proprio a regolarlo paina per pagina. */
 #sitehead h1.gazzetta {font-size:4em;} 
