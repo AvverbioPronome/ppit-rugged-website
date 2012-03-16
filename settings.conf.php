@@ -30,4 +30,9 @@ $settings['formalfoo'][] = array('Modulo_Iscrizione_e_Certificazione',5);
 $settings['formalfoo'][] = array('Modulo_Personale_del_Certificatore',5);
 $settings['formalfoo'][] = array('Modulo_Contabile_del_Certificatore',3);
 
+// staticonf.
+$settings['debug'] = false;
+$settings['test'] = false;
+$settings['cleanprevious'] = false;
+
 ?>
