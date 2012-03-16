@@ -6,10 +6,10 @@ class Piratewww {
 	private $basedir="./";
 	private $wikiurl="https://dev.partitopirata.org/projects/ppit/wiki/";
 	private $lfapiurl="http://apitest.liquidfeedback.org:25520/";
-	private $templates="templates/";
-	private $includes="includes/";
-	private $htdocs="html/";
-	private $locale="IT";
+	private $templates;
+	private $includes;
+	private $htdocs;
+	private $locale;
 	private $lfapi;
 	private $index;
 
@@ -33,19 +33,19 @@ class Piratewww {
 				$page->id = "";
 				$page->title = "";
 				$page->content = $source;
-				$page->template = "";
+				$page->template = $templates."wikipages.html";
 			break;
 			case "tribune":
 				$page->id = "";
 				$page->title = "";
-				$page->content = "";
-				$page->template = "";
+				$page->content = $source;
+				$page->template = $templates."tribune.html";
 			break;
 			case "report":
 				$page->id = "";
 				$page->title = "";
-				$page->content = "";
-				$page->template = "";
+				$page->content = $source;
+				$page->template = $templates."report.html";
 			break;
 		}
 		$this->pages[$page->id] = $page->makePage($source);

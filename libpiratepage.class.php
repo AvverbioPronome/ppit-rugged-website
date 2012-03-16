@@ -13,15 +13,22 @@ class Piratepage {
 		$this->type = $type;
 	}
 
-	private function ftbi($filename) {
-		// questa serve solo al motore di templating per scrivere meno codice.
-		// quando si voglino includere gli includes.
-		return file_get_contents($includes.$filename.'.html');
+	private function loadTemplate() {
+		$this->html = file_get_contents($this->template);
+	}
+
+	private function loadInclude() {
+		return file_get_contents($this->includes.);
+	}
+
+	private function addSub($tag, $re){
+		$this->$subs[0][]=$tag;
+		$this->$subs[1][]=$re; 
 	}
 
 	private function makeSubs() {
 		// all pages
-		$tag[] = '<!--include:ppheader-->';
+		$this->addSub('<!--include:ppheader-->', );
 		$re[] = $this->ftbi('ppheader');
 		$tag[] = '<!--include:sitenav-->';
 		$re[] = $this->ftbi('sitenav');
@@ -47,14 +54,6 @@ class Piratepage {
 		$this->html = str_replace($this->subs[0], $this->subs[1], file_get_contents($this->template));
 	}
 	
-	public function addSub($tag, $re){
-		// aggiunge una sostituzione a quelle definite sopra. nel caso una pagina abbia bisogno 
-		// di una sostituzione particolare
-		
-		$this->$subs[0][]=$tag;
-		$this->$subs[1][]=$re; 
-		// non metto controlli esclusivamente perché i parametri sono obbligatori.
-	}
 
 	function makePage($source) {
 		$this->makeSubs();
