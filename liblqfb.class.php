@@ -4,7 +4,7 @@ class Liquidquery {
 	private $apiserver=NULL; // default
 	private $tnt=2; // default
 	
-	function __construct($apiserver=NULL, $tnt=NULL)
+	function __construct($apiserver, $tnt=NULL)
 	{ // parametri del server e regolazione dell'insistenza.
 		
 		$this->apiserver = $apiserver ? $apiserver : exit(1);
