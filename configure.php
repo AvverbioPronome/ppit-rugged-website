@@ -13,7 +13,7 @@ $settings['TEMPLATES'] = 'templates/';
 $settings['INCLUDES'] = 'includes/';
 
 // dove scrivere i file html finali
-$settings['HTDOCS'] = 'html/';
+$settings['HTDOCS'] = 'html2/';
 
 // dove prelevare i testi
 $settings['WIKIURL'] = 'https://dev.partitopirata.org/projects/ppit/wiki/';

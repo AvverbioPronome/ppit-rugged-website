@@ -1,6 +1,6 @@
 <?php
 require_once 'liblqfb.class.php';
-require_once 'libpiratepage.class.php';
+require_once 'libpage.class.php';
 
 class Piratewww {
 	private $basedir="./";
@@ -29,32 +29,29 @@ class Piratewww {
 	private function createPage($type, $source) {
 		$page = new Piratepage($type);
 		switch( $type ) {
-			case "wiki":
-				$page->id = "";
-				$page->title = "";
-				$page->content = $source;
-				$page->template = $templates."wikipages.html";
+			case "report":
+				$page->id = $type."_".$source['id'];
+				$page->template = $this->templates."report.html";
 			break;
 			case "tribune":
-				$page->id = "";
-				$page->title = "";
-				$page->content = $source;
-				$page->template = $templates."tribune.html";
+				$page->id = $type."_".$source['id'];
+				$page->template = $this->templates."tribune.html";
 			break;
-			case "report":
-				$page->id = "";
-				$page->title = "";
-				$page->content = $source;
-				$page->template = $templates."report.html";
+			default:
+				$page->id = $type."_".$type;
+				$page->template = $this->templates."wikipages.html";
 			break;
 		}
-		$this->pages[$page->id] = $page->makePage($source);
+		$page->makePage($source);
+		$this->pages[$page->id] = $page;
 	}
 
 	private function createIndex($type, $sources) {
 		$page = new Piratepage($type);
 		$page->id = $type."_index";
-		$this->pages[$page->id] = $page->makeIndex($sources);
+		$page->template = $this->templates.$type.".html";
+		$page->makeIndex($sources);
+		$this->pages[$page->id] = $page;
 	}
 
 	private function fetchFiles($docsdir) {
@@ -73,7 +70,7 @@ class Piratewww {
 			if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $pagecontent, $matches)) {
 				$pagecontent = $matches[1];
 			}
-			$this->createPage("wiki", $pagecontent);
+			$this->createPage($wikipage, $pagecontent);
 		}
 	}
 	
@@ -87,20 +84,21 @@ class Piratewww {
 				$drafts = $this->lfapi->getDrafts($last);
 			break;
 		}
-/*		foreach ( $drafts as $draft ) {
+		foreach ( $drafts as $draft ) {
 			$this->createPage($type, $draft);
 		}
+
 		$this->createIndex($type, $drafts);
-*/	}	
+	}	
 
 	private function fetchForum() {
 	}
 
-	private function writePages($type, $last=NULL) {
-		foreach($pages as $page) {
-			$page->writePage($type, $last);
+	private function writePages($last=NULL) {
+		foreach($this->pages as $page) {
+			$page->writePage($this->htdocs);
 		}
-		$pages = array();
+		$this->pages = array();
 	}
 
 	function updateFormalfoo($wikipages) {
@@ -110,13 +108,13 @@ class Piratewww {
 
 	function updateReport($last = "1") {
 		$this->fetchLf("report", $last);
-//		$this->writePages("report", $last);
+		$this->writePages($last);
 	}
 
 	function updateTribune($last = "1") {
 		$this->fetchLf("tribune", $last);
 		$this->fetchforum();
-//		$this->writePages("tribune", $last);
+		$this->writePages($last);
 	}
 };
 ?>
