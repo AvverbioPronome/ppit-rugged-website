@@ -28,13 +28,39 @@ class Piratewww {
 	
 	private function createPage($type, $source) {
 		$page = new Piratepage($type);
-		return $page->makePage($type, $source);
+		switch( $type ) {
+			case "wiki":
+				$page->id = "";
+				$page->title = "";
+				$page->content = $source;
+				$page->template = "";
+			break;
+			case "tribune":
+				$page->id = "";
+				$page->title = "";
+				$page->content = "";
+				$page->template = "";
+			break;
+			case "report":
+				$page->id = "";
+				$page->title = "";
+				$page->content = "";
+				$page->template = "";
+			break;
+		}
+		$this->pages[$page->id] = $page->makePage($source);
 	}
-	
+
+	private function createIndex($type, $sources) {
+		$page = new Piratepage($type);
+		$page->id = $type."_index";
+		$this->pages[$page->id] = $page->makeIndex($sources);
+	}
+
 	private function fetchFiles($docsdir) {
 		$files = array_diff(scandir($docsdir), array('.', '..'));
 		foreach ( $files as $file ) {
-			createPage("file", $file);
+			$pages[$file] = createPage("file", $file);
 		}
 	}
 	
@@ -42,26 +68,29 @@ class Piratewww {
 		foreach ( $wikipages as $wikipage ) {
 			$wikipage=trim($wikipage);
 			$page = $wikiurl.$wikipage;
-			$pages[$wikipage] = createPage("wiki", $page);
+			$pagecontent = file_get_contents($page);
+			// http://stackoverflow.com/a/4911037
+			if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $pagecontent, $matches)) {
+				$pagecontent = $matches[1];
+			}
+			$this->createPage("wiki", $pagecontent);
 		}
 	}
 	
 	private function fetchLf( $type, $last ) {
 		$drafts = NULL;
-		$this->index = new Piratepage($type);
 		switch( $type ) {
 			case "tribune":
-				$drafts = $liq->getApproved($last);
+				$drafts = $lfapi->getApproved($last);
 			break;
 			case "report":
-				$drafts = $liq->getDrafts($last);
+				$drafts = $lfapi->getDrafts($last);
 			break;
 		}
-		foreach ( $drafts as $page ) {
-			$pageid = $type."_".$page;
-			$pages[$pageid] = createPage($type, $page);
+		foreach ( $drafts as $draft ) {
+			$this->createPage($type, $draft);
 		}
-		$pages[$type."_index"] = createIndex($type, $pages);
+		$this->createIndex($type, $drafts);
 	}	
 
 	private function fetchForum() {
