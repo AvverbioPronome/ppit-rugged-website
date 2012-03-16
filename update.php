@@ -5,11 +5,9 @@ $perfstart = microtime(true);
 
 echo "Init: ";
 
-require_once('new_staticizzatore.conf');
+require_once('configure');
 require_once('libpiratewww.class.php');
 
-// new www
-//$www = new Piratewww('IT',$settings['lfapi']);
 
 // create needed dirs
 function createdirs($dir=NULL) {
@@ -43,6 +41,8 @@ echo "OK\n";
 echo "Config: ";
 
 // config parsing
+$settings['locale']=$locale;
+unset($locale);
 $settings['basedir']=$basedir;
 unset($basedir);
 $settings['templates']=$templates;
@@ -60,6 +60,11 @@ unset($index,$manifesto,$statuto,$iscrizione,$intento,$lara,$lart,$larm,$modiscr
 $settings['debug'] = false;
 $settings['test'] = false;
 $settings['cleanprevious'] = false;
+$settings['ff'] = false;
+$settings['tribune'] = false;
+$settings['report'] = true;
+$settings['full'] = false;
+$settings['quickstart'] = false;
 
 echo "OK\n";
 echo "Commands: ";
@@ -115,6 +120,17 @@ if (isset($argc)) {
     }; // switch options
   }; // for each option
 }; // if is option
+
+// new www
+$www = new Piratewww($settings['basedir'], $settings['wikiurl'], $settings['lfapi'], $settings['templates'], $settings['includes'], $settings['htdocs'], $settings['locale']);
+if ( $settings['full'] || $settings['quickstart'] ) {
+  $last="1";
+} else {
+  // TODO: scandir to figure out which is the last draft already updated
+}
+if ( $settings['ff'] || $settings['full'] || $settings['quickstart'] ) $www->updateFormalfoo();
+if ( $settings['tribune'] || $settings['full'] || $settings['quickstart'] ) $www->updateTribune();
+if ( $settings['report'] || $settings['full'] || $settings['quickstart'] ) $www->updateReport();
 
 echo "OK\n";
 echo "Post: ";

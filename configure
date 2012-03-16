@@ -1,5 +1,8 @@
 <?php
 
+// locale: branch of PP
+$locale='IT';
+
 // basedir
 $basedir='.';
 

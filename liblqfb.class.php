@@ -1,13 +1,13 @@
 <?php
-class liquidquery{
+class Liquidquery {
 	
-	private $apiserver='http://apitest.liquidfeedback.org:25520/';
-	private $tnt=2; //solo il valore di default...
+	private $apiserver=NULL; // default
+	private $tnt=2; // default
 	
 	function __construct($apiserver=NULL, $tnt=NULL)
 	{ // parametri del server e regolazione dell'insistenza.
 		
-		$this->apiserver = $apiserver ? $apiserver : $this->apiserver;
+		$this->apiserver = $apiserver ? $apiserver : exit(1);
 		$this->tnt = $tnt ? $tnt : $this->tnt;
 	}
 	
