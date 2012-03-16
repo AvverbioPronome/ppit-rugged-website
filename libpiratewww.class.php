@@ -26,6 +26,7 @@ class Piratewww {
 		$this->lfapi = new Liquidquery($lfapiurl);
 	}
 
+
 	private function createPage($type, $source) {
 		$page = new Piratepage($type);
 		switch( $type ) {
@@ -87,7 +88,6 @@ class Piratewww {
 		foreach ( $drafts as $draft ) {
 			$this->createPage($type, $draft);
 		}
-
 		$this->createIndex($type, $drafts);
 	}	
 
@@ -100,6 +100,57 @@ class Piratewww {
 		}
 		$this->pages = array();
 	}
+
+// create needed dirs and touch empty skels for needed includes and templates
+function createdirs($dir=NULL) {
+  // create dirs
+  if ( file_exists($dir) ){
+    $comando="mkdir ".$dir.$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
+    $uscita[0]="Ok";
+    $ritorno=1;
+    exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
+    if ( $ritorno != 0 ){
+      echo "ATTENZIONE: non ho potuto creare le directories necessarie.\n";
+      exit(1);
+    };
+  };
+  // create empty includes
+  if ( file_exists($dir) ){
+    $comando="touch ".$dir.$settings['INCLUDES']."ppheader.inc.html ".$dir.$settings['INCLUDES']."ppfooter.inc.html ".$dir.$settings['INCLUDES']."sitenav.inc.html";
+    $uscita[0]="Ok";
+    $ritorno=1;
+    exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
+    if ( $ritorno != 0 ){
+      echo "ATTENZIONE: non ho potuto creare gli includes.\n";
+      exit(1);
+    };
+  };
+  // create empty templates
+  if ( file_exists($dir) ){
+    $comando="mkdir ".$dir.$settings['TEMPLATES']."wikipages.html ".$dir.$settings['TEMPLATES']."report.html ".$dir.$settings['TEMPLATES']."tribune.html";
+    $uscita[0]="Ok";
+    $ritorno=1;
+    exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
+    if ( $ritorno != 0 ){
+      echo "ATTENZIONE: non ho potuto creare i templates.\n";
+      exit(1);
+    };
+  };
+}
+
+// clean previous .html files from htdocs
+function cleanprevious($htdocs=NULL) {
+  if ( file_exists($htdocs) ){
+    $comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
+    $uscita[0]="Ok";
+    $ritorno=1;
+    exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
+    if ( $ritorno != 0 ){
+      echo "ATTENZIONE: non ho potuto cancellare i file .html pre-esistenti\n";
+      exit(1);
+    };
+  };
+}
 
 	function updateFormalfoo($wikipages) {
 		$this->fetchWiki($wikipages);
