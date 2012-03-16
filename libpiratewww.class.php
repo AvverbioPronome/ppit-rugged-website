@@ -57,7 +57,18 @@ class Piratewww {
 			break;
 		}
 		foreach ( $drafts as $draft ) {
+<<<<<<< HEAD
 			createPage($type, $draft);
+=======
+			pagefromlf($draft,$type); 
+				//ALERT: non credo che le variabili interne di questa funzione passino fuori, tipo $init e $page
+			$indice->appendToBody("\n");
+			$indice->appendToBody("<section id=init".$init['initiative_id'].">");
+			$indice->appendToBody('<h1><a href="'.$page->saved_as.'">Proposta n° '.$init['initiative_id'].': '.$init['name']."</a></h1>");
+			$indice->appendToBody(strlen($init['content']) < 3000 ? $init['content'] : substr($init['content'], 0, 3000).'[continua...]');
+			$indice->appendToBody('<p><small>Pubblicato <time datetime='.$initiative['created'].'>'.$initiative['created'].'</time> da Spugna, portavoce dell\'Assemblea Permanente, nel Contesto '."TODO".' con tags '."TODO".'</small></p>');
+			$indice->appendToBody('</section>');
+>>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
 		}
 	}	
 
@@ -68,6 +79,7 @@ class Piratewww {
 		$pages = array();
 	}
 
+<<<<<<< HEAD
 	function updateFormalfoo() {
 		$this->fetchWiki();
 		$this->writePages("wiki");
@@ -82,6 +94,22 @@ class Piratewww {
 		this->fetchLf("tribune", $last);
 		//this->fetchforum();
 		this->writePages("tribune", $last);
+=======
+	function updateFormalfoo($wikiurls=NULL, $htdocs=NULL) {
+		$this->fetchwiki($wikiurls);
+		$this->writepages($htdocs);
+	}
+	
+	function updateReport($htdocs=NULL) {
+		$this->fetchlf("report");
+		$this->writepages($htdocs);
+	}
+
+	function updateTribune($htdocs=NULL) {
+		$this->fetchlf("tribune");
+		//this->fetchforum();
+		$this->writepages($htdocs);
+>>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
 	}
 };
 ?>

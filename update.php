@@ -5,8 +5,13 @@ $perfstart = microtime(true);
 
 echo "Init: ";
 
+<<<<<<< HEAD
 require_once('configure');
 require_once('libpiratewww.class.php');
+=======
+require_once 'settings.conf.php';
+require_once 'libpiratewww.class.php';
+>>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
 
 
 // create needed dirs
@@ -15,7 +20,7 @@ function createdirs($dir=NULL) {
     $comando="mkdir ".$dir.$settings['templates']." ".$dir.$settings['includes']." ".$dir.$settings['htdocs']." ";
     $uscita[0]="Ok";
     $ritorno=1;
-    exec($comando,$uscita,$ritorno);
+    exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
     if ( $ritorno != 0 ){
       echo "ATTENZIONE: non ho potuto creare le directories necessarie.\n";
       exit(1);
@@ -29,7 +34,7 @@ function cleanprevious($htdocs=NULL) {
     $comando="rm ".$settings['basedir'].$settings['htdocs']."*.html";
     $uscita[0]="Ok";
     $ritorno=1;
-    exec($comando,$uscita,$ritorno);
+    exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
     if ( $ritorno != 0 ){
       echo "ATTENZIONE: non ho potuto cancellare i file .html pre-esistenti\n";
       exit(1);
@@ -40,6 +45,7 @@ function cleanprevious($htdocs=NULL) {
 echo "OK\n";
 echo "Config: ";
 
+<<<<<<< HEAD
 // config parsing
 $settings['locale']=$locale;
 unset($locale);
@@ -65,36 +71,24 @@ $settings['tribune'] = false;
 $settings['report'] = true;
 $settings['full'] = false;
 $settings['quickstart'] = false;
+=======
+// $settings spostato in settings.
+require_once 'settings.conf.php'; // l'ho requesto prima, quindi questa riga non fa assolutamente niente.
+>>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
 
 echo "OK\n";
 echo "Commands: ";
 
 // command parsing and exec
-if (isset($argc)) {
+if ($argc > 1) {
   for ($i = 1; $i < $argc; $i++) {
     switch($argv[$i]) {
-      case "-?":
-      case "-h":
-      case "--help":
-        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['basedir'].".\n";
-        echo "\n";
-        echo "Usage: ".$argv[0]." <option>\n";
-        echo "\n";
-        echo "--help, -help, -h, or -?	to get this help.\n";
-        echo "--version, -v		to return the version of this file.\n";
-        echo "--debug, -d		to turn on output debugging.\n";
-        echo "--test, -t		to fake any write operation (filesystem, api).\n";
-        echo "--basedir [directory]	to change base directory from ".$settings['basedir']." .\n";
-        echo "--createdirs, -c	to create needed dirs starting from basedir.";
-        echo "\n";
-        echo "Command line options override config files options.\n";
-      exit;
-      break;
+      
       case "-v":
       case "--version":
         echo $argv[0]." v0.1\n";
-        exit;
         break;
+        exit;
       case "-d":
       case "--debug":
         $settings['debug'] = true;
@@ -117,6 +111,24 @@ if (isset($argc)) {
         createdirs($settings['basedir']);
         exit;
         break;
+      case "-?":
+      case "-h":
+      case "--help":
+      default:      
+        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['basedir'].".\n";
+        echo "\n";
+        echo "Usage: ".$argv[0]." <option>\n";
+        echo "\n";
+        echo "--help, -help, -h, or -?	to get this help.\n";
+        echo "--version, -v		to return the version of this file.\n";
+        echo "--debug, -d		to turn on output debugging.\n";
+        echo "--test, -t		to fake any write operation (filesystem, api).\n";
+        echo "--basedir [directory]	to change base directory from ".$settings['basedir']." .\n";
+        echo "--createdirs, -c	to create needed dirs starting from basedir.";
+        echo "\n";
+        echo "Command line options override config files options.\n";
+      exit;
+      break;
     }; // switch options
   }; // for each option
 }; // if is option
