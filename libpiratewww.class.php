@@ -1,6 +1,6 @@
 <?php
-require_once('liblqfb.class.php');
-require_once('libpiratepage.class.php');
+require_once 'liblqfb.class.php';
+require_once 'libpiratepage.class.php';
 
 class Piratewww {
 	private $basedir="./";
@@ -25,7 +25,7 @@ class Piratewww {
 		$this->locale = $locale;
 		$this->lfapi = new Liquidquery($lfapiurl);
 	}
-	
+
 	private function createPage($type, $source) {
 		$page = new Piratepage($type);
 		switch( $type ) {
@@ -81,17 +81,17 @@ class Piratewww {
 		$drafts = NULL;
 		switch( $type ) {
 			case "tribune":
-				$drafts = $lfapi->getApproved($last);
+				$drafts = $this->lfapi->getApproved($last);
 			break;
 			case "report":
-				$drafts = $lfapi->getDrafts($last);
+				$drafts = $this->lfapi->getDrafts($last);
 			break;
 		}
-		foreach ( $drafts as $draft ) {
+/*		foreach ( $drafts as $draft ) {
 			$this->createPage($type, $draft);
 		}
 		$this->createIndex($type, $drafts);
-	}	
+*/	}	
 
 	private function fetchForum() {
 	}
@@ -105,18 +105,18 @@ class Piratewww {
 
 	function updateFormalfoo($wikipages) {
 		$this->fetchWiki($wikipages);
-		$this->writePages("wiki");
+//		$this->writePages("wiki");
 	}
 
 	function updateReport($last = "1") {
 		$this->fetchLf("report", $last);
-		$this->writePages("report", $last);
+//		$this->writePages("report", $last);
 	}
 
 	function updateTribune($last = "1") {
-		this->fetchLf("tribune", $last);
-		this->fetchforum();
-		this->writePages("tribune", $last);
+		$this->fetchLf("tribune", $last);
+		$this->fetchforum();
+//		$this->writePages("tribune", $last);
 	}
 };
 ?>

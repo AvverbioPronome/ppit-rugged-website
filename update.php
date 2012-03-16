@@ -1,17 +1,16 @@
 #!/usr/bin/php
 <?php
-error_reporting(E_ALL && E_NOTICE);
 $perfstart = microtime(true);
 
 echo "Init: ";
 
-require_once 'settings.conf.php';
+require_once 'configure.php';
 require_once 'libpiratewww.class.php';
 
 // create needed dirs
 function createdirs($dir=NULL) {
   if ( file_exists($dir) ){
-    $comando="mkdir ".$dir.$settings['templates']." ".$dir.$settings['includes']." ".$dir.$settings['htdocs']." ";
+    $comando="mkdir ".$dir.$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
     $uscita[0]="Ok";
     $ritorno=1;
     exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -25,7 +24,7 @@ function createdirs($dir=NULL) {
 // clean previous .html files from htdocs
 function cleanprevious($htdocs=NULL) {
   if ( file_exists($htdocs) ){
-    $comando="rm ".$settings['basedir'].$settings['htdocs']."*.html";
+    $comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
     $uscita[0]="Ok";
     $ritorno=1;
     exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
@@ -51,31 +50,31 @@ if ($argc > 1) {
         exit;
       case "-d":
       case "--debug":
-        $settings['debug'] = true;
+        $settings['DEBUG'] = true;
         break;
       case "-t":
       case "--test":
-        $settings['test'] = true;
+        $settings['TEST'] = true;
         break;
       case "--base":
       case "--basedir":
       case "--dir":
-        $settings['basedir'] = $argv[++$i];
+        $settings['BASEDIR'] = $argv[++$i];
         break;
       case "-p":
       case "--cleanprevious":
-        $settings['cleanprevious'] = true;
+        $settings['CLEAN'] = true;
         break;
       case "-c":
       case "--createdirs":
-        createdirs($settings['basedir']);
+        createdirs($settings['BASEDIR']);
         exit;
         break;
       case "-?":
       case "-h":
       case "--help":
       default:      
-        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['basedir'].".\n";
+        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['BASEDIR'].".\n";
         echo "\n";
         echo "Usage: ".$argv[0]." <option>\n";
         echo "\n";
@@ -83,7 +82,7 @@ if ($argc > 1) {
         echo "--version, -v		to return the version of this file.\n";
         echo "--debug, -d		to turn on output debugging.\n";
         echo "--test, -t		to fake any write operation (filesystem, api).\n";
-        echo "--basedir [directory]	to change base directory from ".$settings['basedir']." .\n";
+        echo "--basedir [directory]	to change base directory from ".$settings['BASEDIR']." .\n";
         echo "--createdirs, -c	to create needed dirs starting from basedir.";
         echo "\n";
         echo "Command line options override config files options.\n";
@@ -94,15 +93,15 @@ if ($argc > 1) {
 }; // if is option
 
 // new www
-$www = new Piratewww($settings['basedir'], $settings['wikiurl'], $settings['lfapi'], $settings['templates'], $settings['includes'], $settings['htdocs'], $settings['locale']);
-if ( $settings['full'] || $settings['quickstart'] ) {
+$www = new Piratewww($settings['BASEDIR'], $settings['WIKIURL'], $settings['LFAPIURL'], $settings['TEMPLATES'], $settings['INCLUDES'], $settings['HTDOCS'], $settings['LOCALE']);
+if ( $settings['FULL'] || $settings['QUICKSTART'] ) {
   $last="1";
 } else {
   // TODO: scandir to figure out which is the last draft already updated
 }
-if ( $settings['ff'] || $settings['full'] || $settings['quickstart'] ) $www->updateFormalfoo();
-if ( $settings['tribune'] || $settings['full'] || $settings['quickstart'] ) $www->updateTribune();
-if ( $settings['report'] || $settings['full'] || $settings['quickstart'] ) $www->updateReport();
+if ( $settings['FF'] || $settings['FULL'] || $settings['QUICKSTART'] ) $www->updateFormalfoo();
+if ( $settings['TRIBUNE'] || $settings['FULL'] || $settings['QUICKSTART'] ) $www->updateTribune();
+if ( $settings['REPORT'] || $settings['FULL'] || $settings['QUICKSTART'] ) $www->updateReport();
 
 echo "OK\n";
 echo "Post: ";

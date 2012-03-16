@@ -1,7 +1,7 @@
 <?php
 class Piratepage {
 	private $type = "wiki";
-	private $subs=array();
+	private $subs;
 
 	public $id;
         public $title;
@@ -13,27 +13,18 @@ class Piratepage {
 		$this->type = $type;
 	}
 
-	private function loadTemplate() {
-		$this->html = file_get_contents($this->template);
-	}
-
-	private function loadInclude() {
-		return file_get_contents($this->includes.);
-	}
-
-	private function addSub($tag, $re){
-		$this->$subs[0][]=$tag;
-		$this->$subs[1][]=$re; 
+	private function loadFile($file) {
+		return file_get_contents($file);
 	}
 
 	private function makeSubs() {
 		// all pages
-		$this->addSub('<!--include:ppheader-->', );
-		$re[] = $this->ftbi('ppheader');
+		$tag[] = '<!--include:ppheader-->';
+		$re[] = $this->loadFile('ppheader');
 		$tag[] = '<!--include:sitenav-->';
-		$re[] = $this->ftbi('sitenav');
+		$re[] = $this->loadFile('sitenav');
 		$tag[] = '<!--include:ppfooter-->';
-		$re[] = $this->ftbi('ppfooter');
+		$re[] = $this->loadFile('ppfooter');
 		
 		// Redmine's html validation.
 		$tag[] = '<a name=';
@@ -53,7 +44,6 @@ class Piratepage {
 
 		$this->html = str_replace($this->subs[0], $this->subs[1], file_get_contents($this->template));
 	}
-	
 
 	function makePage($source) {
 		$this->makeSubs();
@@ -79,5 +69,5 @@ class Piratepage {
 		file_put_contents($dir.$filename, $this->htm);
 		$this->saved_as=$filename;
 	}
-}
+};
 ?>
