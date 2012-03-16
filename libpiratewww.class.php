@@ -81,7 +81,8 @@ class Piratewww {
 			break;
 		}
 		foreach ( $drafts as $draft ) {
-			pagefromlf($draft,$type);
+			pagefromlf($draft,$type); 
+				//ALERT: non credo che le variabili interne di questa funzione passino fuori, tipo $init e $page
 			$indice->appendToBody("\n");
 			$indice->appendToBody("<section id=init".$init['initiative_id'].">");
 			$indice->appendToBody('<h1><a href="'.$page->saved_as.'">Proposta n° '.$init['initiative_id'].': '.$init['name']."</a></h1>");
@@ -101,19 +102,19 @@ class Piratewww {
 	}
 
 	function updateFormalfoo($wikiurls=NULL, $htdocs=NULL) {
-		this->fetchwiki($wikiurls);
-		this->writepages($htdocs);
+		$this->fetchwiki($wikiurls);
+		$this->writepages($htdocs);
 	}
 	
 	function updateReport($htdocs=NULL) {
-		this->fetchlf("report");
-		this->writepages($htdocs);
+		$this->fetchlf("report");
+		$this->writepages($htdocs);
 	}
 
 	function updateTribune($htdocs=NULL) {
-		this->fetchlf("tribune");
+		$this->fetchlf("tribune");
 		//this->fetchforum();
-		this->writepages($htdocs);
+		$this->writepages($htdocs);
 	}
 };
 ?>
