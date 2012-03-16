@@ -1,21 +1,21 @@
 <?php
 
 // basedir
-define('BASEDIR', './');
+$settings['BASEDIR']='./';
 // dove sono i template (ie: wikipages, tribuna, verbale, etc)
-define('TEMPLATEDIR', 'templates/')
+$settings['TEMPLATEDIR'] = 'templates/')
 
-// dove sono gli include (ie: ppheader, ppfooter, etc)
-define('INCLUDEDIR', 'includes/');
+// dove sono gli include (ie: ppheader, ppfooter,etc)
+$settings['INCLUDEDIR'] = 'includes/';
 
 // dove scrivere i file html finali
-define('HTDOCS', 'html/');
+$settings['HTDOCS'] = 'html/';
 
 // dove prelevare i testi
-define('WIKIURL', 'https://dev.partitopirata.org/projects/ppit/wiki/');
+$settings['WIKIURL'] = 'https://dev.partitopirata.org/projects/ppit/wiki/';
 
 // dove prelevare i lavori assembleari
-define('LFAPIURL', 'http://apitest.liquidfeedback.org:25520/');
+$settings['LFAPIURL'] = 'http://apitest.liquidfeedback.org:25520/';
 
 // Composizione Gazzetta
 $settings['formalfoo'][] = array('Il_Partito_Pirata', 28);
