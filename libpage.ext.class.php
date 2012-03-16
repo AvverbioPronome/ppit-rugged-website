@@ -44,9 +44,10 @@ class Report extends Liquidpage{
 		$this->id='verbale_'.$source['draft_id'];
 		
 		$this->title = "Verbale";
+		$this->template='./templates/report.html';
 		$this->content = '<p>Il Verbale del Partito Pirata riporta fedelmente tutta l\'attivit&agrave; dell\'Assemblea Permanente  elencando tutte le iniziative e rielencandole quando vengono modificate dai relatori.</p>'."\n";
 		
-		parent::__construct($type);
+		parent::__construct($source, $type);
 
 	}
 }
