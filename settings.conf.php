@@ -1,7 +1,11 @@
 <?php
 
+// locale
+$settings['LOCALE']='IT';
+
 // basedir
 $settings['BASEDIR']='./';
+
 // dove sono i template (ie: wikipages, tribuna, verbale, etc)
 $settings['TEMPLATEDIR'] = 'templates/')
 
@@ -34,5 +38,9 @@ $settings['formalfoo'][] = array('Modulo_Contabile_del_Certificatore',3);
 $settings['debug'] = false;
 $settings['test'] = false;
 $settings['cleanprevious'] = false;
-
+$settings['ff'] = false;
+$settings['tribune'] = false;
+$settings['report'] = true;
+$settings['full'] = false; 
+$settings['quickstart'] = false;   
 ?>

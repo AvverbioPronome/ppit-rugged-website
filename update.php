@@ -5,14 +5,8 @@ $perfstart = microtime(true);
 
 echo "Init: ";
 
-<<<<<<< HEAD
-require_once('configure');
-require_once('libpiratewww.class.php');
-=======
 require_once 'settings.conf.php';
 require_once 'libpiratewww.class.php';
->>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
-
 
 // create needed dirs
 function createdirs($dir=NULL) {
@@ -41,40 +35,6 @@ function cleanprevious($htdocs=NULL) {
     };
   };
 }
-
-echo "OK\n";
-echo "Config: ";
-
-<<<<<<< HEAD
-// config parsing
-$settings['locale']=$locale;
-unset($locale);
-$settings['basedir']=$basedir;
-unset($basedir);
-$settings['templates']=$templates;
-unset($templates);
-$settings['includes']=$includes;
-unset($includes);
-$settings['htdocs']=$htdocs;
-unset($htdocs);
-$settings['wikiurl']=$wikiurl;
-unset($wikiurl);
-$settings['lfapi']=$lfapi;
-unset($lfapi);
-$settings['formalfoo']=array($index,$manifesto,$statuto,$iscrizione,$intento,$lara,$lart,$larm,$modiscri,$modident,$modquota);
-unset($index,$manifesto,$statuto,$iscrizione,$intento,$lara,$lart,$larm,$modiscri,$modident,$modquota);
-$settings['debug'] = false;
-$settings['test'] = false;
-$settings['cleanprevious'] = false;
-$settings['ff'] = false;
-$settings['tribune'] = false;
-$settings['report'] = true;
-$settings['full'] = false;
-$settings['quickstart'] = false;
-=======
-// $settings spostato in settings.
-require_once 'settings.conf.php'; // l'ho requesto prima, quindi questa riga non fa assolutamente niente.
->>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
 
 echo "OK\n";
 echo "Commands: ";
