@@ -29,6 +29,9 @@ class Piratepage {
 		// cal. li aveva messi fuori dalla classe per mantenerla più generica
 		// possibile, ma va bene anche così. 
 		
+		// ALERT: mettendoli fuori dalla classe gli includes vengono letti una volta sola e
+		//		  tenuti in memoria: invece, così vengono letti dal disco per ogni pagina!
+		
 		// all pages
 		$tag[] = '<!--include:ppheader-->';
 		$re[] = $this->ftbi('ppheader');
