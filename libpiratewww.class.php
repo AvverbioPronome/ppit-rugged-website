@@ -13,6 +13,8 @@ class Piratewww {
 	private $lfapi;
 	private $index;
 
+	public $pages;
+
 	function __construct($basedir=NULL, $wikiurl=NULL, $lfapiurl=NULL, $templates="templates/", $includes="includes/", $htdocs="html/", $locale="IT") {
 		$this->basedir = $basedir ? $basedir : $this->basedir;
 		$this->wikiurl = $wikiurl ? $wikiurl : $this->wikiurl;
@@ -26,8 +28,7 @@ class Piratewww {
 	
 	private function createPage($type, $source) {
 		$page = new Piratepage($type);
-		$page->makePage($type, $source, $index);
-		return $page;
+		return $page->makePage($type, $source);
 	}
 	
 	private function fetchFiles($docsdir) {
@@ -40,8 +41,8 @@ class Piratewww {
 	private function fetchWiki($wikipages) {
 		foreach ( $wikipages as $wikipage ) {
 			$wikipage=trim($wikipage);
-			$wiki = $wikiurl.$wikipage;
-			createPage("wiki", $wiki);
+			$page = $wikiurl.$wikipage;
+			$pages[$wikipage] = createPage("wiki", $page);
 		}
 	}
 	
@@ -56,32 +57,25 @@ class Piratewww {
 				$drafts = $liq->getDrafts($last);
 			break;
 		}
-		foreach ( $drafts as $draft ) {
-<<<<<<< HEAD
-			createPage($type, $draft);
-=======
-			pagefromlf($draft,$type); 
-				//ALERT: non credo che le variabili interne di questa funzione passino fuori, tipo $init e $page
-			$indice->appendToBody("\n");
-			$indice->appendToBody("<section id=init".$init['initiative_id'].">");
-			$indice->appendToBody('<h1><a href="'.$page->saved_as.'">Proposta n° '.$init['initiative_id'].': '.$init['name']."</a></h1>");
-			$indice->appendToBody(strlen($init['content']) < 3000 ? $init['content'] : substr($init['content'], 0, 3000).'[continua...]');
-			$indice->appendToBody('<p><small>Pubblicato <time datetime='.$initiative['created'].'>'.$initiative['created'].'</time> da Spugna, portavoce dell\'Assemblea Permanente, nel Contesto '."TODO".' con tags '."TODO".'</small></p>');
-			$indice->appendToBody('</section>');
->>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
+		foreach ( $drafts as $page ) {
+			$pageid = $type."_".$page;
+			$pages[$pageid] = createPage($type, $page);
 		}
+		$pages[$type."_index"] = createIndex($type, $pages);
 	}	
 
-	private function writePages($type, $last) {
+	private function fetchForum() {
+	}
+
+	private function writePages($type, $last=NULL) {
 		foreach($pages as $page) {
 			$page->writePage($type, $last);
 		}
 		$pages = array();
 	}
 
-<<<<<<< HEAD
-	function updateFormalfoo() {
-		$this->fetchWiki();
+	function updateFormalfoo($wikipages) {
+		$this->fetchWiki($wikipages);
 		$this->writePages("wiki");
 	}
 
@@ -92,24 +86,8 @@ class Piratewww {
 
 	function updateTribune($last = "1") {
 		this->fetchLf("tribune", $last);
-		//this->fetchforum();
+		this->fetchforum();
 		this->writePages("tribune", $last);
-=======
-	function updateFormalfoo($wikiurls=NULL, $htdocs=NULL) {
-		$this->fetchwiki($wikiurls);
-		$this->writepages($htdocs);
-	}
-	
-	function updateReport($htdocs=NULL) {
-		$this->fetchlf("report");
-		$this->writepages($htdocs);
-	}
-
-	function updateTribune($htdocs=NULL) {
-		$this->fetchlf("tribune");
-		//this->fetchforum();
-		$this->writepages($htdocs);
->>>>>>> fdcb58b3d365c03443d2b465a9dbad834190a520
 	}
 };
 ?>
