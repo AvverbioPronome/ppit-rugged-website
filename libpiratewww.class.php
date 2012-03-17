@@ -1,7 +1,8 @@
 <?php
-require_once 'liblqfb.class.php';
-require_once 'libpage.class.php';
+
+require_once 'configure.php';
 require_once 'libpage.ext.class.php';
+require_once 'liblqfb.class.php';
 
 class Piratewww {
 	private $settings;	
@@ -23,7 +24,7 @@ class Piratewww {
 	private function fetchWiki($wikipage) {
 		
 		$html=file_get_contents($this->settings['WIKIURL'].$wikipage[0].'.html?version='.$wikipage[1]);
-		
+
 		// http://stackoverflow.com/a/4911037
 		if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches))
 			return $matches[1];
@@ -56,7 +57,7 @@ class Piratewww {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('tribune');
 		$indice->id='Tribuna';
-		$indice->content='La Tribuna Politica del Partito Pirata elenca le iniziative assembleari che hanno raggiunto l\'approvazione, accompagnate da eventuali commenti "a bocce ferme" da parte di chi desideri inviare degli approfondimenti sul significato delle scelte assembleari qui elencate, aggiungere una prospettiva storica, commentare le alternative bocciate dall\'assemblea, contestualizzare o descrivere i potenziali scenari aperti dal cambiamento approvato.<ul>';//metto un <ul> perché ho appena sovrascritto quello nativo della classe indice.
+		$indice->intro='La Tribuna Politica del Partito Pirata elenca le iniziative assembleari che hanno raggiunto l\'approvazione, accompagnate da eventuali commenti "a bocce ferme" da parte di chi desideri inviare degli approfondimenti sul significato delle scelte assembleari qui elencate, aggiungere una prospettiva storica, commentare le alternative bocciate dall\'assemblea, contestualizzare o descrivere i potenziali scenari aperti dal cambiamento approvato.';
 		
 		foreach($lfapi->getApproved($offset, $limit) as $a){
 			$pagina = new Tribune($a);

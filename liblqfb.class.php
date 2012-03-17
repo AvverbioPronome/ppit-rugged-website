@@ -1,4 +1,7 @@
 <?php
+
+require_once 'configure.php';
+
 class Liquidquery {
 	
 	private $apiserver;

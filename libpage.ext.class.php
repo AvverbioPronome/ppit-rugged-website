@@ -1,11 +1,11 @@
 <?php
+
+require_once 'configure.php';
 require_once 'libpage.class.php';
+require_once 'liblqfb.class.php';
 
 class Formalfoo extends Piratepage{
 	function __construct(){
-		
-		global $settings;
-		$this->settings=$settings;
 		parent::__construct();
 	
 		$this->template=$this->settings['BASEDIR'].$this->settings['TEMPLATES'].'wikipages.html';
@@ -15,16 +15,13 @@ class Formalfoo extends Piratepage{
 
 class Indice extends Piratepage{
 	public $excerptlen=3000;
+	public $intro='';
 	
 	function __construct($template){
-		
 		parent::__construct();
 		
-		global $settings;
-		$this->settings=$settings;
-		
 		$this->template=$this->settings['BASEDIR'].$this->settings['TEMPLATES'].$template.'.html';
-		$this->content='<ul>';
+		$this->content=$intro.'<ul>';
 	}
 	
 	function addElement($page){
@@ -45,7 +42,6 @@ class Liquidpage extends Piratepage{
 	// roba che dovrebbero condividere Report e Tribune?
 	
 	function __construct($source, $type) {
-		
 		parent::__construct($type);
 		
 		$this->content .= "<article id=init".$source['initiative_id'].">";
@@ -60,8 +56,6 @@ class Liquidpage extends Piratepage{
 class Report extends Liquidpage{
 	
 	function __construct($source, $type='report'){
-		global $settings;
-		$this->settings=$settings;
 		parent::__construct($source, $type);
 
 		$this->id='Verbale_'.$source['id'];
@@ -74,8 +68,6 @@ class Report extends Liquidpage{
 class Tribune extends Liquidpage{
 	
 	function __construct($source, $type='tribune'){
-		global $settings;
-		$this->settings=$settings;
 		parent::__construct($source, $type);
 
 		$this->id='Tribuna_'.$source['initiative_id'];

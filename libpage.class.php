@@ -1,4 +1,9 @@
 <?php
+
+require_once 'configure.php';
+require_once 'libpage.ext.class.php';
+require_once 'libpiratewww.class.php';
+
 class Piratepage {
 	private $type = "wiki";
 	private $subs;
@@ -11,7 +16,6 @@ class Piratepage {
 	private $settings;
 
 	function __construct($type=NULL) { // miche', a che cazzo serve sto type?
-		
 		global $settings;
 		$this->settings=$settings;
 		
@@ -60,13 +64,13 @@ class Piratepage {
 	
 	private function make(){
 		$this->loadSubs();
-		$this->html = $this->loadFile($this->template);
-		$this->html = str_replace($this->subs['tag'], $this->subs['re'], $this->html);
+		$this->html = $this->loadFile($this->settings['BASEDIR'].$this->settings['TEMPLATES'].$this->template);
+		return $this->html = str_replace($this->subs['tag'], $this->subs['re'], $this->html);
 	}
 
 	function writePage(){
 		$this->make();
-		file_put_contents($this->settings['BASEDIR'].$this->settings['HTDOCS'].$this->id.'.html', $this->html);
+		return file_put_contents($this->settings['BASEDIR'].$this->settings['HTDOCS'].$this->id.'.html', $this->html);
 	}
 };
 ?>
