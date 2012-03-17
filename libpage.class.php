@@ -26,7 +26,7 @@ class Piratepage {
 		return file_get_contents($f);
 	}
 	
-	private function ftbi($t){
+	private function loadInclude($t){
 		return $this->loadFile($this->settings['BASEDIR'].$this->settings['INCLUDES'].$t);
 	}
 	
@@ -38,11 +38,11 @@ class Piratepage {
 	private function loadSubs() {
 		// all pages
 		$tag[] = '<!--include:ppheader-->';
-		$re[] = $this->ftbi('ppheader.inc.html');
+		$re[] = $this->loadInclude('ppheader.inc.html');
 		$tag[] = '<!--include:sitenav-->';
-		$re[] = $this->ftbi('sitenav.inc.html');
+		$re[] = $this->loadInclude('sitenav.inc.html');
 		$tag[] = '<!--include:ppfooter-->';
-		$re[] = $this->ftbi('ppfooter.inc.html');
+		$re[] = $this->loadInclude('ppfooter.inc.html');
 		
 		// Templating
 		$tag[]='<!--include:textgoeshere-->';
