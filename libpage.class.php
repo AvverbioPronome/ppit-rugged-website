@@ -14,6 +14,7 @@ class Piratepage {
 	public $template;
 	private $html;
 	private $settings;
+	private $moresubs;
 
 	function __construct($type=NULL) { // miche', a che cazzo serve sto type?
 		global $settings;
@@ -31,8 +32,17 @@ class Piratepage {
 	}
 	
 	public function addSub($tag, $re){
-		$this->subs['tag'][] = $tag;
-		$this->subs['re'][] = $re;
+		$this->moresubs['tag'][] = $tag;
+		$this->moresubs['re'][] = $re;
+	}
+	
+	private function loadMoreSubs(){
+		foreach($this->moresubs['tag'] as $m){
+			$this->subs['tag'][]=$m;
+		}
+		foreach($this->moresubs['re'] as $m){
+			$this->subs['re'][]=$m;
+		}
 	}
 
 	private function loadSubs() {
@@ -65,6 +75,8 @@ class Piratepage {
 
 		$this->subs['tag'] = $tag;
 		$this->subs['re'] = $re;
+		
+		$this->loadMoreSubs();
 
 	}
 	
