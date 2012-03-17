@@ -15,13 +15,12 @@ class Formalfoo extends Piratepage{
 
 class Indice extends Piratepage{
 	public $excerptlen=3000;
-	public $intro='';
+	public $intro;
 	
 	function __construct($template){
 		parent::__construct();
 		
-		$this->template=$this->settings['BASEDIR'].$this->settings['TEMPLATES'].$template.'.html';
-		$this->content=$intro.'<ul>';
+		$this->template= $this->settings['BASEDIR'].$this->settings['TEMPLATES'].$template.'.html';
 	}
 	
 	function addElement($page){
@@ -31,7 +30,7 @@ class Indice extends Piratepage{
 	}
 	
 	function writePage(){
-		$this->content.='</ul>';
+		$this->content = $this->intro.'<ul>'.$this->content.'</ul>';
 		
 		parent::writePage();
 	}
