@@ -56,6 +56,8 @@ class Piratewww {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('tribune');
 		$indice->id='Tribuna';
+		$indice->content='La Tribuna Politica del Partito Pirata elenca le iniziative assembleari che hanno raggiunto l\'approvazione, accompagnate da eventuali commenti "a bocce ferme" da parte di chi desideri inviare degli approfondimenti sul significato delle scelte assembleari qui elencate, aggiungere una prospettiva storica, commentare le alternative bocciate dall\'assemblea, contestualizzare o descrivere i potenziali scenari aperti dal cambiamento approvato.<ul>';//metto un <ul> perché ho appena sovrascritto quello nativo della classe indice.
+		
 		foreach($lfapi->getApproved($offset, $limit) as $a){
 			$pagina = new Tribune($a);
 			$indice->addElement($pagina);
