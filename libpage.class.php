@@ -9,7 +9,7 @@ class Piratepage {
 	private $subs;
 
 	public $id;
-    public $title;
+        public $title;
 	public $content;
 	public $template;
 	private $html;

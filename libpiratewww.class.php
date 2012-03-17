@@ -44,7 +44,9 @@ class Piratewww {
 	function updateReport($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('report');
-		$indice->id='Verbale';
+		$indice->id='verbale';
+		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
+
 		foreach($lfapi->getDrafts($offset, $limit) as $a){
 			$pagina = new Report($a);
 			$indice->addElement($pagina);
@@ -56,7 +58,7 @@ class Piratewww {
 	function updateTribune($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('tribune');
-		$indice->id='Tribuna';
+		$indice->id='tribuna';
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.tribuna.inc.html'));
 
 		foreach($lfapi->getApproved($offset, $limit) as $a){

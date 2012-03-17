@@ -26,21 +26,17 @@ class Indice extends Piratepage{
 	
 	function addElement($page){
 		// $code come oggetto Piratepage? Si, ok.
-
 		$this->content .= '<li><a href="'.$page->id.'.html">'.$page->title.'</a></li>';
 	}
 	
 	function writePage(){
 		$this->content .= '</ul>';
-		
 		parent::writePage();
 	}
 }
 
 class Liquidpage extends Piratepage{
-	
 	// roba che dovrebbero condividere Report e Tribune?
-	
 	function __construct($source, $type) {
 		parent::__construct($type);
 		
@@ -54,26 +50,22 @@ class Liquidpage extends Piratepage{
 }
 
 class Report extends Liquidpage{
-	
 	function __construct($source, $type='report'){
 		parent::__construct($source, $type);
 
-		$this->id='Verbale_'.$source['id'];
+		$this->id='verbale_'.$source['id'];
 		$this->title = 'Verbale: '.$source['name'];
 		$this->template=$this->settings['BASEDIR'].$this->settings['TEMPLATES'].'report.html';
-
 	}
 }
 
 class Tribune extends Liquidpage{
-	
 	function __construct($source, $type='tribune'){
 		parent::__construct($source, $type);
 
-		$this->id='Tribuna_'.$source['initiative_id'];
+		$this->id='tribuna_'.$source['initiative_id'];
 		$this->template=$this->settings['BASEDIR'].$this->settings['TEMPLATES'].'tribune.html';
-		$this->title = 'Tribuna: '.$source['name'];		
-		
+		$this->title = 'Tribuna: '.$source['name'];
 	}
 }
 
