@@ -4,12 +4,7 @@ require_once 'libpage.class.php';
 require_once 'libpage.ext.class.php';
 
 class Piratewww {
-	private $settings;
-	private $index;
-	private $lfapi;
-	
-	public $pages;
-	
+	private $settings;	
 
 	function __construct() {
 		global $settings;
@@ -36,9 +31,6 @@ class Piratewww {
 			return false;
 	}
 
-	private function fetchForum() {
-	}
-
 	function updateFormalfoo() {	
 		foreach ($this->settings['FORMALFOO'] as $wikipage) {
 			$page = new Formalfoo();
@@ -59,7 +51,7 @@ class Piratewww {
 		}
 		$indice->writePage();
 	}
-
+	
 	function updateTribune() {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('tribune');
@@ -76,5 +68,56 @@ class Piratewww {
 		print_r($this->settings);
 		
 	}
+	// create needed dirs and touch empty skels for needed includes and templates
+	function createdirs($dir=NULL) {
+	  // create dirs
+	  if ( file_exists($dir) ){
+		$comando="mkdir ".$dir.$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
+		$uscita[0]="Ok";
+		$ritorno=1;
+		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
+		if ( $ritorno != 0 ){
+		  echo "ATTENZIONE: non ho potuto creare le directories necessarie.\n";
+		  exit(1);
+		};
+	  };
+	  // create empty includes
+	  if ( file_exists($dir) ){
+		$comando="touch ".$dir.$settings['INCLUDES']."ppheader.inc.html ".$dir.$settings['INCLUDES']."ppfooter.inc.html ".$dir.$settings['INCLUDES']."sitenav.inc.html";
+		$uscita[0]="Ok";
+		$ritorno=1;
+		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
+		if ( $ritorno != 0 ){
+		  echo "ATTENZIONE: non ho potuto creare gli includes.\n";
+		  exit(1);
+		};
+	  };
+	  // create empty templates
+	  if ( file_exists($dir) ){
+		$comando="mkdir ".$dir.$settings['TEMPLATES']."wikipages.html ".$dir.$settings['TEMPLATES']."report.html ".$dir.$settings['TEMPLATES']."tribune.html";
+		$uscita[0]="Ok";
+		$ritorno=1;
+		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
+		if ( $ritorno != 0 ){
+		  echo "ATTENZIONE: non ho potuto creare i templates.\n";
+		  exit(1);
+		};
+	  };
+	}
+
+	// clean previous .html files from htdocs
+	function cleanprevious($htdocs=NULL) {
+	  if ( file_exists($htdocs) ){
+		$comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
+		$uscita[0]="Ok";
+		$ritorno=1;
+		exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
+		if ( $ritorno != 0 ){
+		  echo "ATTENZIONE: non ho potuto cancellare i file .html pre-esistenti\n";
+		  exit(1);
+		};
+	  };
+	}
+
 };
 ?>

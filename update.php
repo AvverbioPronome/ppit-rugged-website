@@ -7,33 +7,8 @@ echo "Init: ";
 require_once 'configure.php';
 require_once 'libpiratewww.class.php';
 
-// create needed dirs
-function createdirs($dir=NULL) {
-  if ( file_exists($dir) ){
-    $comando="mkdir ".$dir.$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
-    $uscita[0]="Ok";
-    $ritorno=1;
-    exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
-    if ( $ritorno != 0 ){
-      echo "ATTENZIONE: non ho potuto creare le directories necessarie.\n";
-      exit(1);
-    };
-  };
-}
-
-// clean previous .html files from htdocs
-function cleanprevious($htdocs=NULL) {
-  if ( file_exists($htdocs) ){
-    $comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
-    $uscita[0]="Ok";
-    $ritorno=1;
-    exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
-    if ( $ritorno != 0 ){
-      echo "ATTENZIONE: non ho potuto cancellare i file .html pre-esistenti\n";
-      exit(1);
-    };
-  };
-}
+// new version of www
+$www = new Piratewww($settings);
 
 echo "OK\n";
 echo "Commands: ";
@@ -42,7 +17,6 @@ echo "Commands: ";
 if ($argc > 1) {
   for ($i = 1; $i < $argc; $i++) {
     switch($argv[$i]) {
-      
       case "-v":
       case "--version":
         echo $argv[0]." v0.1\n";
@@ -62,13 +36,28 @@ if ($argc > 1) {
         $settings['BASEDIR'] = $argv[++$i];
         break;
       case "-p":
-      case "--cleanprevious":
+      case "--clean":
         $settings['CLEAN'] = true;
         break;
       case "-c":
       case "--createdirs":
-        createdirs($settings['BASEDIR']);
-        exit;
+        $settings['CREATEDIRS'] = true;
+        break;
+      case "-f":
+      case "--full":
+        $settings['CLEAN'] = true;
+        $settings['FF'] = true;
+        $settings['TRIBUNE'] = true;
+        $settings['REPORT'] = true;
+        $settings['FULL'] = true;
+        break;
+      case "-q":
+      case "--quickstart":
+        $settings['CREATEDIRS'] = true;
+        $settings['FF'] = true;
+        $settings['TRIBUNE'] = true;
+        $settings['REPORT'] = true;
+        $settings['QUICKSTART'] = true;
         break;
       case "-?":
       case "-h":
@@ -80,10 +69,13 @@ if ($argc > 1) {
         echo "\n";
         echo "--help, -help, -h, or -?	to get this help.\n";
         echo "--version, -v		to return the version of this file.\n";
-        echo "--debug, -d		to turn on output debugging.\n";
-        echo "--test, -t		to fake any write operation (filesystem, api).\n";
+        echo "--debug, -d		[TODO] to turn on output debugging.\n";
+        echo "--test, -t		[TODO] to fake any write operation (filesystem, api).\n";
         echo "--basedir [directory]	to change base directory from ".$settings['BASEDIR']." .\n";
-        echo "--createdirs, -c	to create needed dirs starting from basedir.";
+        echo "--createdirs, -c	to create needed dirs starting from basedir and touch empty templates and includes.";
+        echo "--clean, -c		to delete *.html.\n";
+        echo "--full, -f		to do Formalfoo, Tribune, Report.\n";
+        echo "--quickstart, -q		same as --clean, --createdirs and --full.\n";
         echo "\n";
         echo "Command line options override config files options.\n";
       exit;
@@ -92,21 +84,24 @@ if ($argc > 1) {
   }; // for each option
 }; // if is option
 
-// new www
-$www = new Piratewww($settings['BASEDIR'], $settings['WIKIURL'], $settings['LFAPIURL'], $settings['TEMPLATES'], $settings['INCLUDES'], $settings['HTDOCS'], $settings['LOCALE']);
+
+if ( $settings['CREATEDIRS'] ) $www->createdirs($settings['BASEDIR']);
+if ( $settings['CLEAN'] ) $www->cleanprevious($settings['BASEDIR']);
 if ( $settings['FULL'] || $settings['QUICKSTART'] ) {
-  $last="1";
+  $last = "1";
 } else {
   // TODO: scandir to figure out which is the last draft already updated
 }
-if ( $settings['FF'] || $settings['FULL'] || $settings['QUICKSTART'] ) $www->updateFormalfoo();
-if ( $settings['TRIBUNE'] || $settings['FULL'] || $settings['QUICKSTART'] ) $www->updateTribune();
-if ( $settings['REPORT'] || $settings['FULL'] || $settings['QUICKSTART'] ) $www->updateReport();
+if ( $settings['FF'] ) $www->updateFormalfoo($last);
+if ( $settings['TRIBUNE'] ) $www->updateTribune($last);
+if ( $settings['REPORT'] ) $www->updateReport($last);
 
 echo "OK\n";
-echo "Post: ";
+//
 
+echo "Post: ";
 // operazioni finali
+
 echo "OK\n";
 
 // cronometro.
