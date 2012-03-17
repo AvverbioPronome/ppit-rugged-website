@@ -39,14 +39,6 @@ class Piratepage {
 		$tag[] = '<!--include:ppfooter-->';
 		$re[] = $this->ftbi('ppfooter.inc.html');
 		
-		// Redmine's html validation.
-		$tag[] = '<a name=';
-		$re[] = '<a id=';
-		$tag[] = '<br /><br />';
-		$re[] = '</p><p>';
-		$tag[] = '<br />';
-		$re[] = ' '; //si che le fa in ordine... :D
-		
 		// Templating
 		$tag[]='<!--include:textgoeshere-->';
 		$re[]=$this->content;
@@ -56,6 +48,15 @@ class Piratepage {
 		$re[]=$this->title;
 		$tag[]='<!--templating:fancytitle-->';
 		$re[]=$this->title;
+		
+		// Redmine's html validation.
+		$tag[] = '<a name=';
+		$re[] = '<a id=';
+		$tag[] = '<br /><br />';
+		$re[] = '</p><p>';
+		//$tag[] = '<br />';
+		//$re[] = ' '; //si che le fa in ordine... :D
+		
 
 		$this->subs['tag'] = $tag;
 		$this->subs['re'] = $re;
