@@ -1,6 +1,7 @@
 #!/usr/bin/php
 <?php
 $perfstart = microtime(true);
+error_reporting(E_ALL && E_NOTICE);
 
 require_once 'configure.php';
 require_once 'libpiratewww.class.php';
