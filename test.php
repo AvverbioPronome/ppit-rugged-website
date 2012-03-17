@@ -1,19 +1,21 @@
+#!/usr/bin/php
 <?php
+$perfstart = microtime(true);
 
+require_once 'configure.php';
 require_once 'libpage.ext.class.php';
 require_once 'liblqfb.class.php';
-//require_once 'libpiratewww.class.php';
+require_once 'libpiratewww.class.php';
 
-// questo è quello a cui penso: il software deve essere a prova di scemo. 
-// ma le classi principali devono restare pulite, cazzo di cristo.
+$bla = new Piratewww();
+//$bla->debuggg();
+$bla->updateFormalfoo();
+$bla->updateTribune();
+$bla->updateReport();
 
-$liq = new Liquidquery('http://apitest.liquidfeedback.org:25520/');
-
-foreach($liq->getApproved(0,2) as $a){
-	$pagina = new Tribune($a);
-	$pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
-}
-
-
-
+// cronometro.
+$perfstop = microtime(true);
+$perfs = $perfstop - $perfstart;
+$perfstime = number_format($perfs,5,',','.');
+echo "Tempo impiegato dallo script: $perfstime secondi\n";
 ?>
