@@ -52,7 +52,7 @@ class Piratewww {
 		$indice->writePage();
 	}
 	
-	function updateTribune() {
+	function updateTribune($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('tribune');
 		$indice->id='Tribuna';
