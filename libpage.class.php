@@ -29,6 +29,11 @@ class Piratepage {
 	private function ftbi($t){
 		return $this->loadFile($this->settings['BASEDIR'].$this->settings['INCLUDES'].$t);
 	}
+	
+	public function addSub($tag, $re){
+		$this->subs['tag'][] = $tag;
+		$this->subs['re'][] = $re;
+	}
 
 	private function loadSubs() {
 		// all pages
