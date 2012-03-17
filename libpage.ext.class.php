@@ -21,6 +21,7 @@ class Indice extends Piratepage{
 		parent::__construct();
 		
 		$this->template= $this->settings['BASEDIR'].$this->settings['TEMPLATES'].$template.'.html';
+		$this->content = '<ul>';
 	}
 	
 	function addElement($page){
@@ -30,7 +31,7 @@ class Indice extends Piratepage{
 	}
 	
 	function writePage(){
-		$this->content = $this->intro.'<ul>'.$this->content.'</ul>';
+		$this->content .= '</ul>';
 		
 		parent::writePage();
 	}
