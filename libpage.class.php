@@ -8,23 +8,32 @@ class Piratepage {
 	public $content;
 	public $template;
 	private $html;
+	private $settings;
 
-	function __construct($type=NULL) {
+	function __construct($type=NULL) { // miche', a che cazzo serve sto type?
+		
+		global $settings;
+		$this->settings=$settings;
+		
 		$this->type = $type;
 	}
 
-	private function loadFile($file) {
-		return file_get_contents($file);
+	private function loadFile($f) {
+		return file_get_contents($f);
+	}
+	
+	private function ftbi($t){
+		return $this->loadFile($this->settings['BASEDIR'].$this->settings['INCLUDES'].$t);
 	}
 
 	private function loadSubs() {
 		// all pages
 		$tag[] = '<!--include:ppheader-->';
-		$re[] = 'ppheader';
+		$re[] = $this->ftbi('ppheader.inc.html');
 		$tag[] = '<!--include:sitenav-->';
-		$re[] = 'sitenav';
+		$re[] = $this->ftbi('sitenav.inc.html');
 		$tag[] = '<!--include:ppfooter-->';
-		$re[] = 'ppfooter';
+		$re[] = $this->ftbi('ppfooter.inc.html');
 		
 		// Redmine's html validation.
 		$tag[] = '<a name=';
@@ -55,9 +64,9 @@ class Piratepage {
 		$this->html = str_replace($this->subs['tag'], $this->subs['re'], $this->html);
 	}
 
-	function writePage($dir=null){
+	function writePage(){
 		$this->make();
-		file_put_contents($dir.$this->id, $this->html);
+		file_put_contents($this->settings['BASEDIR'].$this->settings['HTDOCS'].$this->id.'.html', $this->html);
 	}
 };
 ?>

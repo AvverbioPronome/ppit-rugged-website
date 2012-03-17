@@ -1,14 +1,16 @@
 <?php
 class Liquidquery {
 	
-	private $apiserver=NULL; // default
-	private $tnt=2; // default
+	private $apiserver;
+	private $tnt;
 	
-	function __construct($apiserver, $tnt=NULL)
+	function __construct()
 	{ // parametri del server e regolazione dell'insistenza.
 		
-		$this->apiserver = $apiserver ? $apiserver : exit(1);
-		$this->tnt = $tnt ? $tnt : $this->tnt;
+		global $settings;
+		
+		$this->apiserver = $settings['LFAPIURL'];
+		$this->tnt = $settings['LFMAXTENT'];
 	}
 	
 	function getSomething($what, $querystring)
