@@ -13,6 +13,7 @@ class Piratewww {
 	}
 
 	/* Questa roba non mi pare sia più prevista...
+	    ma io la scriverei comunque, non si sa mai.
 	private function fetchFiles($docsdir) {
 		$files = array_diff(scandir($this->settings['']), array('.', '..'));
 		foreach ( $files as $file ) {
@@ -47,9 +48,9 @@ class Piratewww {
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 		$indice->id = 'verbale';
 		foreach($lfapi->getDrafts($offset, $limit) as $a) {
-                        $pagina = new Report($a);
-                        $pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
-                        $indice->addElement($pagina);
+            $pagina = new Report($a);
+            $pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
+            $indice->addElement($pagina);
 		}
 		$indice->createIndex();
 	}
@@ -75,8 +76,8 @@ class Piratewww {
 	// create needed dirs and touch empty skels for needed includes and templates
 	function createdirs() {
 	  // create dirs
-	  if ( file_exists($settings['BASEDIR']) ){
-		$comando="mkdir ".$settings['BASEDIR'].$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
+	  if ( file_exists($this->settings['BASEDIR']) ){
+		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']." ".$this->settings['BASEDIR'].$this->settings['INCLUDES']." ".$this->settings['BASEDIR'].$this->settings['HTDOCS']." ";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -87,8 +88,8 @@ class Piratewww {
 	  };
 
 	  // create empty includes
-	  if ( file_exists($settings['BASEDIR']) ){
-		$comando="touch ".$settings['BASEDIR'].$settings['INCLUDES']."ppheader.inc.html ".$dir.$settings['INCLUDES']."ppfooter.inc.html ".$dir.$settings['INCLUDES']."sitenav.inc.html";
+	  if ( file_exists($this->settings['BASEDIR']) ){
+		$comando="touch ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."ppheader.inc.html ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."ppfooter.inc.html ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."sitenav.inc.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -98,8 +99,8 @@ class Piratewww {
 		};
 	  };
 	  // create empty templates
-	  if ( file_exists($settings['BASEDIR']) ) {
-		$comando="mkdir ".$settings['BASEDIR'].$settings['TEMPLATES']."wikipages.html ".$dir.$settings['TEMPLATES']."report.html ".$dir.$settings['TEMPLATES']."tribune.html";
+	  if ( file_exists($this->settings['BASEDIR']) ) {
+		$comando="touch ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."wikipages.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."report.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."tribune.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -112,8 +113,8 @@ class Piratewww {
 
 	// clean previous .html files from htdocs
 	function cleanprevious() {
-	  if ( file_exists($settings['BASEDIR'].$settings['HTDOCS']) ) {
-		$comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
+	  if ( file_exists($this->settings['BASEDIR'].$this->settings['HTDOCS']) ) {
+		$comando="rm ".$this->settings['BASEDIR'].$this->settings['HTDOCS']."*.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
