@@ -28,9 +28,10 @@ class Indice extends Piratepage{
 		// $page come oggetto Piratepage::Liquidpage? Si, ok.
 		// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 
-		$this->content .= '<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>';
-		$this->content .= '<dd><ul>';
-		$this->content .= '<li>'.hash('sha256', $page->source['content']).'</li>';
+		$this->content .= "\n".'<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>';
+		$this->content .= "\n".'<dd><ul>';
+		$this->content .= '<li>Created: '..'</li>';
+		$this->content .= '<li>ID SHA-256(LQFB(timestamp),LQFB(id),LQFB(name),LQFB(content))'.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content']).'</li>';
 		//altri <li> da aggiungere?
 		$this->content .= '</ul></dd>';
 
