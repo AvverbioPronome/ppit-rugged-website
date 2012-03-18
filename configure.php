@@ -38,6 +38,7 @@ $settings['FORMALFOO'][] = array('Modulo_Contabile_del_Certificatore',3);
 // staticonf.
 $settings['DEBUG'] = false;
 $settings['TEST'] = false;
+$settings['CREATEDIRS'] = false;
 $settings['CLEAN'] = false;
 $settings['FF'] = false;
 $settings['TRIBUNE'] = false;

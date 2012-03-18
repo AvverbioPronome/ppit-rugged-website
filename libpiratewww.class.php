@@ -44,7 +44,7 @@ class Piratewww {
 	function updateReport($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('report');
-		$indice->id='verbale';
+		$indice->id = 'verbale';
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 
 		foreach($lfapi->getDrafts($offset, $limit) as $a){
@@ -69,7 +69,7 @@ class Piratewww {
 		$indice->writePage();
 	}
 	
-	function debug(){
+	function debuggg() {
 		print_r($this->settings);
 	}
 

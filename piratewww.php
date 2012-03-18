@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 $perfstart = microtime(true);
-error_reporting(E_ALL && E_NOTICE);
+//error_reporting(E_ALL && E_NOTICE);
 
 require_once 'configure.php';
 require_once 'libpiratewww.class.php';
@@ -84,7 +84,7 @@ if ($argc > 1) {
   }; // for each option
 }; // if is option
 
-if ( $settings['DEBUG'] ) $www->debug();
+if ( $settings['DEBUG'] ) $www->debuggg();
 if ( $settings['CLEAN'] ) $www->cleanprevious();
 if ( $settings['CREATEDIRS'] ) $www->createdirs();
 if ( $settings['FF'] ) $www->updateFormalfoo();

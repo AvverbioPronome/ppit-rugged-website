@@ -5,22 +5,19 @@ require_once 'libpage.ext.class.php';
 require_once 'libpiratewww.class.php';
 
 class Piratepage {
-	private $type = "wiki";
 	private $subs;
+	private $html;
+	private $moresubs;
+	protected $settings;
 
 	public $id;
         public $title;
 	public $content;
 	public $template;
-	private $html;
-	private $settings;
-	private $moresubs;
 
-	function __construct($type=NULL) { // miche', a che cazzo serve sto type?
+	function __construct() {
 		global $settings;
 		$this->settings=$settings;
-		
-		$this->type = $type;
 	}
 
 	private function loadFile($f) {
@@ -76,8 +73,7 @@ class Piratepage {
 		$this->subs['tag'] = $tag;
 		$this->subs['re'] = $re;
 		
-		$this->loadMoreSubs();
-
+//		$this->loadMoreSubs();
 	}
 	
 	private function make(){
