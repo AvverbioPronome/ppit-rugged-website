@@ -21,18 +21,23 @@ class Indice extends Piratepage{
 		parent::__construct();
 		
 		$this->template= $this->settings['BASEDIR'].$this->settings['TEMPLATES'].$template.'.html';
-		$this->content = '<ul>';
+		$this->content = '<dl>';
 	}
 	
 	function addElement($page){
 		// $page come oggetto Piratepage::Liquidpage? Si, ok.
 		// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 
-		$this->content .= '<li><a href="'.$page->id.'.html">'.$page->title.'</a></li>';
+		$this->content .= '<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>';
+		$this->content .= '<dd><ul>';
+		$this->content .= '<li>'.hash('sha256', $page->source['content']).'</li>';
+		//altri <li> da aggiungere?
+		$this->content .= '</ul></dd>';
+
 	}
 	
 	function writePage(){
-		$this->content .= '</ul>';
+		$this->content .= '</dl>';
 		parent::writePage();
 	}
 }
