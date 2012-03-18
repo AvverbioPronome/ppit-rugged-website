@@ -50,6 +50,7 @@ class Indice extends Piratepage {
 			$this->content .= '<li>(TODO datetime) './*$page->source['created'].*/'</li>'."\n";
 			$this->content .= '<li>Iniziativa n. '.$page->source['initiative_id'].'</li>'."\n";
 			$this->content .= '<li>Tema n. './*$page->source['issue_id'].*/'</li>'."\n";
+			$this->content .= '<li>Area n. './*$page->source['area_id'].*/'</li>'."\n";
 			$this->content .= '<li>ID: '.hash('sha256', /*$page->source['created'].*/$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
 			//altri <li> da aggiungere?
 			$this->content .= '</ul></dd>'."\n";
@@ -136,9 +137,10 @@ class Tribune extends Liquidpage{
 	function __construct($source){
 		parent::__construct($source);
 
+		$source['initiative_id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
 		$this->id='tribuna_'.$source['initiative_id'];
 		$this->template='tribune.html';
-		$this->title = 'Iniziativa n. '.$source['initiative_id'].': '.$source['name'];
+		$this->title = 'Iniziativa n. '.$source['initiative_id'];
 	}
 }
 

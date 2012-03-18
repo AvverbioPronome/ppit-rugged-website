@@ -48,9 +48,9 @@ class Piratewww {
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 		$indice->id = 'verbale';
 		foreach($lfapi->getDrafts($offset, $limit) as $a) {
-            $pagina = new Report($a);
-            $pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
-            $indice->addElement($pagina);
+                  $pagina = new Report($a);
+                  $pagina->writePage();
+                  $indice->addElement($pagina);
 		}
 		$indice->createIndex();
 	}
@@ -58,15 +58,14 @@ class Piratewww {
 	function updateTribune($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('tribune');
-		$indice->id='tribuna';
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.tribuna.inc.html'));
-
+		$indice->id='tribuna';
 		foreach($lfapi->getApproved($offset, $limit) as $a){
 			$pagina = new Tribune($a);
-			$indice->addElement($pagina);
 			$pagina->writePage();
+			$indice->addElement($pagina);
 		}
-		$indice->writePage();
+		$indice->createIndex();
 	}
 	
 	function debuggg() {

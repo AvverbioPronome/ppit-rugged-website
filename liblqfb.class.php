@@ -58,7 +58,7 @@ class Liquidquery {
 	function getApproved($offset, $limit)
 	{ //
 		
-		$qs .= 'include_initiatives=true&'.'include_issues=true&';
+		$qs = 'include_initiatives=true&'.'include_issues=true&';
 		$qs .= 'issue_state=finished_with_winner&';
 		$qs .= 'initiative_winner=true&';
 		$qs .= 'current_draft=true&'.'render_content=html&';
