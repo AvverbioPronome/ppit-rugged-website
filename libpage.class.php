@@ -34,11 +34,13 @@ class Piratepage {
 	}
 	
 	private function loadMoreSubs(){
-		foreach($this->moresubs['tag'] as $m){
-			$this->subs['tag'][]=$m;
-		}
-		foreach($this->moresubs['re'] as $m){
-			$this->subs['re'][]=$m;
+	    if(is_array($this->moresubs)){
+            foreach($this->moresubs['tag'] as $m){
+                $this->subs['tag'][]=$m;
+            }
+            foreach($this->moresubs['re'] as $m){
+                $this->subs['re'][]=$m;
+            }
 		}
 	}
 
@@ -73,7 +75,7 @@ class Piratepage {
 		$this->subs['tag'] = $tag;
 		$this->subs['re'] = $re;
 		
-//		$this->loadMoreSubs();
+		$this->loadMoreSubs(); //senza di questa non funzionano gli indexintro!
 	}
 	
 	private function make(){
