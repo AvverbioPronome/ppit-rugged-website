@@ -44,7 +44,7 @@ class Piratewww {
 	function updateReport($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('report');
-		$indice->id='verbale';
+		$indice->id = 'verbale';
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 
 		foreach($lfapi->getDrafts($offset, $limit) as $a){
@@ -69,15 +69,15 @@ class Piratewww {
 		$indice->writePage();
 	}
 	
-	function debuggg(){
+	function debuggg() {
 		print_r($this->settings);
-		
 	}
+
 	// create needed dirs and touch empty skels for needed includes and templates
-	function createdirs($dir=NULL) {
+	function createdirs() {
 	  // create dirs
-	  if ( file_exists($dir) ){
-		$comando="mkdir ".$dir.$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
+	  if ( file_exists($settings['BASEDIR']) ){
+		$comando="mkdir ".$settings['BASEDIR'].$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -86,9 +86,10 @@ class Piratewww {
 		  exit(1);
 		};
 	  };
+
 	  // create empty includes
-	  if ( file_exists($dir) ){
-		$comando="touch ".$dir.$settings['INCLUDES']."ppheader.inc.html ".$dir.$settings['INCLUDES']."ppfooter.inc.html ".$dir.$settings['INCLUDES']."sitenav.inc.html";
+	  if ( file_exists($settings['BASEDIR']) ){
+		$comando="touch ".$settings['BASEDIR'].$settings['INCLUDES']."ppheader.inc.html ".$dir.$settings['INCLUDES']."ppfooter.inc.html ".$dir.$settings['INCLUDES']."sitenav.inc.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -98,8 +99,8 @@ class Piratewww {
 		};
 	  };
 	  // create empty templates
-	  if ( file_exists($dir) ){
-		$comando="mkdir ".$dir.$settings['TEMPLATES']."wikipages.html ".$dir.$settings['TEMPLATES']."report.html ".$dir.$settings['TEMPLATES']."tribune.html";
+	  if ( file_exists($settings['BASEDIR']) ) {
+		$comando="mkdir ".$settings['BASEDIR'].$settings['TEMPLATES']."wikipages.html ".$dir.$settings['TEMPLATES']."report.html ".$dir.$settings['TEMPLATES']."tribune.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -111,8 +112,8 @@ class Piratewww {
 	}
 
 	// clean previous .html files from htdocs
-	function cleanprevious($htdocs=NULL) {
-	  if ( file_exists($htdocs) ){
+	function cleanprevious() {
+	  if ( file_exists($settings['BASEDIR'].$settings['HTDOCS']) ) {
 		$comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
