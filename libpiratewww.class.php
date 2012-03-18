@@ -13,6 +13,7 @@ class Piratewww {
 	}
 
 	/* Questa roba non mi pare sia più prevista...
+	    ma io la scriverei comunque, non si sa mai.
 	private function fetchFiles($docsdir) {
 		$files = array_diff(scandir($this->settings['']), array('.', '..'));
 		foreach ( $files as $file ) {
@@ -47,9 +48,9 @@ class Piratewww {
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 		$indice->id = 'verbale';
 		foreach($lfapi->getDrafts($offset, $limit) as $a) {
-                        $pagina = new Report($a);
-                        $pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
-                        $indice->addElement($pagina);
+            $pagina = new Report($a);
+            $pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
+            $indice->addElement($pagina);
 		}
 		$indice->createIndex();
 	}
