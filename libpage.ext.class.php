@@ -38,11 +38,13 @@ class Indice extends Piratepage{
 }
 
 class Liquidpage extends Piratepage{
-	
+	public $source;
 	// roba che dovrebbero condividere Report e Tribune?
 	
 	function __construct($source, $type) {
 		parent::__construct($type);
+		
+		$this->source=$source;
 		
 		$this->content .= "<article id=init".$source['initiative_id'].">";
 		$this->content .= "<hgroup><h4>Tema n. "."null"."->Iniziativa n.".$source['initiative_id']."->Bozza n.".$source['id'].":</h4>";
