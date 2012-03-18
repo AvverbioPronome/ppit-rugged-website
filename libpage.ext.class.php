@@ -43,12 +43,18 @@ class Indice extends Piratepage {
 		foreach ( $pages as $page ) {
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
-			$this->content .= "\n".'<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>';
-			$this->content .= "\n".'<dd><ul>';
-			$this->content .= '<li>ID: '.hash('sha256', /*$page->source['created'].*/$page->source['id'].$page->source['name'].$page->source['content']).'</li>';
-			$this->content .= '<li>Creata: './*$page->source['created'].*/'</li>';
+			$this->content .= "<article id=init".$page->source['id'].">";
+			$this->content .= "\n".'<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>'."\n";
+			$this->content .= '<dd><ul>'."\n";
+			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
+			$this->content .= '<li>(TODO datetime) './*$page->source['created'].*/'</li>'."\n";
+			$this->content .= '<li>Iniziativa n. '.$page->source['initiative_id'].'</li>'."\n";
+			$this->content .= '<li>Tema n. './*$page->source['issue_id'].*/'</li>'."\n";
+			$this->content .= '<li>ID: '.hash('sha256', /*$page->source['created'].*/$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
 			//altri <li> da aggiungere?
-			$this->content .= '</ul></dd>';
+			$this->content .= '</ul></dd>'."\n";
+			$this->content .= "<footer>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</footer>\n";
+			$this->content .= "</article>\n";
 		}
 	}
 
@@ -105,10 +111,11 @@ class Liquidpage extends Piratepage{
 		
 		$this->source=$source;
 		
-		$this->content .= "<article id=init".$source['initiative_id'].">";
-		$this->content .= "<hgroup><h4>Tema n. "."null"."->Iniziativa n.".$source['initiative_id']."->Bozza n.".$source['id'].":</h4>";
+		$this->content .= "<article id=init".$source['id'].">";
+		$this->content .= "<hgroup><h4>Tema n. "."null"." -> Iniziativa n.".$source['initiative_id']." -> Proposta n.".$source['id']."</h4>";
 		$this->content .= "<h1>".$source['name']."</h1></hgroup>";
-		$this->content .= $source['content'];
+		$this->content .= "<p>".$source['content']."</p>";
+		$this->content .= "<footer>ID: ".hash('sha256', /*$source['created'].*/$source['id'].$source['name'].$source['content'])."</footer>\n";
 		$this->content .= "<footer>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</footer>";
 		$this->content .= "</article>\n";
 	}
@@ -120,7 +127,7 @@ class Report extends Liquidpage{
 
 		$source['id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
 		$this->id='verbale_'.$source['id'];
-		$this->title = 'Proposta n. '.$source['id'].': '.$source['name'];
+		$this->title = 'Proposta n. '.$source['id'];
 		$this->template='report.html';
 	}
 }
