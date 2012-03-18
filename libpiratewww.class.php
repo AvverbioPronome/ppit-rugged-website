@@ -100,7 +100,7 @@ class Piratewww {
 	  };
 	  // create empty templates
 	  if ( file_exists($this->settings['BASEDIR']) ) {
-		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."wikipages.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."report.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."tribune.html";
+		$comando="touch ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."wikipages.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."report.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."tribune.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
