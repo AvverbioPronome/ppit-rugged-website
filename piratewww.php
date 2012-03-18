@@ -44,10 +44,12 @@ if ($argc > 1) {
       case "-f":
       case "--full":
         $settings['CLEAN'] = true;
+        $settings['FULL'] = true;
+      case "--update":
+      case "-u":
         $settings['FF'] = true;
         $settings['TRIBUNE'] = true;
         $settings['REPORT'] = true;
-        $settings['FULL'] = true;
         break;
       case "-q":
       case "--quickstart":
@@ -63,21 +65,25 @@ if ($argc > 1) {
       case "-h":
       case "--help":
       default:      
-        echo "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['BASEDIR'].".\n";
-        echo "\n";
-        echo "Usage: ".$argv[0]." <option>\n";
-        echo "\n";
-        echo "--help, -help, -h, or -?	to get this help.\n";
-        echo "--version, -v		to return the version of this file.\n";
-        echo "--debug, -d		[TODO] to turn on output debugging.\n";
-        echo "--test, -t		[TODO] to fake any write operation (filesystem, api).\n";
-        echo "--basedir [directory]	to change base directory from ".$settings['BASEDIR']." .\n";
-        echo "--createdirs, -c	to create needed dirs starting from basedir and touch empty templates and includes.";
-        echo "--clean, -c		to delete *.html.\n";
-        echo "--full, -f		to clean dirs and generate Formalfoo, Tribune, Report.\n";
-        echo "--quickstart, -q		same as --clean, --createdirs and --full.\n";
-        echo "\n";
-        echo "Command line options override config files options.\n";
+        $help .= "Create a Pirate WWW in your htdocs starting from the base directory ".$settings['BASEDIR'].".\n\n";
+
+        $help .= "Usage: ".$argv[0]." <option>\n\n";
+
+        $help .= "--help, -help, -h, or -?	to get this help.\n\n";
+        
+        $help .= "--version, -v		to return the version of this file.\n";
+        $help .= "--debug, -d		[TODO] to turn on output debugging.\n";
+        $help .= "--test, -t		[TODO] to fake any write operation (filesystem, api).\n";
+        $help .= "--basedir [dir]   	to change base directory from ".$settings['BASEDIR']." .\n";
+        $help .= "--createdirs, -c	to create needed dirs starting from basedir and touch empty templates and includes.\n";
+        $help .= "--clean, -c		to delete ".$settings['BASEDIR'].$settings['HTDOCS']."*.html.\n";
+        $help .= "--full, -f		to clean dirs and generate Formalfoo, Tribune, Report.\n";
+        $help .= "--quickstart, -q	same as --clean, --createdirs and --full.\n";
+        $help .= "--update, -u            same as --full, without cleaning dirs";
+        $help .= "\n";
+        $help .= "Command line options override config files options.\n";
+        
+        echo $help; // wordwrap($help, 80, "\n                  "); //non funziona il dannato.
       exit;
       break;
     }; // switch options
