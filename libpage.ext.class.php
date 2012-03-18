@@ -8,7 +8,7 @@ class Formalfoo extends Piratepage {
 	function __construct() {
 		parent::__construct();
 
-		$this->template=$this->settings['BASEDIR'].$this->settings['TEMPLATES'].'wikipages.html';
+		$this->template= 'wikipages.html'; //solo il nome del file dentro la certella dei templates.
 	}
 	//dubito che dovremmo mettere qualcosa qui.
 }
