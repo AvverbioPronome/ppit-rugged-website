@@ -25,8 +25,8 @@ class Indice extends Piratepage{
 	}
 	
 	function addElement($page){
-		// $code come oggetto Piratepage? Si, ok.
-
+		// $page come oggetto Piratepage::Liquidpage? Si, ok.
+		// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 		$this->content .= '<li><a href="'.$page->id.'.html">'.$page->title.'</a></li>';
 	}
 	
