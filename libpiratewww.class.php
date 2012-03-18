@@ -77,7 +77,7 @@ class Piratewww {
 	function createdirs() {
 	  // create dirs
 	  if ( file_exists($this->settings['BASEDIR']) ){
-		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']." ".$dir.$this->settings['INCLUDES']." ".$dir.$this->settings['HTDOCS']." ";
+		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']." ".$this->settings['BASEDIR'].$this->settings['INCLUDES']." ".$this->settings['BASEDIR'].$this->settings['HTDOCS']." ";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -89,7 +89,7 @@ class Piratewww {
 
 	  // create empty includes
 	  if ( file_exists($this->settings['BASEDIR']) ){
-		$comando="touch ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."ppheader.inc.html ".$dir.$this->settings['INCLUDES']."ppfooter.inc.html ".$dir.$this->settings['INCLUDES']."sitenav.inc.html";
+		$comando="touch ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."ppheader.inc.html ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."ppfooter.inc.html ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."sitenav.inc.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -100,7 +100,7 @@ class Piratewww {
 	  };
 	  // create empty templates
 	  if ( file_exists($this->settings['BASEDIR']) ) {
-		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."wikipages.html ".$dir.$this->settings['TEMPLATES']."report.html ".$dir.$this->settings['TEMPLATES']."tribune.html";
+		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."wikipages.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."report.html ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."tribune.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
