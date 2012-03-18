@@ -15,6 +15,8 @@ class Formalfoo extends Piratepage {
 
 class Indice extends Piratepage {
 	private $pages;
+	private $chunksno;
+	private $prefix;
 
 	public $excerptlen=3000;
 	public $intro;
@@ -23,12 +25,22 @@ class Indice extends Piratepage {
 		parent::__construct();
 		
 		$this->template= $template.'.html';
-		$this->content = '<dl>';
 	}
 
-	private function elementsToHtml() {
-		krsort($this->pages);
-		foreach ( $this->pages as $page ) {
+	private function writeIndex() {
+		parent::writePage();
+	}
+
+	private function chunking() {
+		$this->chunksno = 0;
+		$chunks = array_chunk($this->pages, $this->settings['INDEXPAGE'], true);
+		$this->chunksno = count($chunks);
+		$this->chunksno--;
+		return $chunks;
+	}
+	
+	private function elementsToHtml($pages) {
+		foreach ( $pages as $page ) {
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 			$this->content .= "\n".'<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>';
@@ -39,15 +51,48 @@ class Indice extends Piratepage {
 			$this->content .= '</ul></dd>';
 		}
 	}
-	
+
 	function addElement($page) {
 		$this->pages[$page->id] = $page;
 	}
-	
-	function writePage(){
-		$this->elementsToHtml();
-		$this->content .= '</dl>';
-		parent::writePage();
+
+	function createIndex() {
+		krsort($this->pages);
+		$chunks = $this->chunking();
+		$indexchunk = 0;
+		$this->prefix = $this->id;
+		foreach($chunks as $chunk) {
+			$this->content = '<dl>';
+			$this->elementsToHtml($chunk);
+			$this->content .= '</dl>'."\n";
+			if ( $this->chunksno > 0 ) {
+				if ( $indexchunk > 0 ) $this->id = $this->prefix.'_i'.$indexchunk;
+				$previd = $indexchunk - 1;
+				$nextid = $indexchunk + 1;
+				$this->content .= '<div align="center">';
+				if ( $indexchunk != 0 ) {
+					if ( $indexchunk > 1 ) {
+						$prevlink = $this->prefix."_i".$previd.'.html';
+					} else {
+						$prevlink = $this->prefix.'.html';
+					}
+					$this->content .= '<a href="'.$prevlink.'">';
+					$this->content .= 'Successive';
+					$this->content .= '</a>';
+				}
+				if ( $indexchunk != 0 && $indexchunk != $this->chunksno ) {
+					$this->content .= ' | ';
+				}
+				if ( $indexchunk != $this->chunksno ) {
+					$this->content .= '<a href="'.$this->prefix."_i".$nextid.'.html'.'">';
+					$this->content .= 'Precedenti';
+					$this->content .= '</a>';
+				}
+				$this->content .= '</div>';
+			}
+			$this->writeIndex($indexchunk);
+			$indexchunk++;
+		}
 	}
 }
 
