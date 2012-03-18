@@ -5,7 +5,7 @@ require_once 'libpage.ext.class.php';
 require_once 'liblqfb.class.php';
 
 class Piratewww {
-	private $settings;	
+	private $settings;
 
 	function __construct() {
 		global $settings;
@@ -44,15 +44,14 @@ class Piratewww {
 	function updateReport($offset=0, $limit=100) {
 		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice('report');
-		$indice->id = 'verbale';
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
-
-		foreach($lfapi->getDrafts($offset, $limit) as $a){
-			$pagina = new Report($a);
-			$indice->addElement($pagina);
-			$pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
+		$indice->id = 'verbale';
+		foreach($lfapi->getDrafts($offset, $limit) as $a) {
+                        $pagina = new Report($a);
+                        $pagina->writePage(); // se ne fotte delle cartelle. non è un gran problema.
+                        $indice->addElement($pagina);
 		}
-		$indice->writePage();
+		$indice->createIndex();
 	}
 	
 	function updateTribune($offset=0, $limit=100) {
@@ -64,7 +63,7 @@ class Piratewww {
 		foreach($lfapi->getApproved($offset, $limit) as $a){
 			$pagina = new Tribune($a);
 			$indice->addElement($pagina);
-			$pagina->writePage(); 
+			$pagina->writePage();
 		}
 		$indice->writePage();
 	}

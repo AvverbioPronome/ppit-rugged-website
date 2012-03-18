@@ -35,6 +35,9 @@ $settings['FORMALFOO'][] = array('Modulo_Iscrizione_e_Certificazione',5);
 $settings['FORMALFOO'][] = array('Modulo_Personale_del_Certificatore',5);
 $settings['FORMALFOO'][] = array('Modulo_Contabile_del_Certificatore',3);
 
+// quante bozzze/iniziative per ogni pagina di verbale/tribuna
+$settings['INDEXPAGE'] = 20;
+
 // staticonf.
 $settings['DEBUG'] = false;
 $settings['TEST'] = false;
