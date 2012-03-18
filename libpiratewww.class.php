@@ -76,8 +76,8 @@ class Piratewww {
 	// create needed dirs and touch empty skels for needed includes and templates
 	function createdirs() {
 	  // create dirs
-	  if ( file_exists($settings['BASEDIR']) ){
-		$comando="mkdir ".$settings['BASEDIR'].$settings['TEMPLATES']." ".$dir.$settings['INCLUDES']." ".$dir.$settings['HTDOCS']." ";
+	  if ( file_exists($this->settings['BASEDIR']) ){
+		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']." ".$dir.$this->settings['INCLUDES']." ".$dir.$this->settings['HTDOCS']." ";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -88,8 +88,8 @@ class Piratewww {
 	  };
 
 	  // create empty includes
-	  if ( file_exists($settings['BASEDIR']) ){
-		$comando="touch ".$settings['BASEDIR'].$settings['INCLUDES']."ppheader.inc.html ".$dir.$settings['INCLUDES']."ppfooter.inc.html ".$dir.$settings['INCLUDES']."sitenav.inc.html";
+	  if ( file_exists($this->settings['BASEDIR']) ){
+		$comando="touch ".$this->settings['BASEDIR'].$this->settings['INCLUDES']."ppheader.inc.html ".$dir.$this->settings['INCLUDES']."ppfooter.inc.html ".$dir.$this->settings['INCLUDES']."sitenav.inc.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -99,8 +99,8 @@ class Piratewww {
 		};
 	  };
 	  // create empty templates
-	  if ( file_exists($settings['BASEDIR']) ) {
-		$comando="mkdir ".$settings['BASEDIR'].$settings['TEMPLATES']."wikipages.html ".$dir.$settings['TEMPLATES']."report.html ".$dir.$settings['TEMPLATES']."tribune.html";
+	  if ( file_exists($this->settings['BASEDIR']) ) {
+		$comando="mkdir ".$this->settings['BASEDIR'].$this->settings['TEMPLATES']."wikipages.html ".$dir.$this->settings['TEMPLATES']."report.html ".$dir.$this->settings['TEMPLATES']."tribune.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // http://it.php.net/manual/en/function.mkdir.php
@@ -113,8 +113,8 @@ class Piratewww {
 
 	// clean previous .html files from htdocs
 	function cleanprevious() {
-	  if ( file_exists($settings['BASEDIR'].$settings['HTDOCS']) ) {
-		$comando="rm ".$settings['BASEDIR'].$settings['HTDOCS']."*.html";
+	  if ( file_exists($this->settings['BASEDIR'].$this->settings['HTDOCS']) ) {
+		$comando="rm ".$this->settings['BASEDIR'].$this->settings['HTDOCS']."*.html";
 		$uscita[0]="Ok";
 		$ritorno=1;
 		exec($comando,$uscita,$ritorno); // eeeehm, http://it.php.net/manual/en/function.unlink.php
