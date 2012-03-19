@@ -128,7 +128,7 @@ class Liquidpage extends Piratepage{
         }
 		
 		$this->content .= "<article id=init".$this->id.">";
-		$this->content .= "<hgroup><h6>Tema n. "."null"." &#x220B; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
+		$this->content .= "<hgroup><h6>Tema n. "."null"." &#x2283; Iniziativa n.".$source['initiative_id']." &#x220D; Proposta n.".$source['id']."</h6>";
 		$this->content .= "<h1>".$source['name']."</h1></hgroup>";
 		$this->content .= "<p>".$source['content']."</p>";
 		$this->content .= "<footer>ID: ".hash('sha256', /*$source['created'].*/$source['id'].$source['name'].$source['content'])."</footer>\n";
