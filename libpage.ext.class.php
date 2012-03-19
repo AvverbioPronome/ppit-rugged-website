@@ -43,9 +43,9 @@ class Indice extends Piratepage {
 		foreach ( $pages as $page ) {
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
-			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.'</a></dt>'."\n"; // article dentro dl?!?
+			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n"; // article dentro dl?!?
 			$this->content .= '<dd><ul>'."\n";
-			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
+			//$this->content .= '<li>'.$page->source['name'].'</li>'."\n";//meglio in dt
 			$this->content .= '<li>(TODO datetime) './*$page->source['created'].*/'</li>'."\n";
 			$this->content .= '<li>Iniziativa n. '.$page->source['initiative_id'].'</li>'."\n";
 			$this->content .= '<li>Tema n. './*$page->source['issue_id'].*/'</li>'."\n";
