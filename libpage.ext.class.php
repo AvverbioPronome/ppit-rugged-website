@@ -52,8 +52,8 @@ class Indice extends Piratepage {
 			$this->content .= '<li>Area n. './*$page->source['area_id'].*/'</li>'."\n";
 			$this->content .= '<li>ID: '.hash('sha256', /*$page->source['created'].*/$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
 			//altri <li> da aggiungere?
-			$this->content .= '</ul></dd>'."\n";
-			$this->content .= "<footer><small>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</small></footer>\n";
+			$this->content .= '</ul>'."\n";
+			$this->content .= "<p><small>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</small></p></dd>\n";
 		}
 	}
 
