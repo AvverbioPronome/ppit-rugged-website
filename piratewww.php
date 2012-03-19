@@ -45,6 +45,7 @@ if ($argc > 1) {
       case "--full":
         $settings['CLEAN'] = true;
         $settings['FULL'] = true;
+        // i'm deliberately not breaking here.
       case "--update":
       case "-u":
         $settings['FF'] = true;
