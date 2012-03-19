@@ -22,11 +22,12 @@
 #toolbar ul li, #toolbar ul, #toolbar a{
 	vertical-align: top;
 }
-.sites{
+#toolbar .sites{
 	position: absolute;
 	top:2px;
 	left:0;
 }
+/* qualcosa da allineare a destra?
 .sso{
 	position:absolute;
 	top:0;
@@ -36,9 +37,12 @@
 .sso input{
 	height:12px;margin:0; padding:0;
 }
+*/
 #toolbar a{text-decoration:none;color:#ff8c00;}
 #toolbar a:hover{color:black;background-color:#ff8c00;}
-#toolbar .icon, #toolbar a img{
+#toolbar a.icon{text-decoration:none;background-color:transparent;}
+#toolbar a.icon:hover{color:black;background-color:transparent;}
+#toolbar a.icon img{
 	height: 18px;
 	margin:0;padding:0;
 	position:relative;
