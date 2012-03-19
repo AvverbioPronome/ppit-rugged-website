@@ -47,9 +47,9 @@ class Piratewww {
 		$indice = new Indice('report');
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 		$indice->id = 'verbale';
-		$lfdrafts = $lfapi->getDrafts($offset, $limit);
-                krsort($lfdrafts);
-		foreach($lfdrafts as $a) {
+		$lfresult = $lfapi->getDrafts($offset, $limit);
+		krsort($lfresult);
+		foreach( $lfresult as $a) {
                   $pagina = new Report($a);
                   $pagina->writePage();
                   $indice->addElement($pagina);
@@ -62,8 +62,9 @@ class Piratewww {
 		$indice = new Indice('tribune');
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.tribuna.inc.html'));
 		$indice->id='tribuna';
-		krsort($lfdrafts);
-		foreach($lfapi->getApproved($offset, $limit) as $a){
+		$lfresult = $lfapi->getApproved($offset, $limit);
+		krsort($lfresult);
+		foreach( $lfresult as $a ) {
 			$pagina = new Tribune($a);
 			$pagina->writePage();
 			$indice->addElement($pagina);
