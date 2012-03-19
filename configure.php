@@ -25,7 +25,7 @@ $settings['LFMAXTENT'] = 2;
 // Composizione Gazzetta: la prima che scrivi diventa index.html.
 $settings['FORMALFOO'][] = array('Il_Partito_Pirata', 28);
 $settings['FORMALFOO'][] = array('Manifesto', 13);
-$settings['FORMALFOO'][] = array('Statuto', 45); 
+$settings['FORMALFOO'][] = array('Statuto', 47); 
 $settings['FORMALFOO'][] = array('Garanzia_di_Iscrizione_ed_Esclusione', 11);
 $settings['FORMALFOO'][] = array('Lettera_di_Intento_Pirata', 4);
 $settings['FORMALFOO'][] = array('Lettera_di_Assunzione_Responsabilità_Artistiche',5);

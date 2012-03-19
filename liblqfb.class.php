@@ -7,8 +7,7 @@ class Liquidquery {
 	private $apiserver;
 	private $tnt;
 	
-	function __construct()
-	{ // parametri del server e regolazione dell'insistenza.
+	function __construct() { // parametri del server e regolazione dell'insistenza.
 		
 		global $settings;
 		
@@ -16,8 +15,7 @@ class Liquidquery {
 		$this->tnt = $settings['LFMAXTENT'];
 	}
 	
-	function getSomething($what, $querystring)
-	{ // la funzione brutale. fa una query.
+	function getSomething($what, $querystring) { // la funzione brutale. fa una query.
 		
 		$i=0;
 		do{
@@ -36,14 +34,23 @@ class Liquidquery {
 			return false;
 	}
 	
-	function getDrafts($querystring='')
-	{ //
+	function getDrafts($querystring='') { //
 		
 		$txts = $this->getSomething('draft', $querystring);
 		
 		foreach($txts as $txt){
 			$res=$this->getInitiativeInfo($txt['initiative_id']);
+			$txt['issue_id']=$res['issue_id'];
 			$txt['name']=$res['name'];
+			$txt['created']=$res['created'];
+			$txn[$txt['id']]=$txt;
+
+			$res=$this->getIssueInfo($txt['issue_id']);
+			$txt['area_id']=$res['area_id'];
+			$txn[$txt['id']]=$txt;
+			
+			$res=$this->getAreaInfo($txt['area_id']);
+			$txt['area_name']=$res['name'];
 			$txn[$txt['id']]=$txt;
 		};
 		
@@ -55,8 +62,7 @@ class Liquidquery {
 			return false;
 	}
 	
-	function getApproved($offset, $limit)
-	{ //
+	function getApproved($offset, $limit) { //
 		
 		$qs = 'include_initiatives=true&'.'include_issues=true&';
 		$qs .= 'issue_state=finished_with_winner&';
@@ -67,8 +73,8 @@ class Liquidquery {
 		return $this->getDrafts($qs);		
 	}
 	
-	function getInitiativeInfo($id)
-	{ // mah, apiserver: dimmi un po' di questa proposta...
+	function getInitiativeInfo($id)	{ 
+	// mah, apiserver: dimmi un po' di questa proposta...
 		
 		$res = $this->getSomething('initiative', 'initiative_id='.$id);
 		
@@ -78,5 +84,26 @@ class Liquidquery {
 			return false;
 	}
 
+	function getIssueInfo($id) { 
+	// mah, apiserver: dimmi un po' di questo Tema...
+		
+		$res = $this->getSomething('issue', 'issue_id='.$id);
+		
+		if ($res)
+			return $res[0];
+		else
+			return false;
+	}
+
+	function getAreaInfo($id) { 
+	// mah, apiserver: dimmi un po' di questa proposta...
+		
+		$res = $this->getSomething('area', 'area_id='.$id);
+		
+		if ($res)
+			return $res[0];
+		else
+			return false;
+	}
 };
 ?>

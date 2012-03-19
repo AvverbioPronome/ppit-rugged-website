@@ -46,25 +46,19 @@ class Indice extends Piratepage {
 			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.'</a></dt>'."\n"; // article dentro dl?!?
 			$this->content .= '<dd><ul>'."\n";
 			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
-			$this->content .= '<li>(TODO datetime) './*$page->source['created'].*/'</li>'."\n";
-			$this->content .= '<li>Iniziativa n. '.$page->source['initiative_id'].'</li>'."\n";
-			$this->content .= '<li>Tema n. './*$page->source['issue_id'].*/'</li>'."\n";
-			$this->content .= '<li>Area n. './*$page->source['area_id'].*/'</li>'."\n";
-			$this->content .= '<li>ID: '.hash('sha256', /*$page->source['created'].*/$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
+			$this->content .= '<li>Tema n. '.$page->source['issue_id'].' - Area n. '.$page->source['area_id'].' ( '.$page->source['area_name'].' )</li>'."\n";
+			$this->content .= '<li>ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
 			//altri <li> da aggiungere?
 			$this->content .= '</ul></dd>'."\n";
-			$this->content .= "<footer><small>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</small></footer>\n";
+			$this->content .= "<footer><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente, li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></footer>\n";
 		}
 	}
 
 	function addElement($page) {
-		//$this->pages[$page->id] = $page;
 		$this->pages[] = $page;
 	}
 
 	function createIndex() {
-//str_pad($source['id'], 10, "0", STR_PAD_LEFT)
-//		krsort($this->pages);
 		$chunks = $this->chunking();
 		$indexchunk = 0;
 		$this->prefix = $this->id;
