@@ -65,12 +65,14 @@ code, kbd, samp, pre, tt, var {
 #sitehead h1.verbale {font-size:4em}
 #sitehead h1.tribuna {font-size:4em;}
 nav#sitenav{
-    padding:0.5em 1ex;
+    padding:0.5em 0;
 	position:absolute; 
 	bottom:0; 
 	left:0;
 	z-index:100;
+	width:100%;
 }
+nav#sitenav ul li a{padding:0.2ex 0.2em 0 0.2em;}
 nav#sitenav ul li{list-style-type:none; display:inline;}
 nav#sitenav ul {margin:0; padding:0.5ex 1em;}
 nav#sitenav{font-size:1.1em;}
