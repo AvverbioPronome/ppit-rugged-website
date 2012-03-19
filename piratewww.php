@@ -99,8 +99,8 @@ if ( $settings['TRIBUNE'] ) $www->updateTribune();
 if ( $settings['REPORT'] ) $www->updateReport();
 
 // cronometro.
-$perfstop = microtime(true);
-$perfs = $perfstop - $perfstart;
-$perfstime = number_format($perfs,5,',','.');
-echo "Tempo impiegato dallo script: $perfstime secondi\n";
+//$perfstop = microtime(true);
+//$perfs = $perfstop - $perfstart;
+
+printf("Tempo impiegato dallo script: %.5f secondi\n", microtime(true) - $perfstart);
 ?>
