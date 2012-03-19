@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import "reset.css"; 
 @import "ppbar.css";
-#toolbar{position:fixed; z-index:1000; opacity:0.8;}
+#toolbar{ z-index:1000; opacity:0.75;}
 body{
 	background: #ff8c00 url(tagcloud.png) top left;
 	color: black;
@@ -25,7 +25,6 @@ a:hover{
 	background:none;
 	text-decoration:underline;
 }
-hr{display:none;}
 dt{font-weight:bold; margin-top:0.5em;}
 figcaption{font-size:smaller; text-align:center;}
 code, kbd, samp, pre, tt, var {
@@ -43,6 +42,7 @@ code, kbd, samp, pre, tt, var {
 	background-color: rgba(255, 255, 255, 0.55);
 	padding:1em 1ex;
 }
+.rettangolo hr{display:block;}
 
 .map{margin: 1ex auto; width:100%;text-align:center;}
 .map.italy img {width:68%;}
