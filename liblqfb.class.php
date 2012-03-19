@@ -43,9 +43,9 @@ class Liquidquery {
 		
 		foreach($txts as $txt){
 			$res=$this->getInitiativeInfo($txt['initiative_id']);
-			//print_r($res);
 			$txt['name']=$res['name'];
-			$txn[]=$txt;
+			$txn[$txt['id']]=$txt;
+			krsort($txn);
 		};
 		
 		
