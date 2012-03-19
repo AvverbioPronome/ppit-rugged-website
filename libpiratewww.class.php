@@ -47,7 +47,9 @@ class Piratewww {
 		$indice = new Indice('report');
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
 		$indice->id = 'verbale';
-		foreach($lfapi->getDrafts($offset, $limit) as $a) {
+		$lfdrafts = $lfapi->getDrafts($offset, $limit);
+                krsort($lfdrafts);
+		foreach($lfdrafts as $a) {
                   $pagina = new Report($a);
                   $pagina->writePage();
                   $indice->addElement($pagina);

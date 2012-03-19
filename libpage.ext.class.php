@@ -44,7 +44,7 @@ class Indice extends Piratepage {
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 			$this->content .= "<article id=init".$page->source['id'].">";
-			$this->content .= "\n".'<dt><a href="'.$page->id.'.html">'.$page->title.'</a></dt>'."\n";
+			$this->content .= "\n".'<dt><a href="'.$this->prefix."_".$page->source['id'].'.html">'.$page->title.'</a></dt>'."\n";
 			$this->content .= '<dd><ul>'."\n";
 			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
 			$this->content .= '<li>(TODO datetime) './*$page->source['created'].*/'</li>'."\n";
@@ -64,7 +64,8 @@ class Indice extends Piratepage {
 	}
 
 	function createIndex() {
-		krsort($this->pages);
+//str_pad($source['id'], 10, "0", STR_PAD_LEFT)
+//		krsort($this->pages);
 		$chunks = $this->chunking();
 		$indexchunk = 0;
 		$this->prefix = $this->id;
@@ -126,7 +127,7 @@ class Report extends Liquidpage{
 	function __construct($source){
 		parent::__construct($source);
 
-		$source['id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
+//		$source['id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
 		$this->id='verbale_'.$source['id'];
 		$this->title = 'Proposta n. '.$source['id'];
 		$this->template='report.html';
@@ -137,7 +138,7 @@ class Tribune extends Liquidpage{
 	function __construct($source){
 		parent::__construct($source);
 
-		$source['initiative_id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
+//		$source['initiative_id'] = str_pad($source['initiative_id'], 10, "0", STR_PAD_LEFT);
 		$this->id='tribuna_'.$source['initiative_id'];
 		$this->template='tribune.html';
 		$this->title = 'Iniziativa n. '.$source['initiative_id'];
