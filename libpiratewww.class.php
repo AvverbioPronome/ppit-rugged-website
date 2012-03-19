@@ -62,6 +62,7 @@ class Piratewww {
 		$indice = new Indice('tribune');
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.tribuna.inc.html'));
 		$indice->id='tribuna';
+		krsort($lfdrafts);
 		foreach($lfapi->getApproved($offset, $limit) as $a){
 			$pagina = new Tribune($a);
 			$pagina->writePage();
