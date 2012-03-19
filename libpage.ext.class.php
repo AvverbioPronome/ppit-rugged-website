@@ -28,7 +28,7 @@ class Indice extends Piratepage {
 	}
 
 	private function writeIndex() {
-		parent::writePage();
+		parent::writePage(); //è inutile. si poteva chiamare direttamente.
 	}
 
 	private function chunking() {
@@ -43,8 +43,7 @@ class Indice extends Piratepage {
 		foreach ( $pages as $page ) {
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
-			$this->content .= "<article id=init".$page->source['id'].">";
-			$this->content .= "\n".'<dt><a href="'.$this->prefix."_".$page->source['id'].'.html">'.$page->title.'</a></dt>'."\n";
+			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.'</a></dt>'."\n"; // article dentro dl?!?
 			$this->content .= '<dd><ul>'."\n";
 			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
 			$this->content .= '<li>(TODO datetime) './*$page->source['created'].*/'</li>'."\n";
@@ -54,13 +53,13 @@ class Indice extends Piratepage {
 			$this->content .= '<li>ID: '.hash('sha256', /*$page->source['created'].*/$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
 			//altri <li> da aggiungere?
 			$this->content .= '</ul></dd>'."\n";
-			$this->content .= "<footer>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</footer>\n";
-			$this->content .= "</article>\n";
+			$this->content .= "<footer><small>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</small></footer>\n";
 		}
 	}
 
 	function addElement($page) {
-		$this->pages[$page->id] = $page;
+		//$this->pages[$page->id] = $page;
+		$this->pages[] = $page;
 	}
 
 	function createIndex() {
@@ -77,7 +76,7 @@ class Indice extends Piratepage {
 				if ( $indexchunk > 0 ) $this->id = $this->prefix.'_i'.$indexchunk;
 				$previd = $indexchunk - 1;
 				$nextid = $indexchunk + 1;
-				$this->content .= '<div align="center">';
+				$this->content .= '<div align="center">'; //ovvove.
 				if ( $indexchunk != 0 ) {
 					if ( $indexchunk > 1 ) {
 						$prevlink = $this->prefix."_i".$previd.'.html';
@@ -108,40 +107,34 @@ class Liquidpage extends Piratepage{
 	public $source;
 
 	// roba che dovrebbero condividere Report e Tribune?
-	function __construct($source) {
+	function __construct($source, $cosa) {
 		parent::__construct();
 		
 		$this->source=$source;
 		
-		$this->content .= "<article id=init".$source['id'].">";
-		$this->content .= "<hgroup><h4>Tema n. "."null"." -> Iniziativa n.".$source['initiative_id']." -> Proposta n.".$source['id']."</h4>";
+        switch($cosa){
+        case "report":
+    //		$source['id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
+            $this->id='verbale_'.$source['id'];
+            $this->template='report.html';
+            $this->title = 'Proposta n. '.$source['id'];
+        break;
+        case "tribune":
+    //		$source['initiative_id'] = str_pad($source['initiative_id'], 10, "0", STR_PAD_LEFT);
+            $this->id='tribuna_'.$source['initiative_id'];
+            $this->template='tribune.html';
+            $this->title = 'Iniziativa n. '.$source['initiative_id'];
+        break;
+        }
+		
+		$this->content .= "<article id=init".$this->id.">";
+		$this->content .= "<hgroup><h6>Tema n. "."null"." &#x220B; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
 		$this->content .= "<h1>".$source['name']."</h1></hgroup>";
 		$this->content .= "<p>".$source['content']."</p>";
 		$this->content .= "<footer>ID: ".hash('sha256', /*$source['created'].*/$source['id'].$source['name'].$source['content'])."</footer>\n";
 		$this->content .= "<footer>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</footer>";
 		$this->content .= "</article>\n";
-	}
-}
 
-class Report extends Liquidpage{
-	function __construct($source){
-		parent::__construct($source);
-
-//		$source['id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
-		$this->id='verbale_'.$source['id'];
-		$this->title = 'Proposta n. '.$source['id'];
-		$this->template='report.html';
-	}
-}
-
-class Tribune extends Liquidpage{
-	function __construct($source){
-		parent::__construct($source);
-
-//		$source['initiative_id'] = str_pad($source['initiative_id'], 10, "0", STR_PAD_LEFT);
-		$this->id='tribuna_'.$source['initiative_id'];
-		$this->template='tribune.html';
-		$this->title = 'Iniziativa n. '.$source['initiative_id'];
 	}
 }
 
