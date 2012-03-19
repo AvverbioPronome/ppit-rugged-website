@@ -1,13 +1,13 @@
 #!/usr/bin/php
 <?php
 $perfstart = microtime(true);
-//error_reporting(E_ALL && E_NOTICE);
 
 require_once 'configure.php';
 require_once 'libpiratewww.class.php';
 require_once 'liblqfb.class.php';
 require_once 'libpage.class.php';
 require_once 'libpage.ext.class.php';
+
 
 $www = new Piratewww();
 
@@ -23,6 +23,7 @@ if ($argc > 1) {
       case "-d":
       case "--debug":
         $settings['DEBUG'] = true;
+        error_reporting(E_ALL && E_NOTICE);
         break;
       case "-t":
       case "--test":
@@ -99,8 +100,5 @@ if ( $settings['TRIBUNE'] ) $www->updateTribune();
 if ( $settings['REPORT'] ) $www->updateReport();
 
 // cronometro.
-//$perfstop = microtime(true);
-//$perfs = $perfstop - $perfstart;
-
 printf("Tempo impiegato dallo script: %.5f secondi\n", microtime(true) - $perfstart);
 ?>
