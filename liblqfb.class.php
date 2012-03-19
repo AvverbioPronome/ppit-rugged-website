@@ -45,9 +45,9 @@ class Liquidquery {
 			$res=$this->getInitiativeInfo($txt['initiative_id']);
 			$txt['name']=$res['name'];
 			$txn[$txt['id']]=$txt;
-			krsort($txn);
 		};
 		
+		krsort($txn);
 		
 		if (is_array($txn))
 			return $txn;
