@@ -43,14 +43,14 @@ class Indice extends Piratepage {
 		foreach ( $pages as $page ) {
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
-			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.'</a></dt>'."\n"; // article dentro dl?!?
+			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n"; // article dentro dl?!?
 			$this->content .= '<dd><ul>'."\n";
 			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
 			$this->content .= '<li>Tema n. '.$page->source['issue_id'].' - Area n. '.$page->source['area_id'].' ( '.$page->source['area_name'].' )</li>'."\n";
 			$this->content .= '<li>ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
 			//altri <li> da aggiungere?
-			$this->content .= '</ul></dd>'."\n";
-			$this->content .= "<footer><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente, li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></footer>\n";
+			$this->content .= '</ul>'."\n";
+			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente, li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p></dd>\n";
 		}
 	}
 
@@ -122,7 +122,7 @@ class Liquidpage extends Piratepage{
         }
 		
 		$this->content .= "<article id=init".$this->id.">";
-		$this->content .= "<hgroup><h6>Tema n. "."null"." &#x220B; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
+		$this->content .= "<hgroup><h6>Tema n. "."null"." &#x2283; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
 		$this->content .= "<h1>".$source['name']."</h1></hgroup>";
 		$this->content .= "<p>".$source['content']."</p>";
 		$this->content .= "<footer>ID: ".hash('sha256', /*$source['created'].*/$source['id'].$source['name'].$source['content'])."</footer>\n";
