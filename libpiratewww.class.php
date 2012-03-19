@@ -41,35 +41,44 @@ class Piratewww {
 			$page->writePage();
 		}
 	}
-
-	function updateReport($offset=0, $limit=100) {
-		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
-		$indice = new Indice('report');
-		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.verbale.inc.html'));
-		$indice->id = 'verbale';
-		$lfresult = $lfapi->getDrafts($offset, $limit);
-		krsort($lfresult);
-		foreach( $lfresult as $a) {
-                  $pagina = new Report($a);
-                  $pagina->writePage();
-                  $indice->addElement($pagina);
+    
+    private function updateLiquidpages($cosa, $offset, $limit){
+        $lfapi = new Liquidquery($this->settings['LFAPIURL']);
+		$indice = new Indice($cosa);
+		
+		switch($cosa){
+		    case 'report':
+		    	$indexintro='indexintro.verbale.inc.html';
+            	$indice->id = 'verbale';
+                $lfresult = $lfapi->getDrafts($offset, $limit);
+                
+		    break;
+		    case 'tribune':
+	            $indexintro='indexintro.tribuna.inc.html';
+	            $indice->id='tribuna';
+		        $lfresult = $lfapi->getApproved($offset, $limit);
+		    break;
+		}
+		
+		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
+		
+		
+		
+		foreach($lfresult as $a) {
+            $pagina = new Liquidpage($a, $cosa);
+            $pagina->writePage();
+            $indice->addElement($pagina);
 		}
 		$indice->createIndex();
+
+    }
+    
+	function updateReport($offset=0, $limit=100) {
+		return $this->updateLiquidpages('report', $offset, $limit);
 	}
 	
 	function updateTribune($offset=0, $limit=100) {
-		$lfapi = new Liquidquery($this->settings['LFAPIURL']);
-		$indice = new Indice('tribune');
-		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].'indexintro.tribuna.inc.html'));
-		$indice->id='tribuna';
-		$lfresult = $lfapi->getApproved($offset, $limit);
-		krsort($lfresult);
-		foreach( $lfresult as $a ) {
-			$pagina = new Tribune($a);
-			$pagina->writePage();
-			$indice->addElement($pagina);
-		}
-		$indice->createIndex();
+		return $this->updateLiquidpages('tribune', $offset, $limit);
 	}
 	
 	function debuggg() {
