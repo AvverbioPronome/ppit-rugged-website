@@ -44,12 +44,12 @@ class Piratewww {
 		switch($cosa){
 		    case 'report':
 		    	$indexintro='indexintro.verbale.inc.html';
-                    	$indice->id = 'verbale';
-                        $lfresult = $lqfb->getDrafts($offset, $limit);
+                $indice->id = 'verbale';
+                $lfresult = $lqfb->getDrafts($offset, $limit);
 		    break;
 		    case 'tribune':
-        	        $indexintro='indexintro.tribuna.inc.html';
-        	        $indice->id='tribuna';
+        	    $indexintro='indexintro.tribuna.inc.html';
+                $indice->id='tribuna';
 		        $lfresult = $lqfb->getApproved($offset, $limit);
 		    break;
 		}
