@@ -26,6 +26,16 @@ a:hover{
 	text-decoration:underline;
 }
 dt{font-weight:bold; margin-top:0.5em;}
+
+.rettangolo dd{
+    /* font-style:italic; */
+    font-size: 0.8em;
+}
+
+.rettangolo dd ul{
+    list-style: outside;
+}
+
 figcaption{font-size:smaller; text-align:center;}
 code, kbd, samp, pre, tt, var {
   font-family: consolas, "courier new", courier, monospace; 
