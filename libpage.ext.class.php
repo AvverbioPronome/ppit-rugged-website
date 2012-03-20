@@ -133,15 +133,13 @@ class Liquidpage extends Piratepage {
             $this->title = 'Iniziativa n. '.$source['initiative_id'];
         break;
         }
-		
-		$this->content .= "<article id=init".$this->id.">";
-		$this->content .= "<hgroup><h6>Tema n. "."null"." &#x2283; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
-		$this->content .= "<h1>".$source['name']."</h1></hgroup>";
-		$this->content .= "<p>".$source['content']."</p>";
-		$this->content .= "<footer>ID: ".hash('sha256', /*$source['created'].*/$source['id'].$source['name'].$source['content'])."</footer>\n";
-		$this->content .= "<footer>Pubblicato <time datetime="./*$source['created'].*/">"./*$source['created'].*/"</time> da Spugna, portavoce dell'Assemblea Permanente,"." tags "."null"."</footer>";
-		$this->content .= "</article>\n";
-
+        $this->content .= "<article id=init".$this->id.">";
+        $this->content .= "<hgroup><h6>Area n. ".$source['area_id']." &#x2283; Tema n. ".$source['issue_id']." &#x2283; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
+        $this->content .= "<h1>".$source['name']."</h1>";
+        $this->content .= "<h6>ID: ".hash('sha256', $source['created'].$source['id'].$source['name'].$source['content'])."</h6></hgroup>\n";
+        $this->content .= "<p>".$source['content']."</p>";
+        $this->content .= "<footer>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$source['created'].">".$source['created'].".</time></footer>";
+        $this->content .= "</article>\n";
 	}
 
 	function type() {
