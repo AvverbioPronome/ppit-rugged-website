@@ -53,6 +53,9 @@ if ($argc > 1) {
         $settings['TRIBUNE'] = true;
         $settings['REPORT'] = true;
         break;
+      case "--update-report":
+        $settings['REPORT'] = true;
+        break;
       case "-q":
       case "--quickstart":
         $settings['CLEAN'] = true;

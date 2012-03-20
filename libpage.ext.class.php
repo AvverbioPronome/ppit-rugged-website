@@ -54,16 +54,17 @@ class Indice extends Piratepage {
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n"; // article dentro dl?!?
 			$this->content .= '<dd>'."\n";
-			$this->content .= 'Tema n. '.$page->source['issue_id'].' - Area n. '.$page->source['area_id'].' ( '.$page->source['area_name'].' )'."<br>\n";
+			$this->content .= 'Tema n. '.$page->source['issue_id'].' - Area n. '.$page->source['area_id'].' ('.$page->source['area_name'].')'."<br>\n";
 			$this->content .= 'ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content'])."\n";
-			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p></dd>\n";
+			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p>\n";
 			if ( $this->prefix == "tribuna" ) {
-        			$this->content .= '<ul>'."\n";
+        			$this->content .= '<ul class="comments">'."\n";
                                 foreach ( $comments as $comment ) {
         	        		$this->content .= '<li>Commento: <a href="'.$comment.'">'.$comment.'</a></li>'."\n";
                                 }
                                 $this->content .= '</ul>'."\n";
                         }
+            $this->content .= '</dd>'."\n";
 		}
 	}
 
@@ -120,6 +121,7 @@ class Liquidpage extends Piratepage {
 		
 		$this->source=$source;
 		$this->cosa = $cosa;
+        if ($this->settings['DEBUG']) echo "chiamando $cosa\n";
 
         switch($cosa) {
         case "report":
