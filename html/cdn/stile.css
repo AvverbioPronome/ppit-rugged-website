@@ -74,7 +74,7 @@ nav#sitenav{
 	z-index:100;
 	width:100%;
 }
-nav#sitenav ul li a{padding:0.2ex 0.2em 0 0.2em;}
+nav#sitenav ul li a{padding:0.2ex 0.2em 0 0.2em; }
 nav#sitenav ul li{list-style-type:none; display:inline;}
 nav#sitenav ul {margin:0; padding:0.5ex 1em;}
 nav#sitenav{font-size:1.1em;}
@@ -95,6 +95,9 @@ nav#sitenav{font-size:1.1em;}
 	text-decoration:none;
 }
 #sitecont a.wiki-anchor { display: none; margin-left: 6px; text-decoration: none; }
+
+hr.insula{display:none;}
+
 article, section{
 	font-size:1em;
 	line-height:1.2;
