@@ -1,0 +1,34 @@
+        Area n. 2 )C Tema n. 9 )C Iniziativa n.20 -) Proposta n.43
+
+                        Foundation of Pirate Party Moon
+
+        ID: 6912368314be1710e0efb269a03f994880c60cee340f7c3231f4b2cba9a37a48
+
+   Do we need a Pirate Party Moon? RocketWiki Headings ==== Main Heading
+   (H1) ==== === Heading (H2) === == Sub-Heading (H3) == = Sub-Sub-Heading
+   (H4) = Horizontal line --- Unnumbered lists - Toplevel Entry -- Sub
+   Entry Numbered list # Toplevel Entry ## Sub Entry Font style **bold**
+   //italic// __underlined__ ++big++ %%small%% ||monospaced|| &&no line
+   break&& $$stylename: use a specific CSS style$$ {{no special
+   interpretation of formatting characters}} Quotes ""normal english
+   quotes"" """single english quotes""" ,,normal german quotes'' ,,,single
+   german quotes''' <> <<>> Text flow non-breaking space softÂhypen
+   Special characters {EUR} sign German umlauts: {Ae} {Oe} {Ue} {ae} {oe}
+   {ue} German SZ-ligature: {sz} or {ss} Mid{.}dot Ellipsis {...} Arrows
+   {->} {=>} {<->} etc. {C} 2009, Registered{R}, Trademark{TM} 360{deg}
+   0{'} 0{''} â 360Â° 0â² 0â³ {1/4} + {1/2} = {3/4} â Â¼ + Â½ = Â¾ 10{%o}
+   = 1% â 10â° = 1% (5 {-} 1) {x} 3 {/} 4 {=} 3 â (5 â 1) Ã 3 Ã· 4 = 3
+   Dashes En{--}Dash Em{---}Dash Images
+   [http://example.org/embedded_image.jpg]
+   [http://example.org/embedded_image.jpeg]
+   [http://example.org/embedded_image.gif]
+   [http://example.org/embedded_image.png] [stylename:
+   http://example.org/image_with_CSS_style.png]
+   [http://example.org/image.png Image with alternative text] Links
+   [http://example.org/ normal link with text] [http://example.org/
+   http://example.org/image_for_link.png] [http://example.org/
+   http://example.org/image.png Alternative text]
+   [http://example.org/image.png! Link to image] DIVs @@id: DIV contents
+   @@ CSS styles for multiple paragraphs $$style: ... $$
+   Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,
+   li' 2012-03-13T23:52:01.648Z.
