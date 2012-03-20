@@ -3,7 +3,7 @@
 @import "ppbar.css";
 #toolbar{ z-index:1000; opacity:0.75;}
 body{
-	background: #ff8c00 url(tagcloud.png) top left;
+	background: #ff8c00 url(cyberspace_indipendence_wordle.png) center center fixed;
 	color: black;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: normal;
