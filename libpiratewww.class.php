@@ -21,7 +21,10 @@ class Piratewww {
 	
 	private function fetchWiki($wikipage) {
 		$html=file_get_contents($this->settings['WIKIURL'].$wikipage[0].'.html?version='.$wikipage[1]);
-
+		return $this->extractBody($html);
+    }
+    
+    function extractBody($html){
 		// http://stackoverflow.com/a/4911037
 		if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches))
 			return $matches[1];
@@ -29,14 +32,15 @@ class Piratewww {
 			return false;
 	}
 
-        private function fetchLiquid($cosa, $offset, $limit, $switch="API") {
-                if ( $switch == "core") {
-                        $lqfb = new Liquidcore($this->settings['LFCORE']);
-                } else {
-                        $lqfb = new Liquidapi($this->settings['LFAPIURL']);
-                }
-                $indice = new Indice($cosa);
-		
+    private function fetchLiquid($cosa, $offset, $limit, $switch="API") {
+        if ( $switch == "core") {
+            $lqfb = new Liquidcore($this->settings['LFCORE']);
+        } else {
+            $lqfb = new Liquidapi($this->settings['LFAPIURL']);
+        }
+        
+        $indice = new Indice($cosa);
+    
 		switch($cosa){
 		    case 'report':
 		    	$indexintro='indexintro.verbale.inc.html';
@@ -53,12 +57,12 @@ class Piratewww {
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
 				
 		foreach($lfresult as $a) {
-                  $pagina = new Liquidpage($a, $cosa);
-                  $pagina->writePage();
-                  $indice->addElement($pagina);
+            $pagina = new Liquidpage($a, $cosa);
+            $pagina->writePage();
+            $indice->addElement($pagina);
 		}
 		$indice->createIndex();
-        }
+    }
 
 	// create needed dirs and touch empty skels for needed includes and templates
 	function createdirs() {
