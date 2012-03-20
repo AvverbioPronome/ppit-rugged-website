@@ -140,7 +140,7 @@ class Liquidpage extends Piratepage {
         $this->content .= "<h1>".$source['name']."</h1>";
         $this->content .= "<h6>ID: ".hash('sha256', $source['created'].$source['id'].$source['name'].$source['content'])."</h6></hgroup>\n";
         $this->content .= "<p>".$source['content']."</p>";
-        $this->content .= "<footer>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$source['created'].">".$source['created'].".</time></footer>";
+        $this->content .= "<footer><p>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$source['created'].">".$source['created'].".</time></p></footer>";
         $this->content .= "</article>\n";
 	}
 
