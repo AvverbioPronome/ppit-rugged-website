@@ -19,6 +19,7 @@ $settings['HTDOCS'] = 'html/';
 $settings['WIKIURL'] = 'https://dev.partitopirata.org/projects/ppit/wiki/';
 
 // dove prelevare i lavori assembleari
+$settings['LFCORE'] = 'pg://user:password@localhost:5432/dbname';
 $settings['LFAPIURL'] = 'http://apitest.liquidfeedback.org:25520/';
 $settings['LFMAXTENT'] = 2;
 

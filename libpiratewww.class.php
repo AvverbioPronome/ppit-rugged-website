@@ -29,21 +29,24 @@ class Piratewww {
 			return false;
 	}
 
-        private function fetchLiquid($cosa, $offset, $limit) {
-                $lfapi = new Liquidquery($this->settings['LFAPIURL']);
-		$indice = new Indice($cosa);
+        private function fetchLiquid($cosa, $offset, $limit, $switch="API") {
+                if ( $switch == "core") {
+                        $lqfb = new Liquidcore($this->settings['LFCORE']);
+                } else {
+                        $lqfb = new Liquidapi($this->settings['LFAPIURL']);
+                }
+                $indice = new Indice($cosa);
 		
 		switch($cosa){
 		    case 'report':
 		    	$indexintro='indexintro.verbale.inc.html';
-            	$indice->id = 'verbale';
-                $lfresult = $lfapi->getDrafts($offset, $limit);
-                
+                    	$indice->id = 'verbale';
+                        $lfresult = $lqfb->getDrafts($offset, $limit);
 		    break;
 		    case 'tribune':
-	            $indexintro='indexintro.tribuna.inc.html';
-	            $indice->id='tribuna';
-		        $lfresult = $lfapi->getApproved($offset, $limit);
+        	        $indexintro='indexintro.tribuna.inc.html';
+        	        $indice->id='tribuna';
+		        $lfresult = $lqfb->getApproved($offset, $limit);
 		    break;
 		}
 		
