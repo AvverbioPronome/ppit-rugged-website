@@ -12,18 +12,14 @@ class Piratewww {
 		$this->settings=$settings;
 	}
 
-	/* Questa roba non mi pare sia più prevista...
-	    ma io la scriverei comunque, non si sa mai.
 	private function fetchFiles($docsdir) {
 		$files = array_diff(scandir($this->settings['']), array('.', '..'));
 		foreach ( $files as $file ) {
 			$pages[$file] = createPage("file", $file);
 		}
 	}
-	*/
 	
 	private function fetchWiki($wikipage) {
-		
 		$html=file_get_contents($this->settings['WIKIURL'].$wikipage[0].'.html?version='.$wikipage[1]);
 
 		// http://stackoverflow.com/a/4911037
@@ -33,17 +29,8 @@ class Piratewww {
 			return false;
 	}
 
-	function updateFormalfoo() {	
-		foreach ($this->settings['FORMALFOO'] as $wikipage) {
-			$page = new Formalfoo();
-			$page->id = $wikipage == $this->settings['FORMALFOO'][0] ? 'index' : $wikipage[0];
-			$page->content = $this->fetchWiki($wikipage);
-			$page->writePage();
-		}
-	}
-    
-    private function updateLiquidpages($cosa, $offset, $limit){
-        $lfapi = new Liquidquery($this->settings['LFAPIURL']);
+        private function fetchLiquid($cosa, $offset, $limit) {
+                $lfapi = new Liquidquery($this->settings['LFAPIURL']);
 		$indice = new Indice($cosa);
 		
 		switch($cosa){
@@ -61,29 +48,14 @@ class Piratewww {
 		}
 		
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
-		
-		
-		
+				
 		foreach($lfresult as $a) {
-            $pagina = new Liquidpage($a, $cosa);
-            $pagina->writePage();
-            $indice->addElement($pagina);
+                  $pagina = new Liquidpage($a, $cosa);
+                  $pagina->writePage();
+                  $indice->addElement($pagina);
 		}
 		$indice->createIndex();
-
-    }
-    
-	function updateReport($offset=0, $limit=100) {
-		return $this->updateLiquidpages('report', $offset, $limit);
-	}
-	
-	function updateTribune($offset=0, $limit=100) {
-		return $this->updateLiquidpages('tribune', $offset, $limit);
-	}
-	
-	function debuggg() {
-		print_r($this->settings);
-	}
+        }
 
 	// create needed dirs and touch empty skels for needed includes and templates
 	function createdirs() {
@@ -136,6 +108,28 @@ class Piratewww {
 		};
 	  };
 	}
+
+	function updateFormalfoo() {	
+		foreach ($this->settings['FORMALFOO'] as $wikipage) {
+			$page = new Formalfoo();
+			$page->id = $wikipage == $this->settings['FORMALFOO'][0] ? 'index' : $wikipage[0];
+			$page->content = $this->fetchWiki($wikipage);
+			$page->writePage();
+		}
+	}
+    
+	function updateReport($offset=0, $limit=100) {
+		return $this->fetchLiquid('report', $offset, $limit);
+	}
+	
+	function updateTribune($offset=0, $limit=100) {
+		return $this->fetchLiquid('tribune', $offset, $limit);
+	}
+	
+	function debuggg() {
+		print_r($this->settings);
+	}
+
 
 };
 ?>

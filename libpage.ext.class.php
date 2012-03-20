@@ -38,19 +38,32 @@ class Indice extends Piratepage {
 		$this->chunksno--;
 		return $chunks;
 	}
-	
+
+        private function addComments($draftid) {
+                $comments[0] = "http://blog.partitopirata.org/2012/12/30/post-name";
+                $comments[1] = "http://www.ilfattoquotidiano.it/2012/03/19/il-successo-di-costruire-la-normalita/198683/";
+                $comments[2] = "http://www.beppegrillo.it/2012/03/passaparola_viv/index.html";
+                $comments[3] = "http://dentroefuoricasapound.wordpress.com/2012/01/23/intervista-sul-libro-mediapolitika/";
+                return $comments;
+        }
+
 	private function elementsToHtml($pages) {
 		foreach ( $pages as $page ) {
+		        $comments = $this->addComments($page->source['id']);
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n"; // article dentro dl?!?
-			$this->content .= '<dd><ul>'."\n";
-			$this->content .= '<li>'.$page->source['name'].'</li>'."\n";
-			$this->content .= '<li>Tema n. '.$page->source['issue_id'].' - Area n. '.$page->source['area_id'].' ( '.$page->source['area_name'].' )</li>'."\n";
-			$this->content .= '<li>ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content']).'</li>'."\n";
-			//altri <li> da aggiungere?
-			$this->content .= '</ul>'."\n";
-			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente, li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p></dd>\n";
+			$this->content .= '<dd>'."\n";
+			$this->content .= 'Tema n. '.$page->source['issue_id'].' - Area n. '.$page->source['area_id'].' ( '.$page->source['area_name'].' )'."<br>\n";
+			$this->content .= 'ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content'])."\n";
+			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p></dd>\n";
+			if ( $this->prefix == "tribuna" ) {
+        			$this->content .= '<ul>'."\n";
+                                foreach ( $comments as $comment ) {
+        	        		$this->content .= '<li>Commento: <a href="'.$comment.'">'.$comment.'</a></li>'."\n";
+                                }
+                                $this->content .= '</ul>'."\n";
+                        }
 		}
 	}
 
@@ -97,7 +110,8 @@ class Indice extends Piratepage {
 	}
 }
 
-class Liquidpage extends Piratepage{
+class Liquidpage extends Piratepage {
+        private $cosa;
 	public $source;
 
 	// roba che dovrebbero condividere Report e Tribune?
@@ -105,16 +119,15 @@ class Liquidpage extends Piratepage{
 		parent::__construct();
 		
 		$this->source=$source;
-		
-        switch($cosa){
+		$this->cosa = $cosa;
+
+        switch($cosa) {
         case "report":
-    //		$source['id'] = str_pad($source['id'], 10, "0", STR_PAD_LEFT);
             $this->id='verbale_'.$source['id'];
             $this->template='report.html';
             $this->title = 'Proposta n. '.$source['id'];
         break;
         case "tribune":
-    //		$source['initiative_id'] = str_pad($source['initiative_id'], 10, "0", STR_PAD_LEFT);
             $this->id='tribuna_'.$source['initiative_id'];
             $this->template='tribune.html';
             $this->title = 'Iniziativa n. '.$source['initiative_id'];
@@ -130,6 +143,10 @@ class Liquidpage extends Piratepage{
 		$this->content .= "</article>\n";
 
 	}
+
+	function type() {
+	    return $this->type;
+        }
 }
 
 ?>
