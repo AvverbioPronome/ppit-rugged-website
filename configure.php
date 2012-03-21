@@ -24,7 +24,7 @@ $settings['LFAPIURL'] = 'http://apitest.liquidfeedback.org:25520/';
 $settings['LFMAXTENT'] = 2;
 
 // Composizione Gazzetta: la prima che scrivi diventa index.html.
-$settings['FORMALFOO'][] = array('Il_Partito_Pirata', 28);
+$settings['FORMALFOO'][] = array('Il_Partito_Pirata', 34);
 $settings['FORMALFOO'][] = array('Manifesto', 13);
 $settings['FORMALFOO'][] = array('Statuto', 48);
 $settings['FORMALFOO'][] = array('Garanzia_di_Iscrizione_ed_Esclusione', 11);
@@ -35,6 +35,8 @@ $settings['FORMALFOO'][] = array('Lettera_di_Assunzione_Responsabilità_Uomini_P
 $settings['FORMALFOO'][] = array('Modulo_Iscrizione_e_Certificazione',5);
 $settings['FORMALFOO'][] = array('Modulo_Personale_del_Certificatore',5);
 $settings['FORMALFOO'][] = array('Modulo_Contabile_del_Certificatore',3);
+$settings['FORMALFOO'][] = array('Assemblea_Occasionale_2011', 2);
+$settings['FORMALFOO'][] = array('Assemblea_Occasionale_2012', 4);
 
 // quante bozzze/iniziative per ogni pagina di verbale/tribuna
 $settings['INDEXPAGE'] = 20;
@@ -44,7 +46,7 @@ $settings['DEBUG'] = false;
 $settings['TEST'] = false;
 $settings['CREATEDIRS'] = false;
 $settings['CLEAN'] = false;
-$settings['FF'] = false;
+$settings['FF'] = true;
 $settings['TRIBUNE'] = true;
 $settings['REPORT'] = true;
 $settings['FULL'] = false; 
