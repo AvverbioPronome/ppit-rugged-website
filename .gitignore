@@ -1,4 +1,6 @@
 html/*.html
-*.sh
+pull.sh
+push.sh
 html/cdn/_notes
 robaperdopo.php
+vdump/*

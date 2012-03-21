@@ -21,7 +21,10 @@ class Piratewww {
 	
 	private function fetchWiki($wikipage) {
 		$html=file_get_contents($this->settings['WIKIURL'].$wikipage[0].'.html?version='.$wikipage[1]);
-
+		return $this->extractBody($html);
+    }
+    
+    function extractBody($html){
 		// http://stackoverflow.com/a/4911037
 		if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches))
 			return $matches[1];
@@ -44,21 +47,28 @@ class Piratewww {
                         $lfresult = $lqfb->getDrafts(' ORDER BY id DESC');
 		    break;
 		    case 'tribune':
-        	        $indexintro='indexintro.tribuna.inc.html';
-        	        $indice->id='tribuna';
+        	    $indexintro='indexintro.tribuna.inc.html';
+                $indice->id='tribuna';
 		        $lfresult = $lqfb->getApproved($offset, $limit);
 		    break;
 		}
 		
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
 				
+<<<<<<< HEAD
 		if ($lfresult) foreach($lfresult as $a) {
                   $pagina = new Liquidpage($a, $cosa);
                   $pagina->writePage();
                   $indice->addElement($pagina);
+=======
+		foreach($lfresult as $a) {
+            $pagina = new Liquidpage($a, $cosa);
+            $pagina->writePage();
+            $indice->addElement($pagina);
+>>>>>>> 92ea418573c15ca93ca6f6cf113c8032cc1804f6
 		}
 		$indice->createIndex();
-        }
+    }
 
 	// create needed dirs and touch empty skels for needed includes and templates
 	function createdirs() {

@@ -178,8 +178,12 @@ class Liquidapi implements Liquid {
 	
 	function getDrafts($querystring='') {
 		$txts = $this->getSomething('draft', $querystring);
+		if ($this->settings['DEBUG']) echo "gettando drafts\n";
 		foreach($txts as $txt){
 			$res=$this->getInitiativeInfo($txt['initiative_id']);
+			$txt['issue_id']=$res['issue_id'];
+			$txt['name']=$res['name'];
+			$txt['created']=$res['created'];
 			$res=$this->getIssueInfo($txt['issue_id']);
 			$txt['area_id']=$res['area_id'];
 			$res=$this->getAreaInfo($txt['area_id']);
