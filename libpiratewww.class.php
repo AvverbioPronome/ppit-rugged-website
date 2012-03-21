@@ -12,19 +12,7 @@ class Piratewww {
 		$this->settings=$settings;
 	}
 
-	private function fetchFiles($docsdir) {
-		$files = array_diff(scandir($this->settings['']), array('.', '..'));
-		foreach ( $files as $file ) {
-			$pages[$file] = createPage("file", $file);
-		}
-	}
-	
-	private function fetchWiki($wikipage) {
-		$html=file_get_contents($this->settings['WIKIURL'].$wikipage[0].'.html?version='.$wikipage[1]);
-		return $this->extractBody($html);
-    }
-    
-    function extractBody($html){
+        private function extractBody($html) {
 		// http://stackoverflow.com/a/4911037
 		if (preg_match('/(?:<body[^>]*>)(.*)<\/body>/isU', $html, $matches))
 			return $matches[1];
@@ -32,36 +20,59 @@ class Piratewww {
 			return false;
 	}
 
-        private function fetchLiquid($cosa, $offset, $limit, $switch="CORE") {
+	private function fetchFiles($docsdir) {
+		$files = array_diff(scandir($this->settings['']), array('.', '..'));
+		foreach ( $files as $file ) {
+			$pages[$file] = createPage("file", $file);
+		}
+	}
+	
+        private function fetchLiquid($type, $offset, $limit, $switch="CORE") {
                 if ( $switch == "CORE") {
                         $lqfb = new Liquidcore($this->settings['LFCORE']);
                 } else {
                         $lqfb = new Liquidapi($this->settings['LFAPIURL']);
                 }
-                $indice = new Indice($cosa);
+                
+                $index = new Index($type);
 		
-		switch($cosa){
+		switch ($type) {
 		    case 'report':
 		    	$indexintro='indexintro.verbale.inc.html';
-                    	$indice->id = 'verbale';
+                    	$index->id = 'verbale';
                         $lfresult = $lqfb->getDrafts(' ORDER BY id DESC');
 		    break;
 		    case 'tribune':
-        	    $indexintro='indexintro.tribuna.inc.html';
-                $indice->id='tribuna';
+        	        $indexintro='indexintro.tribuna.inc.html';
+        	        $index->id='tribuna';
 		        $lfresult = $lqfb->getApproved($offset, $limit);
 		    break;
 		}
 		
-		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
+		$index->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
 				
 		if ($lfresult) foreach($lfresult as $a) {
-                  $pagina = new Liquidpage($a, $cosa);
+                  $pagina = new Liquidpage($a, $type);
                   $pagina->writePage();
-                  $indice->addElement($pagina);
+                  $index->addElement($pagina);
 		}
-		$indice->createIndex();
-    }
+		$index->createIndex();
+        }
+
+	private function fetchWiki($wikipage) {
+		$html=file_get_contents($this->settings['WIKIURL'].$wikipage[0].'.html?version='.$wikipage[1]);
+		return $this->extractBody($html);
+        }
+        
+        private function fetchNews() {
+        }
+
+        private function fetchForum() {
+        }
+
+	public function debuggg() {
+		print_r($this->settings);
+	}
 
 	// create needed dirs and touch empty skels for needed includes and templates
 	function createdirs() {
@@ -132,9 +143,6 @@ class Piratewww {
 		return $this->fetchLiquid('tribune', $offset, $limit);
 	}
 	
-	function debuggg() {
-		print_r($this->settings);
-	}
 
 
 };
