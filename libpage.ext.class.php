@@ -39,17 +39,9 @@ class Indice extends Piratepage {
 		return $chunks;
 	}
 
-        private function addComments($draftid) {
-                $comments[0] = "http://blog.partitopirata.org/2012/12/30/post-name";
-                $comments[1] = "http://www.ilfattoquotidiano.it/2012/03/19/il-successo-di-costruire-la-normalita/198683/";
-                $comments[2] = "http://www.beppegrillo.it/2012/03/passaparola_viv/index.html";
-                $comments[3] = "http://dentroefuoricasapound.wordpress.com/2012/01/23/intervista-sul-libro-mediapolitika/";
-                return $comments;
-        }
 
 	private function elementsToHtml($pages) {
 		foreach ( $pages as $page ) {
-		        $comments = $this->addComments($page->source['id']);
 			// $page come oggetto Piratepage::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
 			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n"; // article dentro dl?!?
@@ -57,13 +49,6 @@ class Indice extends Piratepage {
 			$this->content .= 'Iniziativa n. '.$page->source['initiative_id'].' - Area n. '.$page->source['area_id'].' ( '.$page->source['area_name'].' )'."<br>\n";
 			$this->content .= 'ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content'])."\n";
 			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p>\n";
-			if ( $this->prefix == "tribuna" ) {
-        			$this->content .= '<ul class="comments">'."\n";
-                                foreach ( $comments as $comment ) {
-        	        		$this->content .= '<li>Commento: <a href="'.$comment.'">'.$comment.'</a></li>'."\n";
-                                }
-                                $this->content .= '</ul>'."\n";
-                        }
             $this->content .= '</dd>'."\n";
 		}
 	}
@@ -140,9 +125,27 @@ class Liquidpage extends Piratepage {
         $this->content .= "<h1>".$source['name']."</h1>";
         $this->content .= "<h6>ID: ".hash('sha256', $source['created'].$source['id'].$source['name'].$source['content'])."</h6></hgroup>\n";
         $this->content .= "<p>".$source['content']."</p>";
-        $this->content .= "<footer><p>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$source['created'].">".$source['created'].".</time></p></footer>";
+        $this->content .= "<footer><p>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$source['created'].">".$source['created'].".</time></p>";
+        $comments = $this->addComments($source['id']);
+        if ( $this->cosa == "tribune" ) {
+                $this->content .= '<ul class="comments">'."\n";
+                foreach ( $comments as $comment ) {
+                        $this->content .= '<li>Commento: <a href="'.$comment.'">'.$comment.'</a></li>'."\n";
+                }
+                $this->content .= '</ul>'."\n";
+        }
+        $this->content .= "</footer>\n";
         $this->content .= "</article>\n";
 	}
+
+        private function addComments($draftid) {
+                $comments[0] = "http://blog.partitopirata.org/2012/12/30/post-name";
+                $comments[1] = "http://www.ilfattoquotidiano.it/2012/03/19/il-successo-di-costruire-la-normalita/198683/";
+                $comments[2] = "http://www.beppegrillo.it/2012/03/passaparola_viv/index.html";
+                $comments[3] = "http://dentroefuoricasapound.wordpress.com/2012/01/23/intervista-sul-libro-mediapolitika/";
+                return $comments;
+        }
+
 
 	function type() {
 	    return $this->type;
