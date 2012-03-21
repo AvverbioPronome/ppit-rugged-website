@@ -19,7 +19,7 @@ $settings['HTDOCS'] = 'html/';
 $settings['WIKIURL'] = 'https://dev.partitopirata.org/projects/ppit/wiki/';
 
 // dove prelevare i lavori assembleari
-$settings['LFCORE'] = 'pg://lqfb0:lqfb0@localhost:5432/lqfb0'; //probabilmente configure.php non dovrebbe stare nel repo... a meno che quello non sia un user di sola lettura, ma anche in questo caso ci sarebbero implicazioni di privacy nel consentire accesso a chiunque al database.
+$settings['LFCORE'] = 'pg://@localhost:5432/lqfb0'; //probabilmente configure.php non dovrebbe stare nel repo... a meno che quello non sia un user di sola lettura, ma anche in questo caso ci sarebbero implicazioni di privacy nel consentire accesso a chiunque al database.
 $settings['LFAPIURL'] = 'http://apitest.liquidfeedback.org:25520/';
 $settings['LFMAXTENT'] = 2;
 
