@@ -55,17 +55,10 @@ class Piratewww {
 		
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
 				
-<<<<<<< HEAD
 		if ($lfresult) foreach($lfresult as $a) {
                   $pagina = new Liquidpage($a, $cosa);
                   $pagina->writePage();
                   $indice->addElement($pagina);
-=======
-		foreach($lfresult as $a) {
-            $pagina = new Liquidpage($a, $cosa);
-            $pagina->writePage();
-            $indice->addElement($pagina);
->>>>>>> 92ea418573c15ca93ca6f6cf113c8032cc1804f6
 		}
 		$indice->createIndex();
     }
