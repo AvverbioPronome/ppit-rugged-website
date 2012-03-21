@@ -29,8 +29,8 @@ class Piratewww {
 			return false;
 	}
 
-        private function fetchLiquid($cosa, $offset, $limit, $switch="API") {
-                if ( $switch == "core") {
+        private function fetchLiquid($cosa, $offset, $limit, $switch="CORE") {
+                if ( $switch == "CORE") {
                         $lqfb = new Liquidcore($this->settings['LFCORE']);
                 } else {
                         $lqfb = new Liquidapi($this->settings['LFAPIURL']);
@@ -41,7 +41,7 @@ class Piratewww {
 		    case 'report':
 		    	$indexintro='indexintro.verbale.inc.html';
                     	$indice->id = 'verbale';
-                        $lfresult = $lqfb->getDrafts($offset, $limit);
+                        $lfresult = $lqfb->getDrafts(' ORDER BY id DESC');
 		    break;
 		    case 'tribune':
         	        $indexintro='indexintro.tribuna.inc.html';
@@ -52,7 +52,7 @@ class Piratewww {
 		
 		$indice->addSub('<!--include:indexintro-->', file_get_contents($this->settings['BASEDIR'].$this->settings['INCLUDES'].$indexintro));
 				
-		foreach($lfresult as $a) {
+		if ($lfresult) foreach($lfresult as $a) {
                   $pagina = new Liquidpage($a, $cosa);
                   $pagina->writePage();
                   $indice->addElement($pagina);

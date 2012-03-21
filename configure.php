@@ -19,14 +19,14 @@ $settings['HTDOCS'] = 'html/';
 $settings['WIKIURL'] = 'https://dev.partitopirata.org/projects/ppit/wiki/';
 
 // dove prelevare i lavori assembleari
-$settings['LFCORE'] = 'pg://user:password@localhost:5432/dbname';
+$settings['LFCORE'] = 'pg://lqfb0:lqfb0@localhost:5432/lqfb0';
 $settings['LFAPIURL'] = 'http://apitest.liquidfeedback.org:25520/';
 $settings['LFMAXTENT'] = 2;
 
 // Composizione Gazzetta: la prima che scrivi diventa index.html.
 $settings['FORMALFOO'][] = array('Il_Partito_Pirata', 28);
 $settings['FORMALFOO'][] = array('Manifesto', 13);
-$settings['FORMALFOO'][] = array('Statuto', 47); 
+$settings['FORMALFOO'][] = array('Statuto', 48);
 $settings['FORMALFOO'][] = array('Garanzia_di_Iscrizione_ed_Esclusione', 11);
 $settings['FORMALFOO'][] = array('Lettera_di_Intento_Pirata', 4);
 $settings['FORMALFOO'][] = array('Lettera_di_Assunzione_Responsabilità_Artistiche',5);
