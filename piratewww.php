@@ -6,7 +6,6 @@ require_once 'configure.php';
 require_once 'libpiratewww.class.php';
 require_once 'liblqfb.class.php';
 require_once 'libpage.class.php';
-require_once 'libpage.ext.class.php';
 
 
 $www = new Piratewww();
