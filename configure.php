@@ -24,7 +24,7 @@ $settings['LFAPIURL'] = 'http://apitest.liquidfeedback.org:25520/';
 $settings['LFMAXTENT'] = 2;
 
 // Composizione Gazzetta: la prima che scrivi diventa index.html.
-$settings['FORMALFOO'][] = array('Il_Partito_Pirata', 34);
+$settings['FORMALFOO'][] = array('Il_Partito_Pirata', 35);
 $settings['FORMALFOO'][] = array('Manifesto', 13);
 $settings['FORMALFOO'][] = array('Statuto', 48);
 $settings['FORMALFOO'][] = array('Garanzia_di_Iscrizione_ed_Esclusione', 11);

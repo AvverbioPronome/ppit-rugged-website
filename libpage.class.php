@@ -134,12 +134,12 @@ class Index extends Page {
 		foreach ( $pages as $page ) {
 			// $page come oggetto Page::Liquidpage? Si, ok.
 			// $page->source contiene l'initiative, si possono usare i suoi pezzi per comporre l'indice.
-			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n"; // article dentro dl?!?
+			$this->content .= "\n".'<dt id='.$page->source['id'].'><a href="'.$page->id.'.html">'.$page->title.': '.$page->source['name'].'</a></dt>'."\n";
 			$this->content .= '<dd>'."\n";
 			$this->content .= 'Iniziativa n. '.$page->source['initiative_id'].' - Area n. '.$page->source['area_id'].' ('.$page->source['area_name'].')'."<br>\n";
 			$this->content .= 'ID: '.hash('sha256', $page->source['created'].$page->source['id'].$page->source['name'].$page->source['content'])."\n";
 			$this->content .= "<p><small>Pubblicato in Gazzetta Ufficiale dall'Assemblea Permanente,<br> li' <time datetime=".$page->source['created'].">".$page->source['created'].".</time></small></p>\n";
-            $this->content .= '</dd>'."\n";
+			$this->content .= '</dd>'."\n";
 		}
 	}
 
@@ -211,12 +211,12 @@ class Liquidpage extends Page {
                 if ($this->settings['DEBUG']) echo "chiamando $type\n";
 
                 switch($type) {
-                    case "verbale":
+                    case "report":
                         $this->id='verbale_'.$source['id'];
                         $this->template='report.html';
                         $this->title = 'Proposta n. '.$source['id'];
                     break;
-                    case "tribuna":
+                    case "tribune":
                         $this->id='tribuna_'.$source['issue_id'].'_'.$source['initiative_id'];
                         $this->template='tribune.html';
                         $this->title = 'Tema n. '.$source['issue_id'];

@@ -7,7 +7,6 @@ require_once 'libpiratewww.class.php';
 require_once 'liblqfb.class.php';
 require_once 'libpage.class.php';
 
-
 $www = new Piratewww();
 
 // command parsing and exec
