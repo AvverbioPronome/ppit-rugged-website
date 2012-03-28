@@ -3,7 +3,7 @@
 @import "ppbar.css";
 #toolbar{ z-index:1000; opacity:0.75;}
 body{
-	background: #ff8c00 url(cyberspace_indipendence_wordle.png) center center fixed;
+	background: #c60 url(cyberspace_indipendence_wordle.png) center center fixed;
 	color: black;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: normal;
@@ -16,7 +16,7 @@ p{
 em{font-style:italic;}
 strong{font-weight:bold;}
 a{
-	color:#ff8c00;
+	color:#c60;
 	background:black;
 	text-decoration:none;
 }

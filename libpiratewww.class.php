@@ -39,8 +39,8 @@ class Piratewww {
 		switch ($type) {
 		    case 'report':
 		    	$indexintro='indexintro.verbale.inc.html';
-                    	$index->id = 'verbale';
-                        $lfresult = $lqfb->getDrafts(' ORDER BY id DESC');
+                $index->id = 'verbale';
+                $lfresult = $lqfb->getDrafts(' ORDER BY id DESC'); // OOOH! questa funziona solo con Liquidcore!
 		    break;
 		    case 'tribune':
         	        $indexintro='indexintro.tribuna.inc.html';
