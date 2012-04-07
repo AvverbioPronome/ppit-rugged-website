@@ -1,8 +1,7 @@
-html/*.html
-pull.sh
-push.sh
+org.partitopirata.blackpearl/*
+org.partitopirata.www/*.html
+org.partitopirata.www/cdn/_notes
 git.sh
-html/cdn/_notes
 robaperdopo.php
 vdump/*
 rocketwiki
