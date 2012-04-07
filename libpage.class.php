@@ -223,6 +223,13 @@ class Liquidpage extends Page {
                     break;
                 }
 
+		file_put_contents($this->settings['BASEDIR'].'rocketwiki.temp', $this->source['content']);
+                $comando="./rocketwiki < ".$this->settings['BASEDIR'].'rocketwiki.temp';
+                $uscita="";
+                $ritorno="1";
+                exec($comando,$uscita,$ritorno);
+                $source['content'] = $uscita;
+
                 $this->content .= "<article id=init".$this->id.">";
                 $this->content .= "<hgroup><h6>Area n. ".$source['area_id']." &#x2283; Tema n. ".$source['issue_id']." &#x2283; Iniziativa n.".$source['initiative_id']." &#x220B; Proposta n.".$source['id']."</h6>";
                 $this->content .= "<h1>".$source['name']."</h1>";
